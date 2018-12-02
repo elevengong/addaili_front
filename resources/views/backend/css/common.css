@@ -1,0 +1,69 @@
+/* CSS Document */
+* { box-sizing: border-box;}
+*::before, *::after { box-sizing: border-box;}
+body { font-size:12px; color:#726D73; font-family:Microsoft Yahei, Verdana, Geneva, sans-serif; margin:0; padding:0; background:#f9f9fd url(../../../images/v2016_admin/17un/main_bg.png) repeat-y left center;}
+form, ul, ol, li, a, input, p, em, label, select, textarea, button, h1, h2, h3, h4, h5, dl, dt, dd { margin: 0; padding: 0; list-style: none; outline: 0; font-weight: 500; }
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block;}
+label { cursor:pointer;}
+a { text-decoration:none; color:#726D73;}
+.clr { clear:both; height:0; overflow:hidden;}
+.clearfix:after { clear:both; content:""; display:block; height:0; visibility:hidden;}
+.mb10 { margin-bottom: 10px; }
+.pt10 { padding-top: 10px; }
+.block_row { background:#fff; padding:10px 0; font-size:12px;}
+
+/*Float*/
+.right { float:right}
+.left { float:left;}
+
+/*Color & Bgcolor*/
+.bgwhite { background: #fff; }
+.txtRed { color: #f00; }
+.txtGray { color:#999;}
+.txtOrange { color:#FFA317;}
+.txtGreen { color:#40929F;}
+.txtGreen_y { color:#C4D709;}
+.txtGreen_a { color:#A0BD2F;}
+
+/*Col*/
+.col-2 { width:50%; float:left;}
+.col-3 { width:33.3%; float:left;}
+.col-4 { width:25%; float:left;}
+
+/*Input*/
+input[type=button],input[type=submit] { -webkit-appearance: none; outline: none; border:0 none; } /*去除IOS原生按钮状态*/
+input[type=text] { -webkit-appearance: none; outline: none; } /*去除IOS原生输入框状态*/
+input { line-height:normal; border:0; outline:0 none; vertical-align:middle;}
+.ipt { font-size:12px; border:1px #d5d5d5 solid; height:32px; line-height: normal; color:#666; padding:0 6px; font-family:Arial, Helvetica, sans-serif;}
+.w300 { width:300px;}
+.w250 { width:250px;}
+.w200 { width:200px;}
+.w150 { width:150px;}
+.w100 { width:100px;}
+.w50 { width:50px;}
+
+/*Tab*/
+.new_Tab { height:40px; line-height:40px;}
+.new_Tab .col-2 { width:50%; float:left;}
+.new_Tab .col-3 { width:33.3%; float:left;}
+.new_Tab .col-2 a,.new_Tab .col-3 a { text-align:center; display:block; font-size:14px; background:#89d1db;color:#fff;}
+.new_Tab .col-2 a.current,.new_Tab .col-3 a.current { background:#cfedf1; color:#e77919;}
+
+/*Header*/
+.header { width:100%; height:60px; background:#fff; border-bottom:1px #EAEAEA solid; /*20170517新增悬浮固定 position:fixed; z-index: 9999;*/}
+.header .logo_box { width:320px; float:left; margin:15px 0 0 20px;}
+.header .logo_box img { float:left; margin-right:10px; vertical-align:middle;}
+.header .logo_box .admin_type { font-size:16px; line-height:30px;}
+.header .login_info { float:right; height:60px; line-height:60px;}
+.header .login_info .iconfont { font-size:24px; color:#50A9B6; margin-left:3px; vertical-align:middle;}
+.header .login_info .login_out { background:#50A9B6; display:inline-block; text-align:center; width:90px; line-height:60px; color:#fff; margin-left:12px; font-size:14px;}
+.header .login_info .login_out:hover { background:#EEA611; color:#fff;}
+
+/*Btn*/
+.big_btn { width:160px; height:50px; line-height:50px; text-align:center; cursor:pointer; display:inline-block; font-size:16px; vertical-align:middle;}
+.sm_btn { height:32px; line-height:32px; font-size:12px; padding:0 22px; display:inline-block;}
+.subBtn { background:#e77919; color:#fff;} /*提交按钮*/
+.greenBtn { background:#40929F; color:#fff;} /*提交按钮*/
+.grayBtn { color:#333; background:#e0e0e0;} /*提交按钮*/
+.blueBtn { color:#fff; background:#3C3957;} /*蓝色按钮*/
+.whiteBtn { color:#666; background:#fff; border:1px #dfdfdf solid;} /*白色按钮*/
