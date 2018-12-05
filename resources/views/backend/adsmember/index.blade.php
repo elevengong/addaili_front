@@ -1,4 +1,4 @@
-@extends("backend.layout.layout")
+@extends("backend.layout.adslayout")
 @section("content")
 <div class="right-area">
     <p class="position">当前位置：管理后台 > 管理首页</p>
@@ -12,7 +12,7 @@
                 <figure><img src="{{url('/resources/views/backend/images/touxiang.png')}}" alt=""></figure>
 
                 <div class="data" style="float:left;">
-                    <p>2580@qq.com（用户ID：34129）</p>
+                    <p>{{$adsmember}}（用户ID：{{$ads_id}}）</p>
 
                     <p>上次登录时间：2018-12-01 16:18:56</p>
 
@@ -95,29 +95,6 @@
     </form>
     <div class="advertisers">
         <h5 class="head-title">优质广告主</h5>
-
-        <div class="swiper-container" id="partner">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-01.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-02.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-03.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-04.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-05.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-06.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-07.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-08.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-09.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-10.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-11.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-12.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-13.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-14.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-15.jpg')}}" alt=""></div>
-                <div class="swiper-slide"><img src="{{url('/resources/views/backend/images/tjggz-16.jpg')}}" alt=""></div>
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
-        </div>
 
         <ul class="adver-list">
             <li><img src="{{url('/resources/views/backend/images/tjggz-01.jpg')}}" alt=""></li>

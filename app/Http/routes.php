@@ -16,7 +16,14 @@
 Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/service/index','backend\adsmember\IndexController@index');
 
+    Route::any('/adsmember/ads/lists','backend\adsmember\AdsController@lists');
+    Route::any('/adsmember/ads/add','backend\adsmember\AdsController@add');
 
+    Route::any('/adsmember/service/report','backend\adsmember\ReportController@report');
+
+    Route::any('/adsmember/account/info','backend\adsmember\AccountController@info');
+    Route::post('/adsmember/account/updateqq','backend\adsmember\AccountController@updateqq');
+    Route::post('/adsmember/account/updatepwd','backend\adsmember\AccountController@updatepwd');
 
     //图片上传
     Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');

@@ -38,36 +38,43 @@
             <figure class="mb-logo"><img src="{{url('/resources/views/backend/images/logo.png')}}" alt=""></figure>
 
             <div class="service">
-                <figure><img src="{{url('/resources/views/backend/images/kefu.jpg')}}kefu.jpg" alt=""></figure>
+                <figure><img src="{{url('/resources/views/backend/images/kefu.jpg')}}" alt=""></figure>
                 <a href="http://wpa.qq.com/msgrd?v=1&uin=918197512&site=有盟移动客服专员&menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：918197512</a>
             </div>
-            <li  class="active">
+            <li class="active">
                 <a href="/adsmember/service/index"><i class="iconfont icon-home"></i>管理首页</a>
             </li>
             <li >
-                <a href="/adsmember/service/lists_ads"><i class="iconfont icon-shezhi"></i>广告管理</a>
+                <a href="/adsmember/service/material"><i class="iconfont icon-shezhi"></i>素材包管理</a>
+            </li>
+            <li>
+                <a href="/adsmember/service/material_update"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
+            </li>
+
+            <li >
+                <a href="/adsmember/ads/lists"><i class="iconfont icon-diannaodianqi"></i>广告管理</a>
             </li>
             <li >
-                <a href="/adsmember/service/report"><i class="iconfont icon-diannaodianqi"></i>数据报表</a>
+                <a href="/adsmember/service/report"><i class="iconfont icon-baobiao"></i>数据报表</a>
             </li>
             <li >
-                <a href="/adsmember/service/account"><i class="iconfont icon-baobiao"></i>账户管理</a>
+                <a href="/adsmember/account/info"><i class="iconfont icon-iconset0178"></i>账户管理</a>
             </li>
             <li >
-                <a href="/adsmember/service/lists_message"><i class="iconfont icon-iconset0178"></i>消息中心</a>
+                <a href="/adsmember/message/lists"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
             </li>
         </ul>
 
         <div id="user-area">
-            <a href="http://www.17un.com/service/customer/account/action/update.html" class="user">
+            <a href="#" class="user">
                 <i class="iconfont icon-yonghu"></i>
                 <div class="con">
                     <p>Hi!</p>
 
-                    <p>2580@qq.com</p>
+                    <p>{{$adsmember}}</p>
                 </div>
             </a>
-            <a href="http://www.17un.com/auth/logout.html" class="out">退出</a>
+            <a href="/logout.html" class="out">退出</a>
         </div>
 
         <a href="javascript:void(false)" id="close-bt"><i class="iconfont icon-guanbi"></i></a>
@@ -84,7 +91,7 @@
         <a href="javascript:void(0);" class="user">
             <figure><img src="{{url('/resources/views/backend/images/touxiang.png')}}" alt=""></figure>
 
-            <p>Hi, 2580@qq.com</p>
+            <p>{{$adsmember}}</p>
         </a>
 
         <a href="/logout.html" class="out">退出</a>
@@ -107,25 +114,38 @@
 
             </li>
             <li >
-                <a href="/adsmember/service/lists_ads"><i class="iconfont icon-shezhi"></i>广告管理</a>
+                <a href="/adsmember/service/material"><i class="iconfont icon-shezhi"></i>素材包管理</a>
+
+                <span class="iconfont icon-sanjiaoxing"></span>
+
+            </li>
+            <li>
+                <a href="/adsmember/service/material_update"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
+
+                <span class="iconfont icon-sanjiaoxing"></span>
+
+            </li>
+
+            <li >
+                <a href="/adsmember/ads/lists"><i class="iconfont icon-diannaodianqi"></i>广告管理</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>
 
             </li>
             <li >
-                <a href="/adsmember/service/report"><i class="iconfont icon-diannaodianqi"></i>数据报表</a>
+                <a href="/adsmember/service/report"><i class="iconfont icon-baobiao"></i>数据报表</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>
 
             </li>
             <li >
-                <a href="/adsmember/service/account"><i class="iconfont icon-baobiao"></i>账户管理</a>
+                <a href="/adsmember/account/info"><i class="iconfont icon-iconset0178"></i>账户管理</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>
 
             </li>
             <li >
-                <a href="/adsmember/service/lists_message"><i class="iconfont icon-iconset0178"></i>消息中心</a>
+                <a href="/adsmember/message/lists"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>
 
