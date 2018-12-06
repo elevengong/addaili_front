@@ -25,6 +25,9 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::post('/adsmember/account/updateqq','backend\adsmember\AccountController@updateqq');
     Route::post('/adsmember/account/updatepwd','backend\adsmember\AccountController@updatepwd');
 
+    Route::any('/adsmember/account/deposit','backend\adsmember\AccountController@deposit');
+    Route::any('/adsmember/account/deposit/lists','backend\adsmember\AccountController@depositlist');
+
     //图片上传
     Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');
 });

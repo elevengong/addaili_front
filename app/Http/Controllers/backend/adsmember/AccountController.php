@@ -64,4 +64,23 @@ class AccountController extends CommonController
 
         }
     }
+
+    public function deposit(Request $request){
+        if($request->isMethod('post')){
+
+        }else{
+            return view('backend.adsmember.deposit')->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        }
+    }
+
+    public function depositlist(Request $request){
+        if($request->isMethod('post')){
+
+        }else{
+            return view('backend.adsmember.list_deposit')->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        }
+    }
+
+
+
 }
