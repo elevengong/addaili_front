@@ -14,11 +14,10 @@
                 <div class="data" style="float:left;">
                     <p>{{$adsmember}}（用户ID：{{$ads_id}}）</p>
 
-                    <p>上次登录时间：2018-12-01 16:18:56</p>
+                    <p>上次登录时间：{{$member['lastlogined_at']}}</p>
 
-                    <p>账户总额：<span>0.00</span></p>
+                    <p>账户总额：<span>{{$memberBalance[0]['balance']}}</span></p>
 
-                    <p>信用额度：<span>0</span></p>
                 </div>
             </div>
         </div>
@@ -41,7 +40,7 @@
                     <p>本月消耗</p>
                 </li>
                 <li>
-                    <h5>0</h5>
+                    <h5>{{$countAds}}</h5>
                     <p>在投广告数</p>
                 </li>
             </ul>
