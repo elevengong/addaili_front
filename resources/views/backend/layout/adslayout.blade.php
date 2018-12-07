@@ -48,7 +48,7 @@
                 <a href="/adsmember/service/material"><i class="iconfont icon-shezhi"></i>素材包管理</a>
             </li>
             <li>
-                <a href="/adsmember/service/material_update"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
+                <a href="/adsmember/material/lists"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
             </li>
 
             <li >
@@ -120,7 +120,7 @@
 
             </li>
             <li>
-                <a href="/adsmember/service/material_update"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
+                <a href="/adsmember/material/lists"><i class="iconfont icon-shezhi"></i>创意素材管理</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>
 

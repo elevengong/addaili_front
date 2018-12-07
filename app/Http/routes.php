@@ -28,6 +28,11 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/account/deposit','backend\adsmember\AccountController@deposit');
     Route::any('/adsmember/account/deposit/lists','backend\adsmember\AccountController@depositlist');
 
+    Route::any('/adsmember/message/lists','backend\adsmember\MessageController@messagelist');
+
+    Route::any('/adsmember/material/lists','backend\adsmember\MaterialController@materiallist');
+    Route::any('/adsmember/material/upload','backend\adsmember\MaterialController@upload');
+
     //图片上传
     Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');
 });
