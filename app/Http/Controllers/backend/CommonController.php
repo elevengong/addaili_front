@@ -54,7 +54,6 @@ class CommonController extends Controller
         }
     }
 
-
     /**
      * 是否是手机号码
      * @param string $phone 手机号码
@@ -68,6 +67,35 @@ class CommonController extends Controller
             return true;
         }
 
+    }
+
+    //上传广告图片
+    public function uploadphoto(Request $request,$id){
+        $file = $request->file($id);//获取图片
+        $allowed_extensions = ["png", "jpg", "gif"];
+        if ($file->getClientOriginalExtension() && !in_array(strtolower($file->getClientOriginalExtension()), $allowed_extensions)) {
+            return Response()->json([
+                'status' => 0,
+                'msg' => '只能上传 png | jpg | gif格式的图片'
+            ]);
+        }
+        $today = date('Ymd',time());
+        $dir =  dirname(dirname(dirname(dirname(__DIR__))))."/public/uploads/".$today."/";
+        if(!is_dir($dir)){
+            mkdir($dir, 0777);
+        }
+        $destinationPath = 'public/uploads/'.$today.'/';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = time().str_random(5).'.'.$extension;
+        $file->move($destinationPath, $fileName);
+        return Response()->json(
+            [
+                'status' => 1,
+                //'pic' => asset($destinationPath.$fileName),
+                'pic' => "/".$destinationPath.$fileName,
+                'msg' => '上传成功！'
+            ]
+        );
     }
 
 }

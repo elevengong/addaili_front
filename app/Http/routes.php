@@ -34,7 +34,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/material/upload','backend\adsmember\MaterialController@upload');
 
     //图片上传
-    Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');
+    Route::any('/backend/uploadphoto/{id}','backend\CommonController@uploadphoto');
 });
 
 
@@ -46,8 +46,7 @@ Route::group(['middleware' => ['web','webmember.login']],function () {
 
 
 
-    //图片上传
-    Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');
+
 });
 
 
