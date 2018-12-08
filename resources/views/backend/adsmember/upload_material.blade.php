@@ -39,6 +39,8 @@
         <p class="position">当前位置：管理后台 &gt; 添加</p>
 
         <form id="form_insert">
+            <input type="hidden" name="filesize" id="filesize" value="">
+            <input type="hidden" name="size" id="size" value="">
             <div class="insert-app ads-advert-update">
                 <h5 class="head-title">上传素材</h5>
                 <div class="con">
@@ -164,6 +166,8 @@
                                 var result = '<img id="img" src="'+data.pic+'" width="180">';
                                 $('#show').html(result);
                                 $('#adsimage').val(data.pic);
+                                $('#filesize').val(parseInt(fileSize/1024));
+                                $('#size').val(data.size);
 
                             }
 

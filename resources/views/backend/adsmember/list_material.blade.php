@@ -8,7 +8,8 @@
             <div class="top search-area">
                 <div class="input">
                     <form action="/adsmember/material/lists" method="get" name="form_search" id="form_list">
-                        <input type="text" name="keyword" value="" class="search-input" placeholder="创意ID|名称">
+                        {{csrf_field()}}
+                        <input type="text" name="keyword" value="" class="search-input" placeholder="创意ID">
                         <input type="submit" value="查询" class="check check-h">
                     </form>
                 </div>
@@ -28,22 +29,22 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($materialArray as $material)
                     <tr>
-                        @foreach($materialArray as $material)
                         <th class="txt_l">{{$material['id']}}</th>
-                        <th class="txt_l"><a href="{{$material['image']}}" target="_blank" class="preview" height="250" width="300"><embed type="application/x-shockwave-flash" src="{{$material['image']}}" width="60" height="60" wmode="opaque"></a></th>
-                        <th class="txt_l">{{$material['status']}}</th>
-                        <th class="txt_l">640x200</th>
-                        <th class="txt_l">102KB</th>
+                        <th class="txt_l"><a href="{{$material['image']}}" target="_blank"><img src="{{$material['image']}}" width="90"></a></th>
+                        <th class="txt_l">@if($material['status']==0)审核中@elseif($material['status']==1)已审核@elseif($material['status']==2)不通过@endif</th>
+                        <th class="txt_l">{{$material['size']}}</th>
+                        <th class="txt_l">{{$material['filesize']}}KB</th>
                         <th class="txt_l">{{$material['created_at']}}</th>
-                        <th class="txt_l"><a href="javascript:void(false)" jid="189813" title="刪除" class="icoOpr jajax_delete">刪除</a></th>
-                        @endforeach
+                        <th class="txt_l"><a href="javascript:void(false)" onclick="del('{{$material['id']}}');" title="刪除" class="icoOpr jajax_delete">刪除</a></th>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
             <p class="slide-tip">可左右滑动浏览</p>
-            <ul class="pagination"></ul>
+            {{ $materialArray->links() }}
         </div>
         <style>
             <!--
@@ -60,6 +61,35 @@
             $('.mb-menu li').removeClass('active');
             $('.menu li').eq(2).addClass('active');
             $('.mb-menu li').eq(2).addClass('active');
+
+            function del(id) {
+                var msg = "您真的确定要删除吗？\n\n请确认！";
+                if (confirm(msg)==true){
+                    $.ajax({
+                        type:"delete",
+                        url:"/adsmember/material/del/"+id,
+                        dataType:'json',
+                        headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                        data:{},
+                        // data:$("#form_insert").serialize(),
+                        success:function(data){
+                            if(data.status == 0)
+                            {
+                                alert(data.msg);
+                            }else{
+                                alert(data.msg);
+                                window.location.reload();
+                            }
+                        },
+                        error:function (data) {
+                            layer.msg(data.msg);
+                        }
+                    });
+
+                }else{
+                    return false;
+                }
+            }
         </script>
 
 @endsection

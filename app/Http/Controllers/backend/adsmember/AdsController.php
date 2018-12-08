@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend\adsmember;
 
+use App\Model\Material;
 use App\Model\Setting;
 use App\Model\SettingGroup;
 use Illuminate\Http\Request;
@@ -105,6 +106,87 @@ class AdsController extends CommonController
         //print_r($settingData['countType']);exit;
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
             'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+    }
+
+    public function getallmaterial(Request $request){
+        if($request->isMethod('post')){
+            $ads_id = session('ads_id');
+            $allMaterial = Material::where('ads_id',$ads_id)->where('status',1)->orderBy('created_at','desc')->paginate($this->backendPageNum);
+            $html = '';
+            $paginate = '';
+            if(!empty($allMaterial)){
+                foreach ($allMaterial as $material)
+                {
+                    $html .= "<tr class=\"bggray\">";
+                    $html .= "<td scope=\"row\" class=\"mb-hide\">".$material['id']."</td>";
+                    $html .= "<td><div class=\"tdpic\">";
+                    $html .= '<a target="_blank" href="'.$material['image'].'">';
+                    $html .= '<img src="'.$material['image'].'" class="img_material">';
+                    $html .= '</a></div></td>';
+                    $html .= '<td class="mb-hide">横幅</td>';
+                    $html .= '<td class="mb-hide">已审核</td>';
+                    $html .= '<td class="long-table"><div class="opr">';
+                    $html .= '<a id="s_'.$material['id'].'" href="javascript:void(0)" onclick="choose('.$material['id'].');" title="选择素材"><i class="iconfont icon-xuanze"></i>选择素材</a>';
+                    $html .= '</div></td></tr>';
+                }
+
+                $paginate .= $allMaterial->links();
+
+                $reData['status'] = 1;
+                $reData['datas'] = $html;
+                $reData['paginate'] = $paginate;
+
+            }
+
+            return json_encode($reData);
+        }
+    }
+
+    public function choosematerial(Request $request,$id){
+        if($request->isMethod('post')){
+            $material = Material::where('id',$id)->get()->toArray();
+            $html = '';
+            if(!empty($material)){
+                $html .= '<div class="material_item" id="material_item_'.$material[0]['id'].'"><a href="javascript:void(0)" onclick="removeimage('.$material[0]['id'].')" class="del">';
+                $html .= '<i class="iconfont icon-shanchu1"></i></a>';
+                $html .= '<img onmouseover="" src="'.$material[0]['image'].'" class="imgs">';
+                $html .= '<input type="hidden" value="'.$material[0]['id'].'" name="creative_suite_id_array[]" jid="'.$material[0]['id'].'" id="material_'.$material[0]['id'].'" class="material_checked"></div>';
+
+                $reData['status'] = 1;
+                $reData['data'] = $html;
+            }
+
+            return json_encode($reData);
+        }
+    }
+
+    public function getmaterialbyid(Request $request,$id){
+        if($request->isMethod('post')){
+            $materialArray = Material::where('id',$id)->get()->toArray();
+            if(!empty($materialArray)){
+                $material = $materialArray[0];
+                $html = '';
+
+                $html .= "<tr class=\"bggray\">";
+                $html .= "<td scope=\"row\" class=\"mb-hide\">".$material['id']."</td>";
+                $html .= "<td><div class=\"tdpic\">";
+                $html .= '<a target="_blank" href="'.$material['image'].'">';
+                $html .= '<img src="'.$material['image'].'" class="img_material">';
+                $html .= '</a></div></td>';
+                $html .= '<td class="mb-hide">横幅</td>';
+                $html .= '<td class="mb-hide">已审核</td>';
+                $html .= '<td class="long-table"><div class="opr">';
+                $html .= '<a id="s_'.$material['id'].'" href="javascript:void(0)" onclick="choose('.$material['id'].');" title="选择素材"><i class="iconfont icon-xuanze"></i>选择素材</a>';
+                $html .= '</div></td></tr>';
+
+                $reData['status'] = 1;
+                $reData['datas'] = $html;
+            }else{
+                $reData['status'] = 0;
+                $reData['datas'] = '找不到相关的素材!';
+            }
+            return json_encode($reData);
+        }
     }
 
 }

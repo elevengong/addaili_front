@@ -16,7 +16,7 @@ class MaterialController extends CommonController
 
 
         }else{
-            $materialArray  = Material::where('ads_id',session('ads_id'))->orderBy('created_at','desc')->get()->toArray();
+            $materialArray  = Material::where('ads_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
             return view('backend.adsmember.list_material',compact('materialArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
     }
@@ -43,4 +43,19 @@ class MaterialController extends CommonController
             echo json_encode($reData);
         }
     }
+
+    public function delete($id)
+    {
+        $result = Material::destroy($id);
+        if ($result) {
+            $reData['status'] = 1;
+            $reData['msg'] = "删除成功";
+        } else {
+            $reData['status'] = 0;
+            $reData['msg'] = "删除失败";
+        }
+        return json_encode($reData);
+    }
+    
+
 }

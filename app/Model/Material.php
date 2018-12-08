@@ -10,5 +10,5 @@ class Material extends Model
     protected $primaryKey = 'id';
     //public $timestamps = '';
 
-    protected $fillable = ['id','ads_id','settinggroup','image','tag','status','created_at','updated_at'];
+    protected $fillable = ['id','ads_id','settinggroup','image','tag','status','filesize','size','created_at','updated_at'];
 }

@@ -18,6 +18,12 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
 
     Route::any('/adsmember/ads/lists','backend\adsmember\AdsController@lists');
     Route::any('/adsmember/ads/add','backend\adsmember\AdsController@add');
+    Route::post('/adsmember/ads/getallmaterial','backend\adsmember\AdsController@getallmaterial');
+    Route::post('/adsmember/ads/choosematerial/{id}','backend\adsmember\AdsController@choosematerial')->where(['id' => '[0-9]+']);
+    Route::post('/adsmember/ads/getmaterialbyid/{id}','backend\adsmember\AdsController@getmaterialbyid')->where(['id' => '[0-9]+']);
+
+
+
 
     Route::any('/adsmember/service/report','backend\adsmember\ReportController@report');
 
@@ -33,6 +39,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/material/lists','backend\adsmember\MaterialController@materiallist');
     Route::any('/adsmember/material/upload','backend\adsmember\MaterialController@upload');
     Route::post('/adsmember/material/upload/process','backend\adsmember\MaterialController@uploadprocess');
+    Route::delete('/adsmember/material/del/{id}','backend\adsmember\MaterialController@delete')->where(['id' => '[0-9]+']);
 
     //图片上传
     Route::any('/backend/uploadphoto/{id}','backend\CommonController@uploadphoto');

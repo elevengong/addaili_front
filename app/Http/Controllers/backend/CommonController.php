@@ -9,10 +9,14 @@ use App\Http\Controllers\Controller;
 
 class CommonController extends Controller
 {
+    private $domain;
+    protected $backendPageNum;
 
     public function __construct()
     {
         date_default_timezone_set('Asia/Shanghai');
+        $this->domain = 'http://daili.com';
+        $this->backendPageNum = '10';
     }
 
     //删除指定session数据
@@ -88,11 +92,15 @@ class CommonController extends Controller
         $extension = $file->getClientOriginalExtension();
         $fileName = time().str_random(5).'.'.$extension;
         $file->move($destinationPath, $fileName);
+
+        $sizeArray = getimagesize($this->domain."/".$destinationPath.$fileName);
+
         return Response()->json(
             [
                 'status' => 1,
                 //'pic' => asset($destinationPath.$fileName),
                 'pic' => "/".$destinationPath.$fileName,
+                'size' => $sizeArray[0].'x'.$sizeArray[1],
                 'msg' => '上传成功！'
             ]
         );

@@ -4,11 +4,8 @@
     <div class="right-area">
         <p class="position">当前位置：管理后台 &gt; 发布广告</p>
         <!--position-->
-
-        <link rel="stylesheet" type="text/css" href="/js/webuploader/webuploader.css">
-        <link rel="stylesheet" type="text/css" href="/js/webuploader/demo.css">
-        <script type="text/javascript" src="/js/webuploader/webuploader.min.js"></script>
         <form id="form_insert" method="post">
+            {{csrf_field()}}
             <div class="insert-app ads-advert-update">
                 <h5 class="head-title">新建广告</h5>
                 <input type="hidden" value="1" name="ajax_do">
@@ -56,7 +53,7 @@
                     </div>
 
                     <div class="form_row" id="material_bag">
-                        <span class="form-ti">选择创意包：</span>
+                        <span class="form-ti">选择广告素材：</span>
 
                         <div class="form_cont">
                             <div class="form-border form-border-no d_material_choose clearfix" id="creative_suite_li">
@@ -65,60 +62,33 @@
                             <div class="form-border">
 
                                 <div class="input">
-                                    <input type="text" class="search-input" name="keyword">
+                                    <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" class="search-input" id="keyword" name="keyword" placeholder="素材ID">
 
-                                    <input type="button" value="查询" class="check check-h btnsearch">
+                                    <input type="button" value="查询" class="check check-h btnsearch" id="searchimageid">
 
                                     <span class="refresh"><i class="iconfont icon-shuaxin btnsearch"></i></span>
 
-                                    <a href="/service/business/mobile/creative/suite/action/insert.html" target="_blank" class="right add_btn">+ 添加创意包</a>
+                                    <a href="/adsmember/material/upload" target="_blank" class="right add_btn">+ 添加素材</a>
                                 </div>
 
                                 <div class="search-area-bg"></div>
-                                <div class="tab_block clearfix" id="creative_suite"><div class="tab_box mb-table">
+                                <div class="tab_block clearfix" id="creative_suite">
+                                    <div class="tab_box mb-table">
                                         <table class="table">
                                             <thead>
                                             <tr>
                                                 <th scope="col" class="mb-hide">ID</th>
-                                                <th scope="col">名称</th>
+                                                <th scope="col">图片</th>
                                                 <th scope="col" class="mb-hide">广告投放类型</th>
                                                 <th scope="col" class="mb-hide">状态</th>
                                                 <th scope="col" class="long-table">操作</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="bgWhite">
-                                                <td scope="row" class="mb-hide">61017</td>
-                                                <td><div class="tdpic"><img src="http://img1.gtmpekda1.cn/union/mobile/creative/slave/2018/10/0/1540525988386.gif" class="img_material">test4</div></td>
-                                                <td class="mb-hide">横幅</td>
-                                                <td class="mb-hide">审核中</td>
-                                                <td class="long-table"><div class="opr"><a id="s_61017" href="javascript:void(0)" class="'' " onclick="MobileAdvert.event_add_creative_suite({&quot;id&quot;:&quot;61017&quot;,&quot;name&quot;:&quot;test4&quot;,&quot;cover&quot;:&quot;2018\/10\/0\/1540525988386.gif&quot;,&quot;type_name&quot;:&quot;\u624b\u673a\u6e38\u620f&quot;,&quot;advert_type_name&quot;:&quot;\u6a2a\u5e45&quot;,&quot;cover_str&quot;:&quot;http:\/\/img1.gtmpekda1.cn\/union\/mobile\/creative\/slave\/2018\/10\/0\/1540525988386.gif&quot;,&quot;state&quot;:&quot;\u5ba1\u6838\u4e2d&quot;})" title="选择素材包"><i class="iconfont icon-xuanze"></i>选择素材包</a><a target="_blank" class="btnView" title="查看" href="/service/business/mobile/creative/suite/action/update/61017"><i class="iconfont icon-yulan"></i>查看创意</a></div></td>
-                                            </tr>
-                                            <tr class="bggray">
-                                                <td scope="row" class="mb-hide">60989</td>
-                                                <td><div class="tdpic"><img src="http://img1.gtmpekda1.cn/union/mobile/creative/slave/2014/07/1/1404892989435.gif" class="img_material">test2</div></td>
-                                                <td class="mb-hide">横幅</td>
-                                                <td class="mb-hide">审核中</td>
-                                                <td class="long-table"><div class="opr"><a id="s_60989" href="javascript:void(0)" class="'' " onclick="MobileAdvert.event_add_creative_suite({&quot;id&quot;:&quot;60989&quot;,&quot;name&quot;:&quot;test2&quot;,&quot;cover&quot;:&quot;2014\/07\/1\/1404892989435.gif&quot;,&quot;type_name&quot;:&quot;\u7f51\u8d5a&quot;,&quot;advert_type_name&quot;:&quot;\u6a2a\u5e45&quot;,&quot;cover_str&quot;:&quot;http:\/\/img1.gtmpekda1.cn\/union\/mobile\/creative\/slave\/2014\/07\/1\/1404892989435.gif&quot;,&quot;state&quot;:&quot;\u5ba1\u6838\u4e2d&quot;})" title="选择素材包"><i class="iconfont icon-xuanze"></i>选择素材包</a><a target="_blank" class="btnView" title="查看" href="/service/business/mobile/creative/suite/action/update/60989"><i class="iconfont icon-yulan"></i>查看创意</a></div></td>
-                                            </tr>
-                                            <tr class="bgWhite">
-                                                <td scope="row" class="mb-hide">60473</td>
-                                                <td><div class="tdpic"><img src="http://img1.gtmpekda1.cn/union/mobile/creative/slave/2014/07/1/1404892989435.gif" class="img_material">test3</div></td>
-                                                <td class="mb-hide">横幅</td>
-                                                <td class="mb-hide">审核中</td>
-                                                <td class="long-table"><div class="opr"><a id="s_60473" href="javascript:void(0)" class="'' " onclick="MobileAdvert.event_add_creative_suite({&quot;id&quot;:&quot;60473&quot;,&quot;name&quot;:&quot;test3&quot;,&quot;cover&quot;:&quot;2014\/07\/1\/1404892989435.gif&quot;,&quot;type_name&quot;:&quot;\u5c0f\u8bf4&quot;,&quot;advert_type_name&quot;:&quot;\u6a2a\u5e45&quot;,&quot;cover_str&quot;:&quot;http:\/\/img1.gtmpekda1.cn\/union\/mobile\/creative\/slave\/2014\/07\/1\/1404892989435.gif&quot;,&quot;state&quot;:&quot;\u5ba1\u6838\u4e2d&quot;})" title="选择素材包"><i class="iconfont icon-xuanze"></i>选择素材包</a><a target="_blank" class="btnView" title="查看" href="/service/business/mobile/creative/suite/action/update/60473"><i class="iconfont icon-yulan"></i>查看创意</a></div></td>
-                                            </tr>
-                                            <tr class="bggray">
-                                                <td scope="row" class="mb-hide">60387</td>
-                                                <td><div class="tdpic"><img src="http://img1.gtmpekda1.cn/union/mobile/creative/slave/2018/10/0/1539769270301.gif" class="img_material">test</div></td>
-                                                <td class="mb-hide">横幅</td>
-                                                <td class="mb-hide">审核中</td>
-                                                <td class="long-table"><div class="opr"><a id="s_60387" href="javascript:void(0)" class="'' " onclick="MobileAdvert.event_add_creative_suite({&quot;id&quot;:&quot;60387&quot;,&quot;name&quot;:&quot;test&quot;,&quot;cover&quot;:&quot;2018\/10\/0\/1539769270301.gif&quot;,&quot;type_name&quot;:&quot;\u6b63\u89c4\u4ea4\u53cb&quot;,&quot;advert_type_name&quot;:&quot;\u6a2a\u5e45&quot;,&quot;cover_str&quot;:&quot;http:\/\/img1.gtmpekda1.cn\/union\/mobile\/creative\/slave\/2018\/10\/0\/1539769270301.gif&quot;,&quot;state&quot;:&quot;\u5ba1\u6838\u4e2d&quot;})" title="选择素材包"><i class="iconfont icon-xuanze"></i>选择素材包</a><a target="_blank" class="btnView" title="查看" href="/service/business/mobile/creative/suite/action/update/60387"><i class="iconfont icon-yulan"></i>查看创意</a></div></td>
-                                            </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
-                                    <ul class="pagination"><li>总共 <span>4</span> 条信息，每页显示 <span>10</span> 条</li><li class="active"><a>1</a></li></ul>
                                     <script type="text/Javascript" src="/js/image_preview.js"></script>
                                     <script type="text/javascript">
                                             $(document).ready(function(){
@@ -509,6 +479,7 @@
                 </div>
             </div>
         </form>
+        <div id="abc"></div>
 
 
 
@@ -518,6 +489,88 @@
             $('.mb-menu li').removeClass('active');
             $('.menu li').eq(3).addClass('active');
             $('.mb-menu li').eq(3).addClass('active');
+
+            $('.right-area').ready(function () {
+                alert('eee');
+            });
+
+            auto_load_all_materials();
+
+            function auto_load_all_materials(){
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/ads/getallmaterial",
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:{},
+                    // data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            $('.tab_box tbody').html(data.datas);
+                            $('.tab_box').after(data.paginate);
+                        }else{
+                            alert('none');
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
+            }
+
+            $('.icon-shuaxin').click(function () {
+                auto_load_all_materials();
+            });
+
+            $('#searchimageid').click(function () {
+                var id = $.trim( $('#keyword').val() );
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/ads/getmaterialbyid/"+ id,
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:{},
+                    // data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            $('.tab_box tbody').html(data.datas);
+                        }else{
+                            alert(data.datas);
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
+            });
+
+            function choose(id) {
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/ads/choosematerial/"+ id,
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:{},
+                    // data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            $('#creative_suite_li').append(data.data);
+                        }else{
+                            alert('none');
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
+            }
+
+            function removeimage(id){
+                $("#material_item_"+id).remove();
+            }
         </script>
 
 @endsection
