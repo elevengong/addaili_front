@@ -20,7 +20,6 @@
                     <tr>
                         <th scope="col">创意ID</th>
                         <th scope="col">创意图</th>
-                        <th scope="col">创意名称</th>
                         <th scope="col">状态</th>
                         <th scope="col">尺寸</th>
                         <th scope="col">大小</th>
@@ -29,7 +28,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr><td colspan="8">暂无数据</td></tr>
+                    <tr>
+                        @foreach($materialArray as $material)
+                        <th class="txt_l">{{$material['id']}}</th>
+                        <th class="txt_l"><a href="{{$material['image']}}" target="_blank" class="preview" height="250" width="300"><embed type="application/x-shockwave-flash" src="{{$material['image']}}" width="60" height="60" wmode="opaque"></a></th>
+                        <th class="txt_l">{{$material['status']}}</th>
+                        <th class="txt_l">640x200</th>
+                        <th class="txt_l">102KB</th>
+                        <th class="txt_l">{{$material['created_at']}}</th>
+                        <th class="txt_l"><a href="javascript:void(false)" jid="189813" title="刪除" class="icoOpr jajax_delete">刪除</a></th>
+                        @endforeach
+                    </tr>
                     </tbody>
                 </table>
             </div>

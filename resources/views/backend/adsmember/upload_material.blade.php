@@ -40,15 +40,12 @@
 
         <form id="form_insert">
             <div class="insert-app ads-advert-update">
-                <input type="hidden" value="1" name="ajax_do">
-                <input type="hidden" name="response" value="">
-                <input type="hidden" name="mobile_user_id" id="mobile_user_id" value="34129">
                 <h5 class="head-title">上传素材</h5>
                 <div class="con">
                     <div class="form_row">
                         <span class="form-ti">素材类型：</span>
-                        <select id="imagetype" name="imagetype">
-                            <option value="0">全部</option>
+                        <select id="imagetype" name="settinggroup">
+                            <option value="0" selected="selected">全部</option>
                             @foreach($imageTypeArray as $imageType)
                             <option value="{{$imageType['id']}}">{{$imageType['remark']}}</option>
                             @endforeach
@@ -60,12 +57,10 @@
                         <div class="form_cont">
                             <div class="upload_box">
                                 <span id="jbtn_upload_slave" class="webuploader-container">
-                                    {{--<div class="webuploader-pick">上传素材</div>--}}
                                     <div id="rt_rt_1cu4a1btu1c63fqq1d1aqemjue1" style=" top: -15.2344px; left: 0px; width: 150px; height: 50px; overflow: hidden; bottom: auto; right: auto;">
-                                        {{--<input type="file" name="file" class="webuploader-element-invisible" multiple="multiple" accept="image/*">--}}
                                         <input type="button" value="上传图片" onclick="photo1.click()" style=""  class="webuploader-pick"/>
                                         <p><input type="file" id="photo1" name="photo1" onchange="upload(this);" style="display:none" /></p>
-                                        <input type="hidden" id="adsimage" name="adsimage" value="">
+                                        <input type="hidden" id="adsimage" name="image" value="">
                                     </div>
                                 </span>
                             </div>
@@ -90,6 +85,44 @@
             $('.mb-menu li').removeClass('active');
             $('.menu li').eq(2).addClass('active');
             $('.mb-menu li').eq(2).addClass('active');
+
+            $('.big_btn').click(function () {
+                var adsimage  = $.trim( $('#adsimage').val() );
+                var imagetype  = $.trim( $('#imagetype').val() );
+                if(adsimage == '')
+                {
+                    alert('没有上传素材!');
+                    return false;
+                }
+                if(imagetype == 0)
+                {
+                    alert('请选择素材类型!');
+                    return false;
+                }
+
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/material/upload/process",
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 0)
+                        {
+                            alert(data.msg);
+                        }else{
+                            alert(data.msg);
+                            window.location.href = '/adsmember/material/lists';
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
+
+            });
+
+
 
             function upload(obj){
                 var id = $(obj).attr("id");
