@@ -23,9 +23,6 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::post('/adsmember/ads/choosematerial/{id}','backend\adsmember\AdsController@choosematerial')->where(['id' => '[0-9]+']);
     Route::post('/adsmember/ads/getmaterialbyid/{id}','backend\adsmember\AdsController@getmaterialbyid')->where(['id' => '[0-9]+']);
 
-
-
-
     Route::any('/adsmember/service/report','backend\adsmember\ReportController@report');
 
     Route::any('/adsmember/account/info','backend\adsmember\AccountController@info');
@@ -52,7 +49,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
 
 Route::group(['middleware' => ['web','webmember.login']],function () {
 
-
+    Route::any('/webmember/service/index','backend\webmember\IndexController@index');
 
 
 
