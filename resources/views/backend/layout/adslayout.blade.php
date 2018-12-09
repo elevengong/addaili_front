@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    {{--<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />--}}
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo asset( "/resources/views/backend/css/bootstrap.min.css") ?>">
     <link rel="stylesheet" href="<?php echo asset( "/resources/views/backend/css/swiper.min.css") ?>">
@@ -44,7 +44,7 @@
             <li class="active">
                 <a href="/adsmember/service/index"><i class="iconfont icon-home"></i>管理首页</a>
             </li>
-            <li >
+            <li style="display: none">
                 <a href="/adsmember/service/material"><i class="iconfont icon-shezhi"></i>素材包管理</a>
             </li>
             <li>
@@ -113,7 +113,7 @@
                 <span class="iconfont icon-sanjiaoxing"></span>
 
             </li>
-            <li >
+            <li style="display: none">
                 <a href="/adsmember/service/material"><i class="iconfont icon-shezhi"></i>素材包管理</a>
 
                 <span class="iconfont icon-sanjiaoxing"></span>

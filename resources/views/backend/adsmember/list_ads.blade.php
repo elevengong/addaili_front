@@ -63,34 +63,40 @@
                         <th scope="col">总剩余预算</th>
                         <th scope="col">每日剩余预算</th>
                         <th scope="col" class="br-table">状态</th>
-                        <th scope="col">备注</th>
+                        {{--<th scope="col">备注</th>--}}
                         <th scope="col" class="long-table">操作</th>
                     </tr>
                     </thead>
 
                     <tbody>
+                    @foreach($adsArray as $ads)
                     <tr>
-                        <th scope="row">90405</th>
-                        <td class="br-table">test3</td>
-                        <td>横幅</td>
-                        <td>CPM</td>
-                        <td>1.00</td>
-                        <td>10</td>
-                        <td>3</td>
-                        <td>10</td>
-                        <td>3</td>
-                        <td class=" br-table" id="state_90405">待审</td>
-                        <td><b style="color:#f00">账户余额不足</b>，<b style="color:#f00">未排期</b></td>
-                        <td><a href="http://www.17un.com/service/business/mobile/advert/action/update/90405.html" target="_blank" title="编辑" class="icoOpr icoEdit">编辑</a></td>
+                        <th scope="row">{{$ads['ads_id']}}</th>
+                        <td class="br-table">{{$ads['ads_name']}}</td>
+                        <td>{{$setting[$ads['ads_type']]}}</td>
+                        <td>{{$setting[$ads['ads_count_type']]}}</td>
+                        <td>{{$ads['per_cost']*1000}}</td>
+                        <td>{{$ads['total_budget']}}</td>
+                        <td>{{$ads['daily_budget']}}</td>
+                        <td>{{$ads['total_budget']}}</td>
+                        <td>{{$ads['daily_budget']}}</td>
+                        <td class=" br-table" id="state_{{$ads['ads_id']}}">
+                            @if($ads['status']==0)审核中 @elseif($ads['status']==1)已审核 @elseif($ads['status']==2)已暂停 @elseif($ads['status']==3)账户余额不足 @elseif($ads['status']==4)当天预算用完 @elseif($ads['status']==5)已关闭@endif
+                        </td>
+                        {{--<td></td>--}}
+                        <td>
+                            <a href="#" target="_blank" title="编辑" class="icoOpr icoEdit">编辑</a>&nbsp;&nbsp;
+                            <a href="#" target="_blank" title="暂停" class="icoOpr icoEdit">暂停</a>
+                        </td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
 
             <p class="slide-tip">可左右滑动浏览</p>
 
-            <ul class="pagination">
-                <li>总共 <span>1</span> 条信息，每页显示 <span>30</span> 条</li><li class="active"><a>1</a></li>                </ul>
+            {{$adsArray->links()}}
         </div>
         <!--list-ad-->
     </div>

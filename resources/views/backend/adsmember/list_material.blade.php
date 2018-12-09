@@ -37,7 +37,11 @@
                         <th class="txt_l">{{$material['size']}}</th>
                         <th class="txt_l">{{$material['filesize']}}KB</th>
                         <th class="txt_l">{{$material['created_at']}}</th>
-                        <th class="txt_l"><a href="javascript:void(false)" onclick="del('{{$material['id']}}');" title="刪除" class="icoOpr jajax_delete">刪除</a></th>
+                        <th class="txt_l">&nbsp;
+                            @if($material['status']!=1)
+                            <a href="javascript:void(false)" onclick="del('{{$material['id']}}');" title="刪除" class="icoOpr jajax_delete">刪除</a>
+                             @endif
+                        </th>
                     </tr>
                     @endforeach
                     </tbody>

@@ -111,7 +111,7 @@
                     <div class="form_row fff">
                         <span class="form-ti">单价：</span>
                         <div class="form_cont">
-                            <input type="text" class="search-input" name="price" value="" >
+                            <input type="text" class="search-input" id="price" name="price" value="" >
 
                             <p class="tips">元</p>
 
@@ -525,7 +525,7 @@
                     }
                 }
 
-                var price = $.trim( $('.price').val() );
+                var price = $.trim( $('#price').val() );
                 if(price === undefined || price == '' || price == 0)
                 {
                     alert('单价不能为空或者为0!');
@@ -647,13 +647,34 @@
                     url:"/adsmember/ads/addprocess",
                     dataType:'json',
                     headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
-                    data:{'switch_browser_array':time_array},
+                    data:{
+                        'name':name,
+                        'count_type':count_type,
+                        'adstype':adstype,
+                        'site_url':site_url,
+                        'creative_image_id_array':creative_image_id_array,
+                        'stime':stime,
+                        'etime':etime,
+                        'price':price,
+                        'budget':budget,
+                        'budget_daily':budget_daily,
+                        'os_array':os_array,
+                        'time_array':time_array,
+                        'area_array':area_array,
+                        'terminal_array':terminal_array,
+                        'switch_browser_array':switch_browser_array,
+                        'switch_domain_category_array':switch_domain_category_array,
+                        'switch_nettype_array':switch_nettype_array,
+                        'switch_network_array':switch_network_array
+                    },
                     success:function(data){
                         if(data.status == 1)
                         {
-                            alert('aa');
+                            alert(data.msg);
+                            window.location.href = '/adsmember/ads/lists';
                         }else{
-                            alert('none');
+                            alert(data.msg);
+                            $(".jbtn_save_insert").removeAttr('disabled');
                         }
                     },
                     error:function (data) {

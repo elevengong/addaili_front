@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\adsmember;
 
 use App\Model\Material;
+use App\Model\Setting;
 use App\Model\SettingGroup;
 use Illuminate\Http\Request;
 

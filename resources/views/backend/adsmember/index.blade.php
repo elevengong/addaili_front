@@ -74,8 +74,9 @@
                 </div>
             </div>
 
-            <div class="curve-area" id="jlist_amount">
-            </div>
+            {{--<div class="curve-area" id="container">--}}
+            {{--</div>--}}
+            <div class="curve-area" id="jlist_amount" style="height:350px;"></div>
 
             <p class="slide-tip">可左右滑动浏览</p>
         </div>
@@ -115,4 +116,59 @@
         </ul>
     </div>
 
+    <script src="<?php echo asset( "/resources/views/backend/js/echarts.min.js") ?>" type="text/javascript"></script>
+    <script>
+        var dom = document.getElementById("jlist_amount");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['广告消耗']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['12-03','12-04','12-05','12-06','12-07','12-08','12-09']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name:'广告消耗',
+                    type:'line',
+                    stack: '总量',
+                    itemStyle : {
+                        normal : {
+                            color:'#92b8ff',
+                            lineStyle:{
+                                color:'#92b8ff'
+                            }
+                        }
+                    },
+                    data:[0, 0, 0, 0, 0, 0, 0]
+                }
+            ]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+
+    </script>
     @endsection
