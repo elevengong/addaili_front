@@ -8,8 +8,6 @@
             {{csrf_field()}}
             <div class="insert-app ads-advert-update">
                 <h5 class="head-title">新建广告</h5>
-                <input type="hidden" value="1" name="ajax_do">
-                <input type="hidden" name="response" value="">
                 <div class="con">
                     <div class="form_row">
                         <span class="form-ti">广告名称：</span>
@@ -89,15 +87,9 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <script type="text/Javascript" src="/js/image_preview.js"></script>
-                                    <script type="text/javascript">
-                                            $(document).ready(function(){
-                                                imagePreview();
-                                            });
-                                    </script></div>
+                                </div>
 
                                 <p class="slide-tip">可左右滑动浏览</p>
-
                             </div>
                         </div>
                     </div>
@@ -107,9 +99,9 @@
 
                         <div class="form_cont">
                             <ul class="date">
-                                <li><input type="text" name="stime" value="2018-12-05" onclick="WdatePicker()"><i class="iconfont icon-gongdantubiao-"></i></li>
+                                <li><input type="text" id="stime" name="stime" value=""><i class="iconfont icon-gongdantubiao-"></i></li>
                                 <li>至</li>
-                                <li><input type="text" name="etime" value="2018-12-12" onclick="WdatePicker()"><i class="iconfont icon-gongdantubiao-"></i></li>
+                                <li><input type="text" id="etime" name="etime" value=""><i class="iconfont icon-gongdantubiao-"></i></li>
                             </ul>
 
                             <p class="tips"><i>*</i>投放结束时间不填则为不限制投放</p>
@@ -119,7 +111,7 @@
                     <div class="form_row fff">
                         <span class="form-ti">单价：</span>
                         <div class="form_cont">
-                            <input type="text" class="search-input" name="price" value="">
+                            <input type="text" class="search-input" name="price" value="" >
 
                             <p class="tips">元</p>
 
@@ -150,19 +142,14 @@
                         <div class="form_row">
                             <div class="form-ti">日程设置：</div>
                             <div class="form_cont">
-					<span class="form_group w100"> <label> <input type="radio" name="time" value="0" class="time_choose" id="zdlx01" checked="checked">不限时间
-					</label>
-					</span> <span class="form_group w100"> <label> <input type="radio" name="time" value="1" class="time_choose" id="zdlx02"> 制定时间
-					</label>
-					</span>
-                                <div class="table_Box M_tableBox" id="time_choose" style="display:block;">
-
-                                    &nbsp;&nbsp;&nbsp;快速选择：
+                                <span class="form_group w100">
+                                    <label> <input type="radio" name="time" value="0" class="time_choose" id="zdlx01" checked="checked">不限时间</label>
+                                </span>
+                                <span class="form_group w100"> <label> <input type="radio" name="time" value="1" class="time_choose" id="zdlx02"> 制定时间</label></span>
+                                <div class="table_Box M_tableBox" id="time_choose" style="display:none;">快速选择：
                                     <span style="cursor: pointer;margin-left: 10px;" class="querk_choose_time" jid="1">00:00-07:59</span><span style="padding-left: 20px; cursor: pointer;" class="querk_choose_time" jid="2">08:00-23:59</span><span style="padding-left: 20px;" class="sds"><input type="text" class="ipt w100" style="width: 50px;" id="check_stime" value="0"> - <input type="text" style="width: 50px;" class="ipt w100" id="check_etime" value="23"><input type="button" class="sm_btn greenBtn confirm_check" value="确认"></span>
                                     <table class="table">
                                         <tbody>
-
-
                                         <tr class="thead_bg">
                                             <th><span>日期</span></th>
                                             <th><span>时间段</span></th>
@@ -300,15 +287,9 @@
 					</span> <span class="form_group w100"> <label> <input type="radio" name="area" value="1" class="area" id="tfdq02"> 选择地区
 					</label>
 					</span>
-                                <div class="tableBox directSelect" id="p_c_area" style="display:block;">
+                                <div class="tableBox directSelect" id="p_c_area" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody>
-                                        <tr>
-                                            <th class="nor" style="text-align: left"><span>定向方式</span></th>
-                                        </tr>
-                                        <tr>
-                                            <td><span style="width: 150px"><label><input type="radio" name="order_area_type" value="allow">定向</label></span> <span style="width: 150px"><label><input type="radio" name="order_area_type" value="forbid">排除</label></span></td>
-                                        </tr>
                                         <tr>
                                             <th class="nor" style="text-align: left"><span>地区</span></th>
                                         </tr>
@@ -316,7 +297,7 @@
                                             <td>
                                                 @foreach($ProvinceArray as $province)
 					                             <span class="c_province">
-                                                     <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}">{{$province['remark']}}</label>
+                                                     <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}">{{$province['remark']}}</label>
 					                          	</span>
                                                  @endforeach
                                             </td>
@@ -335,7 +316,7 @@
 					</span> <span class="form_group w100"> <label> <input type="radio" name="terminal" value="1" class="terminal" id="zdlx02"> 选择终端
 					</label>
 					</span>
-                                <div class="tableBox directSelect zdSelect" id="a_terminal" style="display:block;">
+                                <div class="tableBox directSelect zdSelect" id="a_terminal" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <th class="nor" style="text-align:left"><span><label>Android</label></span></th>
@@ -366,14 +347,9 @@
                             <div class="form-ti">定向浏览器：</div>
                             <div class="form_cont">
                                 <span class="form_group w100"><label><input type="radio" name="switch_browser" value="0" class="switch_browser" checked="checked"> 不限</label></span> <span class="form_group w100"><label><input type="radio" name="switch_browser" value="1" class="switch_browser"> 选择浏览器</label></span>
-                                <div class="tableBox directSelect zdSelect" id="id_browser" style="display:block;">
+                                <div class="tableBox directSelect zdSelect" id="id_browser" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
-                                        <tbody><tr>
-                                            <th class="nor" style="text-align: left"><span>定向方式</span></th>
-                                        </tr>
-                                        <tr>
-                                            <td><span style="width: 150px"><label><input type="radio" name="order_browser_type" value="allow">定向</label></span> <span style="width: 150px"><label><input type="radio" name="order_browser_type" value="forbid">排除</label></span></td>
-                                        </tr>
+                                        <tbody>
                                         <tr>
                                             <th class="nor" style="text-align:left"><span>android</span></th>
                                         </tr>
@@ -407,7 +383,7 @@
 								</span> <span class="form_group w100"> <label> <input type="radio" name="switch_domain_category" value="1" class="switch_domain_category"> 选择网站类型
 								</label>
 								</span>
-                                <div class="tableBox directSelect zdSelect" id="domain_category" style="display:block;">
+                                <div class="tableBox directSelect zdSelect" id="domain_category" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <th class="nor" style="text-align: left"><span>网站类型</span> <label><input type="checkbox" id="checked_all">全选</label></th>
@@ -432,7 +408,7 @@
 								</span> <span class="form_group w100"> <label> <input type="radio" name="switch_nettype" value="1" class="switch_nettype"> 选择网络类型
 								</label>
 								</span>
-                                <div class="tableBox directSelect zdSelect" id="id_nettype" style="display:block;">
+                                <div class="tableBox directSelect zdSelect" id="id_nettype" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
@@ -454,7 +430,7 @@
 								</span> <span class="form_group w100"> <label> <input type="radio" name="switch_network" value="1" class="switch_network"> 选择运营商
 								</label>
 								</span>
-                                <div class="tableBox directSelect zdSelect" id="id_network" style="display:block;">
+                                <div class="tableBox directSelect zdSelect" id="id_network" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
@@ -483,32 +459,199 @@
 
 
 
-
+        <script src="<?php echo asset( "/resources/views/backend/js/laydate.js") ?>" type="text/javascript"></script>
+        <script src="<?php echo asset( "/resources/views/frontend/pc/js/baseCheck.js?ver=1.0") ?>" type="text/javascript"></script>
+        <script src="<?php echo asset( "/resources/views/backend/js/include/add_ads.js?ver=1.0") ?>" type="text/javascript"></script>
         <script>
-            $('.menu li').removeClass('active');
-            $('.mb-menu li').removeClass('active');
-            $('.menu li').eq(3).addClass('active');
-            $('.mb-menu li').eq(3).addClass('active');
 
-            $('.right-area').ready(function () {
-                alert('eee');
-            });
 
-            auto_load_all_materials();
 
-            function auto_load_all_materials(){
+
+            $('.jbtn_save_insert').click(function () {
+                var name = $.trim( $('#name').val() );
+                if(name === undefined || name == '')
+                {
+                    alert('广告名称不能为空!');
+                    return false;
+                }
+                var count_type = $('input[name="count_type"]:checked').val();
+                if(count_type === undefined || count_type == '')
+                {
+                    alert('计费类型不能为空!');
+                    return false;
+                }
+                var adstype = $('input[name="adstype"]:checked').val();
+                if(adstype === undefined || adstype == '')
+                {
+                    alert('广告类型不能为空!');
+                    return false;
+                }
+                var site_url = $.trim( $('#site_url').val() );
+                if(site_url === undefined || site_url == '')
+                {
+                    alert('推广链接不能为空!');
+                    return false;
+                }
+                if(!isUrl(site_url))
+                {
+                    alert('推广链接格式错误!');
+                    return false;
+                }
+
+                //----广告素材creative_image_id_array[]
+                var creative_image_id_array = [];
+                $('input[name="creative_image_id_array[]"]').each(function(){
+                    creative_image_id_array.push($(this).val());
+                });
+                if(creative_image_id_array === undefined || creative_image_id_array.length == 0){
+                    alert('广告素材不能为空!');
+                    return false;
+                }
+
+                //----投放日期
+                var stime = $.trim( $('#stime').val() );
+                var etime = $.trim( $('#etime').val() );
+                if(stime != '' && etime !='')
+                {
+                    if(isDate(stime) && isDate(etime))
+                    {
+                        alert('广告时间格式错误!');
+                        return false;
+                    }
+                    if(compareDate(stime,etime))
+                    {
+                        alert('广告的开始时间不能大于结束时间!');
+                        return false;
+                    }
+                }
+
+                var price = $.trim( $('.price').val() );
+                if(price === undefined || price == '' || price == 0)
+                {
+                    alert('单价不能为空或者为0!');
+                    return false;
+                }
+                if(!valimoney(price))
+                {
+                    alert('单价格式错误!');
+                    return false;
+                }
+                var budget = $.trim( $('#budget').val() );
+                if(budget === undefined || budget == '')
+                {
+                    alert('总预算不能为空!');
+                    return false;
+                }
+                if(!valimoney(budget))
+                {
+                    alert('总预算格式错误!');
+                    return false;
+                }
+                var budget_daily = $.trim( $('#budget_daily').val() );
+                if(budget_daily === undefined || budget_daily == '')
+                {
+                    alert('每日预算不能为空!');
+                    return false;
+                }
+                if(!valimoney(budget_daily))
+                {
+                    alert('每日预算格式错误!');
+                    return false;
+                }
+
+                //----投放设备系统
+                var os_array =[];
+                $('input[name="os[]"]:checked').each(function(){
+                    os_array.push($(this).val());
+                });
+                if(os_array === undefined || os_array.length == 0){
+                    os_array =['android','ios']
+                }
+
+                //--------------------日程设置
+                var time = $('input[name="time"]:checked').val();
+                var time_array =[];
+                if(time == 1)
+                {
+                    $('input[name="time_array[]"]:checked').each(function(){
+                        time_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向地区
+                var area = $('input[name="area"]:checked').val();
+                var area_array =[];
+                if(area == 1)
+                {
+                    $('input[name="province_id_array[]"]:checked').each(function(){
+                        area_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向终端
+                var terminal = $('input[name="terminal"]:checked').val();
+                var terminal_array =[];
+                if(terminal == 1)
+                {
+                    $('input[name="terminal_id_array[]"]:checked').each(function(){
+                        terminal_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向浏览器
+                var switch_browser = $('input[name="switch_browser"]:checked').val();
+                var switch_browser_array =[];
+                if(switch_browser == 1)
+                {
+                    $('input[name="browser_id_array[]"]:checked').each(function(){
+                        switch_browser_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向网站类型
+                var switch_domain_category = $('input[name="switch_domain_category"]:checked').val();
+                var switch_domain_category_array =[];
+                if(switch_domain_category == 1)
+                {
+                    $('input[name="domain_category_array[]"]:checked').each(function(){
+                        switch_domain_category_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向网络类型
+                var switch_nettype = $('input[name="switch_nettype"]:checked').val();
+                var switch_nettype_array =[];
+                if(switch_nettype == 1)
+                {
+                    $('input[name="nettype_id_array[]"]:checked').each(function(){
+                        switch_nettype_array.push($(this).val());
+                    });
+                }
+
+                //--------------------定向运营商
+                var switch_network = $('input[name="switch_network"]:checked').val();
+                var switch_network_array =[];
+                if(switch_network == 1)
+                {
+                    $('input[name="network_id_array[]"]:checked').each(function(){
+                        switch_network_array.push($(this).val());
+                    });
+                }
+
+                //disable提交按钮
+                $(".jbtn_save_insert").attr('disabled','disabled');
+
+
                 $.ajax({
                     type:"post",
-                    url:"/adsmember/ads/getallmaterial",
+                    url:"/adsmember/ads/addprocess",
                     dataType:'json',
                     headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
-                    data:{},
-                    // data:$("#form_insert").serialize(),
+                    data:{'switch_browser_array':time_array},
                     success:function(data){
                         if(data.status == 1)
                         {
-                            $('.tab_box tbody').html(data.datas);
-                            $('.tab_box').after(data.paginate);
+                            alert('aa');
                         }else{
                             alert('none');
                         }
@@ -517,60 +660,7 @@
                         layer.msg(data.msg);
                     }
                 });
-            }
-
-            $('.icon-shuaxin').click(function () {
-                auto_load_all_materials();
             });
-
-            $('#searchimageid').click(function () {
-                var id = $.trim( $('#keyword').val() );
-                $.ajax({
-                    type:"post",
-                    url:"/adsmember/ads/getmaterialbyid/"+ id,
-                    dataType:'json',
-                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
-                    data:{},
-                    // data:$("#form_insert").serialize(),
-                    success:function(data){
-                        if(data.status == 1)
-                        {
-                            $('.tab_box tbody').html(data.datas);
-                        }else{
-                            alert(data.datas);
-                        }
-                    },
-                    error:function (data) {
-                        layer.msg(data.msg);
-                    }
-                });
-            });
-
-            function choose(id) {
-                $.ajax({
-                    type:"post",
-                    url:"/adsmember/ads/choosematerial/"+ id,
-                    dataType:'json',
-                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
-                    data:{},
-                    // data:$("#form_insert").serialize(),
-                    success:function(data){
-                        if(data.status == 1)
-                        {
-                            $('#creative_suite_li').append(data.data);
-                        }else{
-                            alert('none');
-                        }
-                    },
-                    error:function (data) {
-                        layer.msg(data.msg);
-                    }
-                });
-            }
-
-            function removeimage(id){
-                $("#material_item_"+id).remove();
-            }
         </script>
 
 @endsection

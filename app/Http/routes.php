@@ -17,7 +17,8 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/service/index','backend\adsmember\IndexController@index');
 
     Route::any('/adsmember/ads/lists','backend\adsmember\AdsController@lists');
-    Route::any('/adsmember/ads/add','backend\adsmember\AdsController@add');
+    Route::get('/adsmember/ads/add','backend\adsmember\AdsController@add');
+    Route::post('/adsmember/ads/addprocess','backend\adsmember\AdsController@addprocess');
     Route::post('/adsmember/ads/getallmaterial','backend\adsmember\AdsController@getallmaterial');
     Route::post('/adsmember/ads/choosematerial/{id}','backend\adsmember\AdsController@choosematerial')->where(['id' => '[0-9]+']);
     Route::post('/adsmember/ads/getmaterialbyid/{id}','backend\adsmember\AdsController@getmaterialbyid')->where(['id' => '[0-9]+']);

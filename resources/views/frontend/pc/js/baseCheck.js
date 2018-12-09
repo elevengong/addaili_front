@@ -49,6 +49,19 @@ function isIP(str){
     return baseFun(str, p);
 }
 
+//比较时间大小
+function compareDate(s1,s2){
+    return ((new Date(s1.replace(/-/g,"\/")))>(new Date(s2.replace(/-/g,"\/"))));
+}
+
+//判断是否为正数（检验钱数）
+function valimoney(num)
+{
+    var reg = /^\d+(?=\.{0,1}\d+$|$)/
+    if(reg.test(num)) return true;
+    return false ;
+}
+
 function baseFun(str,p){
     if (str == '') {
         return false;

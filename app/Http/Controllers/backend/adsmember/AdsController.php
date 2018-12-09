@@ -150,7 +150,7 @@ class AdsController extends CommonController
                 $html .= '<div class="material_item" id="material_item_'.$material[0]['id'].'"><a href="javascript:void(0)" onclick="removeimage('.$material[0]['id'].')" class="del">';
                 $html .= '<i class="iconfont icon-shanchu1"></i></a>';
                 $html .= '<img onmouseover="" src="'.$material[0]['image'].'" class="imgs">';
-                $html .= '<input type="hidden" value="'.$material[0]['id'].'" name="creative_suite_id_array[]" jid="'.$material[0]['id'].'" id="material_'.$material[0]['id'].'" class="material_checked"></div>';
+                $html .= '<input type="hidden" value="'.$material[0]['id'].'" name="creative_image_id_array[]" jid="'.$material[0]['id'].'" id="material_'.$material[0]['id'].'" class="material_checked"></div>';
 
                 $reData['status'] = 1;
                 $reData['data'] = $html;
@@ -187,6 +187,14 @@ class AdsController extends CommonController
             }
             return json_encode($reData);
         }
+    }
+
+    public function addprocess(Request $request){
+        if($request->isMethod('post')){
+            $chk_value = request()->input('switch_browser_array');
+            print_r($chk_value);exit;
+        }
+
     }
 
 }
