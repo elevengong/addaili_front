@@ -12,12 +12,8 @@ use App\Http\Requests;
 class IndexController extends CommonController
 {
     public function index(){
-        return view('backend.webmember.index')->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
-        echo "aaa";exit;
-        $memberBalance = MemberBalance::where('id',session('ads_id'))->get()->toArray();
-        $member = Member::find(session('ads_id'))->toArray();
-        $countAds = Ads::where('member_id',session('ads_id'))->where('status',1)->count();
-        return view('backend.adsmember.index',compact('memberBalance','member','countAds'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        $memberBalance = MemberBalance::where('id',session('webmaster_id'))->get()->toArray();
+        return view('backend.webmember.index',compact('memberBalance'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 

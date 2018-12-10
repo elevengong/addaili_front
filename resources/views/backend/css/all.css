@@ -352,7 +352,7 @@ slide-tip
 .add-bankcard .input{margin-bottom: 30px;overflow: hidden;}
 .add-bankcard .input span{width: 100px;text-align: right;display: inline-block;font-size: 14px;color: #777;float: left;line-height: 36px;}
 .add-bankcard .input input{width: 310px;height: 36px;border: solid 1px #dae0e9;border-radius: 5px;padding-left: 10px;outline: none;font-size: 14px;color: #666;}
-.add-bankcard .input select{width: 150px;height: 36px;border: solid 1px #dae0e9;border-radius: 5px;padding-left: 10px;outline: none;font-size: 14px;color: #666;}
+.add-bankcard .input select{width: 310px;height: 36px;border: solid 1px #dae0e9;border-radius: 5px;padding-left: 10px;outline: none;font-size: 14px;color: #666;}
 .add-bankcard .select{border: none;float: left;padding: 0;}
 .add-bankcard .select select:first-child{margin-right: 5px;}
 .add-bankcard .button{margin-left: 100px;padding: 20px 0;}

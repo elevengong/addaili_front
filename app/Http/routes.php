@@ -51,6 +51,17 @@ Route::group(['middleware' => ['web','webmember.login']],function () {
 
     Route::any('/webmember/service/index','backend\webmember\IndexController@index');
 
+    Route::any('/webmember/message/lists','backend\webmember\MessageController@lists');
+
+    Route::any('/webmember/member/setting','backend\webmember\SettingController@index');
+    Route::post('/webmember/setting/updatepwd','backend\webmember\SettingController@updatepwd');
+    Route::post('/webmember/setting/updateqq','backend\webmember\SettingController@updateqq');
+    Route::post('/webmember/setting/updatemobile','backend\webmember\SettingController@updatemobile');
+    Route::post('/webmember/setting/addbankinfo','backend\webmember\SettingController@addbankinfo');
+    Route::delete('/webmember/setting/addbankinfo/del/{withdraw_info_id}','backend\webmember\SettingController@delbankinfo')->where(['withdraw_info_id' => '[0-9]+']);
+
+    Route::any('/webmember/website/index','backend\webmember\WebsiteController@websitelist');
+    Route::any('/webmember/website/add','backend\webmember\WebsiteController@add');
 
 
 });

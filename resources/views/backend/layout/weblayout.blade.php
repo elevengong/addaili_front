@@ -39,45 +39,33 @@
 
             <div class="service">
                 <figure><img src="{{url('/resources/views/backend/images/kefu.jpg')}}" alt=""></figure>
-
                 <a href="http://wpa.qq.com/msgrd?v=1&amp;uin=1736868188&amp;site=有盟移动客服专员&amp;menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：1736868188</a>
             </div>
             <li class="active li">
-                <a href="http://www.17un.com/service/customer/action/index.html"><i class="iconfont icon-home"></i>管理首页</a>
+                <a href="/webmember/service/index"><i class="iconfont icon-home"></i>管理首页</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/account/action/update.html"><i class="iconfont icon-shezhi"></i>基本设置</a>
+                <a href="/webmember/member/setting"><i class="iconfont icon-shezhi"></i>基本设置</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/domain/action/lists.html"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
+                <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists_banner.html"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
+                <a href="/webmember/ads/recommend"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists.html"><i class="iconfont icon-iconset0178"></i>广告位管理</a>
+                <a href="/webmember/ads/management"><i class="iconfont icon-iconset0178"></i>广告位管理</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/stat/mobile/action/lists_amount_web.html"><i class="iconfont icon-yongjin"></i>佣金报表</a>
+                <a href="/webmember/money/report"><i class="iconfont icon-yongjin"></i>佣金报表</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/user/reward/action/lists.html"><i class="iconfont icon-jiangli"></i>奖励报表</a>
+                <a href="/webmember/money/withdraw"><i class="iconfont icon-caiwuguanli"></i>财务结算</a>
             </li>
             <li class="li">
-                <a href="http://www.17un.com/service/customer/payment/action/lists_withdrawal.html"><i class="iconfont icon-caiwuguanli"></i>财务结算</a>
+                <a href="/webmember/message/lists"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
             </li>
-            <li class="li">
-                <a href="http://www.17un.com/service/customer/instation/message/action/lists.html"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
-            </li>
-            <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists_app.html"><i class="iconfont icon-app"></i>APP广告位管理</a>
-            </li>
-            <li class="li">
-                <a href="http://www.17un.com/service/customer/stat/mobile/action/lists_amount_app.html"><i class="iconfont icon-baobiao"></i>APP佣金报表</a>
-            </li>
-            <li class="li">
-                <a href="http://www.17un.com/service/customer/mobile/user/protocol/action/lists.html"><i class="iconfont icon-qiandinghezuoxieyi"></i>投放协议</a>
-            </li>
+
         </ul>
 
         <div id="user-area">
@@ -123,77 +111,38 @@
 
         <ul class="menu">
             <li class="active">
-                <a href="http://www.17un.com/service/customer/action/index.html"><i class="iconfont icon-home"></i>管理首页</a>
-
+                <a href="/webmember/service/index"><i class="iconfont icon-home"></i>管理首页</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/account/action/update.html"><i class="iconfont icon-shezhi"></i>基本设置</a>
-
+                <a href="/webmember/member/setting"><i class="iconfont icon-shezhi"></i>基本设置</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/mobile/domain/action/lists.html"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
-
+                <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists_banner.html"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
-
+                <a href="/webmember/ads/recommend"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists.html"><i class="iconfont icon-iconset0178"></i>广告位管理</a>
-
+                <a href="/webmember/ads/management"><i class="iconfont icon-iconset0178"></i>广告位管理</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/stat/mobile/action/lists_amount_web.html"><i class="iconfont icon-yongjin"></i>佣金报表</a>
-
+                <a href="/webmember/money/report"><i class="iconfont icon-yongjin"></i>佣金报表</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/mobile/user/reward/action/lists.html"><i class="iconfont icon-jiangli"></i>奖励报表</a>
-
+                <a href="/webmember/money/withdraw"><i class="iconfont icon-caiwuguanli"></i>财务结算</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
             <li>
-                <a href="http://www.17un.com/service/customer/payment/action/lists_withdrawal.html"><i class="iconfont icon-caiwuguanli"></i>财务结算</a>
-
+                <a href="/webmember/message/lists"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
-
             </li>
-            <li>
-                <a href="http://www.17un.com/service/customer/instation/message/action/lists.html"><i class="iconfont icon-xiaoxi"></i>消息中心</a>
 
-                <span class="iconfont icon-sanjiaoxing"></span>
-
-            </li>
-            <li>
-                <a href="http://www.17un.com/service/customer/mobile/space/action/lists_app.html"><i class="iconfont icon-app"></i>APP广告位管理</a>
-
-                <span class="iconfont icon-sanjiaoxing"></span>
-
-            </li>
-            <li>
-                <a href="http://www.17un.com/service/customer/stat/mobile/action/lists_amount_app.html"><i class="iconfont icon-baobiao"></i>APP佣金报表</a>
-
-                <span class="iconfont icon-sanjiaoxing"></span>
-
-            </li>
-            <li>
-                <a href="http://www.17un.com/service/customer/mobile/user/protocol/action/lists.html"><i class="iconfont icon-qiandinghezuoxieyi"></i>投放协议</a>
-
-                <span class="iconfont icon-sanjiaoxing"></span>
-
-            </li>
         </ul>
     </div>
     <!--left-area-->
