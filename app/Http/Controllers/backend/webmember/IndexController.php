@@ -12,8 +12,9 @@ use App\Http\Requests;
 class IndexController extends CommonController
 {
     public function index(){
+        $webmaster = Member::find(session('webmaster_id'))->toArray();
         $memberBalance = MemberBalance::where('id',session('webmaster_id'))->get()->toArray();
-        return view('backend.webmember.index',compact('memberBalance'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        return view('backend.webmember.index',compact('memberBalance','webmaster'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 

@@ -50,7 +50,7 @@
             <li class="li">
                 <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
             </li>
-            <li class="li">
+            <li class="li" style="display: none;">
                 <a href="/webmember/ads/recommend"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
             </li>
             <li class="li">
@@ -122,7 +122,7 @@
                 <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
             </li>
-            <li>
+            <li style="display: none;">
                 <a href="/webmember/ads/recommend"><i class="iconfont icon-qunfengweinituijian"></i>推荐广告位</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
             </li>

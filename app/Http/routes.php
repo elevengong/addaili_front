@@ -62,6 +62,16 @@ Route::group(['middleware' => ['web','webmember.login']],function () {
 
     Route::any('/webmember/website/index','backend\webmember\WebsiteController@websitelist');
     Route::any('/webmember/website/add','backend\webmember\WebsiteController@add');
+    Route::delete('/webmember/website/delete','backend\webmember\WebsiteController@delete');
+
+    Route::any('/webmember/ads/management','backend\webmember\AdsController@managementadslist');
+    Route::any('/webmember/ads/add','backend\webmember\AdsController@add');
+    Route::get('/webmember/ads/getadscode/{webmaster_ads_id}','backend\webmember\AdsController@getadscode')->where(['webmaster_ads_id' => '[0-9]+']);
+
+    Route::any('/webmember/money/report','backend\webmember\MoneyController@commissionlist');
+
+    Route::any('/webmember/money/withdraw','backend\webmember\MoneyController@withdraw');
+    Route::any('/webmember/money/withdraw/record','backend\webmember\MoneyController@withdrawrecord');
 
 
 });

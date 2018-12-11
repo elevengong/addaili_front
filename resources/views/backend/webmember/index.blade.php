@@ -5,7 +5,7 @@
         <!--position-->
 
         <div class="index-news">
-            <a href="http://www.17un.com/service/customer/instation/message/action/lists.html?id=2005site_affiche">
+            <a href="#">
                 <p>最新消息： 通知！</p>
                 <span>2018-12-05 19:36</span>
             </a>
@@ -17,10 +17,57 @@
                 <h5 class="head-title">账户信息</h5>
                 <div class="con">
                     <figure><img src="{{url('/resources/views/backend/images/touxiang.png')}}" alt=""></figure>
-                    <div class="data"><p>{{$webmember}}</p><p>上次登录时间：2018-12-05 20:22:55</p>
+                    <div class="data"><p>{{$webmember}}</p><p>上次登录时间：{{$webmaster['lastlogined_at']}}</p>
                     </div>
                 </div>
                 <!--person-data-->
+                <div class="link-rule">
+                    <a href="javascript:void(false);" data-toggle="modal" data-target="#exampleModal">获取推广链接</a>
+
+                    <a href="javascript:void(false);" data-toggle="modal" data-target="#exampleModal-2">查看推广规则</a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">您的专属推广链接</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <span id="url">http://www.17un.com/vip/667?token=WGNTYVI4UjQBb1IwXWQEZQ==</span>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">复制代码</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel-2">媒介主发展下线规则</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>1、通过您专属的推广链接注册成功的网站主账号，该账号2个月内（自然月）产生的媒体佣金的2%将作为您的奖励，每月结算一次；</p>
+
+                                    <p>2、每个WAP网站主或团队拥有多个有盟账户，账户之间相互推荐，则无法领取推荐奖励。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="index-income">
                 <h5 class="head-title">收入状况</h5>

@@ -12,7 +12,7 @@
 
                 <div class="top search-area">
                     <div class="input">
-                        <form method="get" action="http://www.17un.com/service/customer/mobile/domain/action/lists.html" name="form_search" id="form_list">
+                        <form method="get" action="/webmember/website/index" name="form_search" id="form_list">
                             <input class="search-input" type="text" name="keyword" value="" placeholder="ID|网站名称|域名">
                             <input type="submit" value="查询" class="check check-h">
                             <div class="bottom">
@@ -34,16 +34,22 @@
                         <th scope="col">网站类型</th>
                         <th scope="col" class="mb-hide">备案号</th>
                         <th scope="col">状态</th>
-                        <th scope="col" class="mb-hide">审核时间</th>
                         <th scope="col">操作</th>
                     </tr>
                     </thead>
 
                     <tbody>
+                    @foreach($allWebsiteArray as $website)
                     <tr>
-                        <td colspan="8">没有数据信息</td>
+                        <td>{{$website['web_id']}}</td>
+                        <td>{{$website['web_name']}}</td>
+                        <td>{{$website['domain']}}</td>
+                        <td>{{$website['remark']}}</td>
+                        <td>{{$website['icp']}}</td>
+                        <td>@if($website['status']==0)审核中@elseif($website['status']==1)审核已通过@elseif($website['status']==2)审核没通过@endif</td>
+                        <td><a href="javascript:void(false)" onclick="del('{{$website['web_id']}}');" title="刪除">删除</a></td>
                     </tr>
-
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -58,6 +64,35 @@
             $('.mb-menu li').removeClass('active');
             $('.menu li').eq(2).addClass('active');
             $('.mb-menu li').eq(2).addClass('active');
+
+            function del(id) {
+                var msg = "您真的确定要删除吗？\n\n请确认！";
+                if (confirm(msg)==true){
+                    $.ajax({
+                        type:"delete",
+                        url:"/webmember/website/delete/"+id,
+                        dataType:'json',
+                        headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                        data:{},
+                        // data:$("#form_insert").serialize(),
+                        success:function(data){
+                            if(data.status == 0)
+                            {
+                                alert(data.msg);
+                            }else{
+                                alert(data.msg);
+                                window.location.reload();
+                            }
+                        },
+                        error:function (data) {
+                            layer.msg(data.msg);
+                        }
+                    });
+
+                }else{
+                    return false;
+                }
+            }
         </script>
 
 @endsection
