@@ -25,7 +25,7 @@ class SettingController extends CommonController
             ->leftJoin('setting_group',function ($join){
                 $join->on('setting_group.id','=','withdraw_info.province_id');
             })
-            ->where('withdraw_info.webmember_id',session('webmaster_id'))->orderBy('withdraw_info.withdraw_info_id','desc')->get()->toArray();
+            ->where('withdraw_info.webmember_id',session('webmaster_id'))->where('withdraw_info.status',1)->orderBy('withdraw_info.withdraw_info_id','desc')->get()->toArray();
         return view('backend.webmember.setting',compact('memberInfo','allBank','allProvince','withdrawInfo'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
@@ -117,7 +117,7 @@ class SettingController extends CommonController
 
     public function delbankinfo($id)
     {
-        $result = WithdrawInfo::destroy($id);
+        $result = WithdrawInfo::where('withdraw_info_id',$id)->where('webmember_id',session('webmaster_id'))->update(['status'=> 2]);
         if ($result) {
             $reData['status'] = 1;
             $reData['msg'] = "删除成功";

@@ -267,6 +267,13 @@ slide-tip
 .pagination .long a{padding: 0 10px;}
 .pagination i{font-size: 24px;}
 .pagination .active a{background: #ffa55d;color: #fff;}
+.pagination .active span{background: #ffa55d;color: #fff;border: solid 1px #ffa55d;
+    display: block;
+    min-width: 28px;
+    height: 28px;
+    line-height: 26px;
+    border-radius: 5px;
+    text-align: center;}
 .pagination a:hover{background: #ffa55d;color: #fff;}
 .page{}
 .page li{display: inline-block;margin: 0 5px;}

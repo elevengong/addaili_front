@@ -5,9 +5,9 @@
         <!--position-->
 
         <div class="index-news">
-            <a href="#">
-                <p>最新消息： 通知！</p>
-                <span>2018-12-05 19:36</span>
+            <a href="/webmember/message/lists">
+                <p>最新消息： {{$lastestMessage[0]['message_title']}}</p>
+                <span>{{$lastestMessage[0]['created_at']}}</span>
             </a>
         </div>
         <!--index-news-->
@@ -22,17 +22,17 @@
                 </div>
                 <!--person-data-->
                 <div class="link-rule">
-                    <a href="javascript:void(false);" data-toggle="modal" data-target="#exampleModal">获取推广链接</a>
+                    <a href="javascript:void(false);" id="exampleModal_1">获取推广链接</a>
 
-                    <a href="javascript:void(false);" data-toggle="modal" data-target="#exampleModal-2">查看推广规则</a>
+                    <a href="javascript:void(false);" id="exampleModal_2">查看推广规则</a>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal1" tabindex="-1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">您的专属推广链接</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" id="close1" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
@@ -49,12 +49,12 @@
                 </div>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel-2">媒介主发展下线规则</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" id="close2" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
@@ -247,5 +247,47 @@
                 <li><img src="{{url('/resources/views/backend/images/tjggz-16.jpg')}}" alt=""></li>
             </ul>
         </div>
+        <div class="" id="backgroudcolor"></div>
+        <script src="<?php echo asset( "/resources/views/backend/js/clipboard.js") ?>"></script>
+        <script>
+            $(".btn-primary").click(function () {
+                $(".btn-primary").attr('data-clipboard-target','#url');
+                var clipboard = new ClipboardJS('.btn-primary');
+                clipboard.on('success', function(e) {
+                    alert("复制成功");
+                    e.clearSelection();
+                });
+            });
 
+
+            $('#exampleModal_1').click(function () {
+                $('#exampleModal1').css('display','block');
+                $('#exampleModal1').addClass(' show');
+                $('#backgroudcolor').addClass('modal-backdrop fade show');
+            });
+            $('#exampleModal_2').click(function () {
+                $('#exampleModal2').css('display','block');
+                $('#exampleModal2').addClass(' show');
+                $('#backgroudcolor').addClass('modal-backdrop fade show');
+            });
+
+            $('#close1').click(function () {
+                $('#backgroudcolor').removeClass('modal-backdrop fade show')
+                $('#exampleModal1').css('display','none');
+                $('#exampleModal1').removeClass(' show');
+            });
+            $('#close2').click(function () {
+                $('#backgroudcolor').removeClass('modal-backdrop fade show')
+                $('#exampleModal2').css('display','none');
+                $('#exampleModal2').removeClass(' show');
+            });
+
+            $('#backgroudcolor').click(function () {
+                $('#backgroudcolor').removeClass('modal-backdrop fade show')
+                $('#exampleModal1').css('display','none');
+                $('#exampleModal1').removeClass(' show');
+                $('#exampleModal2').css('display','none');
+                $('#exampleModal2').removeClass(' show');
+            });
+        </script>
 @endsection
