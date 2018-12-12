@@ -463,6 +463,9 @@
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/baseCheck.js?ver=1.0") ?>" type="text/javascript"></script>
         <script src="<?php echo asset( "/resources/views/backend/js/include/add_ads.js?ver=1.0") ?>" type="text/javascript"></script>
         <script>
+            function page(page){
+                alert(page);
+            }
 
 
 

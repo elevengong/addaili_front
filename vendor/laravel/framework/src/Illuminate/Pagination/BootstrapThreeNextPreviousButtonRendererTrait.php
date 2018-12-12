@@ -45,4 +45,18 @@ trait BootstrapThreeNextPreviousButtonRendererTrait
 
         return $this->getPageLinkWrapper($url, $text, 'next');
     }
+
+    public function getAjaxNextButton($text = '&raquo;')
+    {
+        // If the current page is greater than or equal to the last page, it means we
+        // can't go any further into the pages, as we're already on this last page
+        // that is available, so we will make it the "next" link style disabled.
+        if (! $this->paginator->hasMorePages()) {
+            return $this->getDisabledTextWrapper($text);
+        }
+
+        $url = $this->paginator->url($this->paginator->currentPage() + 1);
+
+        return $this->getAjaxPageLinkWrapper($url, $text, 'next');
+    }
 }

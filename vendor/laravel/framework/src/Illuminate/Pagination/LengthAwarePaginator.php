@@ -119,6 +119,11 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
         return $this->render($presenter);
     }
 
+    public function ajaxlinks(Presenter $presenter = null)
+    {
+        return $this->ajaxrender($presenter);
+    }
+
     /**
      * Render the paginator using the given presenter.
      *
@@ -134,6 +139,17 @@ class LengthAwarePaginator extends AbstractPaginator implements Arrayable, Array
         $presenter = $presenter ?: new BootstrapThreePresenter($this);
 
         return $presenter->render();
+    }
+
+    public function ajaxrender(Presenter $presenter = null)
+    {
+        if (is_null($presenter) && static::$presenterResolver) {
+            $presenter = call_user_func(static::$presenterResolver, $this);
+        }
+
+        $presenter = $presenter ?: new BootstrapThreePresenter($this);
+
+        return $presenter->ajaxrender();
     }
 
     /**

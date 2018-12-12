@@ -126,7 +126,7 @@ class AdsController extends CommonController
     public function getallmaterial(Request $request){
         if($request->isMethod('post')){
             $ads_id = session('ads_id');
-            $allMaterial = Material::where('ads_id',$ads_id)->where('status',1)->orderBy('created_at','desc')->paginate($this->backendPageNum);
+            $allMaterial = Material::where('ads_id',$ads_id)->where('status',1)->orderBy('created_at','desc')->paginate(1);
             $html = '';
             $paginate = '';
             if(!empty($allMaterial)){
@@ -145,7 +145,7 @@ class AdsController extends CommonController
                     $html .= '</div></td></tr>';
                 }
 
-                $paginate .= $allMaterial->links();
+                $paginate .= $allMaterial->ajaxlinks();
 
                 $reData['status'] = 1;
                 $reData['datas'] = $html;

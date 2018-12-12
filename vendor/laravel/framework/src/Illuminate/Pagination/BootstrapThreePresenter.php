@@ -66,6 +66,18 @@ class BootstrapThreePresenter implements PresenterContract
         return '';
     }
 
+    public function ajaxrender()
+    {
+        if ($this->hasPages()) {
+            return new HtmlString(sprintf(
+                '<ul class="pagination">%s</ul>',
+                $this->getAjaxLinks()
+            ));
+        }
+
+        return '';
+    }
+
     /**
      * Get HTML wrapper for an available page link.
      *
@@ -79,6 +91,13 @@ class BootstrapThreePresenter implements PresenterContract
         $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
 
         return '<li><a href="'.htmlentities($url).'"'.$rel.'>'.$page.'</a></li>';
+    }
+
+    protected function getAjaxAvailablePageWrapper($url, $page, $rel = null)
+    {
+        $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
+
+        return '<li><a href="javascript:" onclick="page('.$page.')">'.$page.'</a></li>';
     }
 
     /**
@@ -99,6 +118,11 @@ class BootstrapThreePresenter implements PresenterContract
      * @return string
      */
     protected function getActivePageWrapper($text)
+    {
+        return '<li class="active"><span>'.$text.'</span></li>';
+    }
+
+    protected function getAjaxActivePageWrapper($text)
     {
         return '<li class="active"><span>'.$text.'</span></li>';
     }

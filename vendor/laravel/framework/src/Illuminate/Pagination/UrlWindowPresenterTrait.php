@@ -30,6 +30,27 @@ trait UrlWindowPresenterTrait
         return $html;
     }
 
+    protected function getAjaxLinks()
+    {
+        $html = '';
+
+        if (is_array($this->window['first'])) {
+            $html .= $this->getAjaxUrlLinks($this->window['first']);
+        }
+
+        if (is_array($this->window['slider'])) {
+            $html .= $this->getDots();
+            $html .= $this->getAjaxUrlLinks($this->window['slider']);
+        }
+
+        if (is_array($this->window['last'])) {
+            $html .= $this->getDots();
+            $html .= $this->getAjaxUrlLinks($this->window['last']);
+        }
+
+        return $html;
+    }
+
     /**
      * Get the links for the URLs in the given array.
      *
@@ -42,6 +63,17 @@ trait UrlWindowPresenterTrait
 
         foreach ($urls as $page => $url) {
             $html .= $this->getPageLinkWrapper($url, $page);
+        }
+
+        return $html;
+    }
+
+    protected function getAjaxUrlLinks(array $urls)
+    {
+        $html = '';
+
+        foreach ($urls as $page => $url) {
+            $html .= $this->getAjaxPageLinkWrapper($url, $page);
         }
 
         return $html;
@@ -62,5 +94,14 @@ trait UrlWindowPresenterTrait
         }
 
         return $this->getAvailablePageWrapper($url, $page, $rel);
+    }
+
+    protected function getAjaxPageLinkWrapper($url, $page, $rel = null)
+    {
+        if ($page == $this->paginator->currentPage()) {
+            return $this->getAjaxActivePageWrapper($page);
+        }
+
+        return $this->getAjaxAvailablePageWrapper($url, $page, $rel);
     }
 }

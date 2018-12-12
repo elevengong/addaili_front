@@ -26,6 +26,7 @@
 
             {{$allMessageArray->links()}}
 
+
         </div>
 
         <script type="text/javascript">
