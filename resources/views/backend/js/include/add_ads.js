@@ -23,7 +23,7 @@ function auto_load_all_materials(){
             if(data.status == 1)
             {
                 $('.tab_box tbody').html(data.datas);
-                $('.tab_box').after(data.paginate);
+                $('#pagehere').html(data.paginate);
             }else{
                 alert('none');
             }

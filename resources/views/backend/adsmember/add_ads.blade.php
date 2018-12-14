@@ -88,6 +88,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div id="pagehere"></div>
 
                                 <p class="slide-tip">可左右滑动浏览</p>
                             </div>
@@ -461,10 +462,29 @@
 
         <script src="<?php echo asset( "/resources/views/backend/js/laydate.js") ?>" type="text/javascript"></script>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/baseCheck.js?ver=1.0") ?>" type="text/javascript"></script>
-        <script src="<?php echo asset( "/resources/views/backend/js/include/add_ads.js?ver=1.0") ?>" type="text/javascript"></script>
+        <script src="<?php echo asset( "/resources/views/backend/js/include/add_ads.js?ver=1.1") ?>" type="text/javascript"></script>
         <script>
             function page(page){
-                alert(page);
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/ads/getallmaterial?page="+page,
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:{},
+                    // data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            $('.tab_box tbody').html(data.datas);
+                            $('#pagehere').html(data.paginate);
+                        }else{
+                            alert('none');
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
             }
 
 
