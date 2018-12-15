@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\CommonSetting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,12 +12,18 @@ class CommonController extends Controller
 {
     private $domain;
     protected $backendPageNum;
+    protected $commonSetting;
 
     public function __construct()
     {
         date_default_timezone_set('Asia/Shanghai');
         $this->domain = 'http://daili.com';
         $this->backendPageNum = '10';
+        $commonSetting = CommonSetting::where('status',1)->orderBy('common_set_id','asc')->get()->toArray();
+        foreach($commonSetting as $set)
+        {
+            $this->commonSetting[$set['name']] = $set['value'];
+        }
     }
 
     //删除指定session数据

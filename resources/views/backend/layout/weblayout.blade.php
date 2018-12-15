@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <title>有盟移动管理后台</title>
+    <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}站长管理后台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -39,7 +39,7 @@
 
             <div class="service">
                 <figure><img src="{{url('/resources/views/backend/images/kefu.jpg')}}" alt=""></figure>
-                <a href="http://wpa.qq.com/msgrd?v=1&amp;uin=1736868188&amp;site=有盟移动客服专员&amp;menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：1736868188</a>
+                <a href="http://wpa.qq.com/msgrd?v=1&uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}移动客服专员&menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a>
             </div>
             <li class="active li">
                 <a href="/webmember/service/index"><i class="iconfont icon-home"></i>管理首页</a>
@@ -69,7 +69,7 @@
         </ul>
 
         <div id="user-area">
-            <a href="http://www.17un.com/service/customer/account/action/update.html" class="user">
+            <a href="#" class="user">
                 <i class="iconfont icon-yonghu"></i>
                 <div class="con">
                     <p>Hi!</p>
@@ -106,7 +106,7 @@
     <div class="left-area">
         <div class="service">
             <figure><img src="{{url('/resources/views/backend/images/kefu.jpg')}}" alt=""></figure>
-            <a href="http://wpa.qq.com/msgrd?v=1&uin=918197512&site=有盟移动客服专员&menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：918197512</a>
+            <a href="http://wpa.qq.com/msgrd?v=1&uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}移动客服专员&menu=yes" target="_blank"><i class="iconfont icon-kefu"></i>我的客服：{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a>
         </div>
 
         <ul class="menu">
@@ -149,7 +149,7 @@
     <div class="ddd ddd-dd"></div>
     @yield('content')
     <div class="copy">
-        <p>©2018 17un.com 版权所有 粤ICP备11080449号-17 <br> 服务热线：400-700-2276 我的客服：<a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=918197512&site=有盟客服专员&menu=yes">QQ:918197512</a></p>
+        <p>©2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}版权所有 {{isset($commonSetting['icp'])?$commonSetting['icp']:''}} <br> 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} 我的客服：<a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&menu=yes">QQ:{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a></p>
     </div>
 </div>
 <!--right-area-->

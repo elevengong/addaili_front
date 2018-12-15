@@ -11,26 +11,26 @@
     <div class="container">
         <div class="con-area">
             <div class="top">
-                <h6>有盟18年1月29日-18年2月4日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实</h6>
+                <h6>{{$message[0]['message_title']}}</h6>
 
-                <p>发布日期：2018-02-08</p>
+                <p>发布日期：{{$message[0]['created_at']}}</p>
             </div>
 
             <div class="con-con">
-                <span style="color: rgb(51, 51, 51); font-family: arial, Tahoma, Verdana; text-align: center; white-space: nowrap; background-color: rgb(246, 246, 246);">有盟18年1月29日-18年2月4日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实</span><br />                </div>
+                <span style="color: rgb(51, 51, 51); font-family: arial, Tahoma, Verdana; text-align: center; white-space: nowrap; background-color: rgb(246, 246, 246);">{{$message[0]['message_content']}}</span><br />                </div>
 
             <div class="foot">
-                <p>有盟网络</p>
+                <p>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}</p>
 
-                <p>2018-02-08</p>
+                <p>{{$message[0]['created_at']}}</p>
             </div>
         </div>
 
         <div class="foot-page">
             <li>
-                <span class="np">上一篇：</span><a href="http://www.17un.com/notice/1837.html" title="有盟18年1月22日-18年1月28日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实">有盟18年1月22日-18年1月28日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实 </a>				</li>
+                <span class="np">上一篇：</span>@if(!empty($messagePrv))<a href="/notice/{{$messagePrv[0]['msg_id']}}.html" title="{{$messagePrv[0]['message_title']}}">{{$messagePrv[0]['message_title']}}</a>@else 无 @endif</li>
             <li>
-                <span class="np">上一篇：</span><a href="http://www.17un.com/notice/1845.html" title="有盟网络2018年春节放假相关公告">有盟网络2018年春节放假相关公告 </a>                </li>
+                <span class="np">上一篇：</span>@if(!empty($messageNext))<a href="/notice/{{$messageNext[0]['msg_id']}}.html" title="{{$messageNext[0]['message_title']}}">{{$messageNext[0]['message_title']}}</a>@else 无 @endif</li>
         </div>
     </div>
 </div>

@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\DB;
 class MoneyController extends CommonController
 {
     public function commissionlist(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
-            return view('backend.webmember.list_commission_report')->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.list_commission_report',compact('commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
     }
 
@@ -85,6 +86,7 @@ class MoneyController extends CommonController
 
 
         }else{
+            $commonSetting = $this->commonSetting;
             $webmaster = Member::find(session('webmaster_id'))->toArray();
             $memberBalance = MemberBalance::where('id',session('webmaster_id'))->get()->toArray();
             $withdrawInfo = WithdrawInfo::select('withdraw_info.*','bank.bank_name','setting_group.remark')
@@ -95,11 +97,12 @@ class MoneyController extends CommonController
                     $join->on('setting_group.id','=','withdraw_info.province_id');
                 })
                 ->where('withdraw_info.webmember_id',session('webmaster_id'))->orderBy('withdraw_info.withdraw_info_id','desc')->get()->toArray();
-            return view('backend.webmember.commission_withdraw',compact('webmaster','memberBalance','withdrawInfo'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.commission_withdraw',compact('webmaster','memberBalance','withdrawInfo','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
     }
 
     public function withdrawrecord(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
@@ -108,7 +111,7 @@ class MoneyController extends CommonController
                     $join->on('withdraw_info.withdraw_info_id','=','withdraw_order.withdraw_info_id');
                 })
                 ->where('withdraw_order.member_id',session('webmaster_id'))->orderBy('withdraw_order.created_at','desc')->get()->toArray();
-            return view('backend.webmember.withdraw_record',compact('orderArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.withdraw_record',compact('orderArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
     }
 }

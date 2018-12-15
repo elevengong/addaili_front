@@ -94,6 +94,9 @@ Route::group(['middleware' => ['web']],function () {
     Route::any('/register.html','frontend\IndexController@register');
     Route::any('/logout.html','frontend\IndexController@logout');
 
+    //网站代理入口
+    Route::get('/webdaili/{webdaili_id}','frontend\IndexController@dailientrance')->where(['webdaili_id' => '[0-9]+']);
+
     Route::get('/backend/code','frontend\IndexController@code');
 });
 

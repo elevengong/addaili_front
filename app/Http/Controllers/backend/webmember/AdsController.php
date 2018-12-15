@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\CommonController;
 class AdsController extends CommonController
 {
     public function managementadslist(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
@@ -26,7 +27,7 @@ class AdsController extends CommonController
                 $settingArray[$setting['set_id']] = $setting['remark'];
             }
 
-            return view('backend.webmember.list_managementads',compact('allAdsArray','settingArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.list_managementads',compact('allAdsArray','settingArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
 
     }
@@ -48,14 +49,16 @@ class AdsController extends CommonController
             }
             echo json_encode($data);
         }else{
+            $commonSetting = $this->commonSetting;
             $adsTypeArray = Setting::where('settinggroup','adsType')->where('status',1)->get()->toArray();
             $countTypeArray = Setting::where('settinggroup','countType')->where('status',1)->get()->toArray();
-            return view('backend.webmember.add_ads',compact('adsTypeArray','countTypeArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.add_ads',compact('adsTypeArray','countTypeArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
     }
 
     public function getadscode(){
-        return view('backend.webmember.getadscode')->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        $commonSetting = $this->commonSetting;
+        return view('backend.webmember.getadscode',compact('commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 }

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>有盟移动-移动广告营销平台</title>
+    <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}-用户登陆</title>
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
@@ -32,7 +32,7 @@
                 <div class="form_cont">
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="customRadioInline1" name="user_role" value="2" checked="checked" class="custom-control-input" />
-                        <label class="custom-control-label" for="customRadioInline1">媒介主</label>
+                        <label class="custom-control-label" for="customRadioInline1">网站主</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="customRadioInline2" name="user_role" value="1" class="custom-control-input" />
@@ -65,7 +65,7 @@
     </div>
 </div>
 <!--con-->
-<p class="copy">&copy;2018 17un.com 版权所有 服务热线：400-700-2276 </p>
+<p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} </p></p>
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script>
     $(function(){

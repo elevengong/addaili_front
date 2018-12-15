@@ -1,7 +1,7 @@
 @extends("frontend.pc.layout.layout")
 @section("content")
     <div class="page-banner about-banner" style="background-image: url('{{url('/resources/views/frontend/pc/images/page-banner-5.jpg')}}')">
-    <h5>有盟网络</h5>
+    <h5>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}</h5>
 
     <h6>更值得信赖的移动平台</h6>
 </div>
@@ -9,7 +9,7 @@
 
 <div class="about-page">
     <div class="container">
-        <h5>关于有盟网络</h5>
+        <h5>关于{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}</h5>
 
         <p>有盟网络（下面简称有盟）移动端广告投放平台，致力于为广告主和媒介主（开发者、自媒体）提供更优质的移动营销服务，使双方营销资源价值更大化。</p>
 
@@ -131,8 +131,8 @@
     </div>
 
     <div class="detail">
-        <p>免费热线：400-700-2276 <br>
-            投诉建议：feedback@17un.com</p>
+        <p>免费热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} <br>
+            投诉建议：{{isset($commonSetting['contact_email'])?$commonSetting['contact_email']:''}}</p>
     </div>
     <script>
         $('.header-menu li').removeClass('active');

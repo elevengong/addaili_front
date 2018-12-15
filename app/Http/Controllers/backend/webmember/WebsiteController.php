@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\CommonController;
 class WebsiteController extends CommonController
 {
     public function websitelist(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
@@ -21,7 +22,7 @@ class WebsiteController extends CommonController
                     $join->on('setting.set_id','=','websites.webtype');
                 })
                 ->where('websites.member_id',session('webmaster_id'))->orderBy('websites.created_at','asc')->get()->toArray();
-            return view('backend.webmember.list_website',compact('allWebsiteArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.list_website',compact('allWebsiteArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
 
     }
@@ -45,8 +46,9 @@ class WebsiteController extends CommonController
             }
             echo json_encode($data);
         }else{
+            $commonSetting = $this->commonSetting;
             $webTypeArray = Setting::where('settinggroup','WebType')->where('status',1)->orderBy('set_id','asc')->get()->toArray();
-            return view('backend.webmember.add_website',compact('webTypeArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.add_website',compact('webTypeArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
 
     }

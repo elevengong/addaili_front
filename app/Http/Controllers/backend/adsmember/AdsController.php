@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\CommonController;
 class AdsController extends CommonController
 {
     public function lists(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
@@ -26,7 +27,7 @@ class AdsController extends CommonController
             //print_r($settingArray);exit;
             $adsmember_id = session('ads_id');
             $adsArray = Ads::where('member_id',$adsmember_id)->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            return view('backend.adsmember.list_ads',compact('adsArray','setting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            return view('backend.adsmember.list_ads',compact('adsArray','setting','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
 
     }
@@ -109,18 +110,9 @@ class AdsController extends CommonController
                 $ProvinceArray[] = $group;
             }
         }
-
-
-        //print_r($ProvinceArray);exit;
-
-//        print_r($settingGroupData);
-//        echo "<br>";
-//        echo "<br>";
-//        echo "<br>";
-//        print_r($settingData);exit;
-        //print_r($settingData['countType']);exit;
+        $commonSetting = $this->commonSetting;
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
-            'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
     public function getallmaterial(Request $request){

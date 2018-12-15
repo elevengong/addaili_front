@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>有盟移动-移动广告营销平台</title>
+    <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}-移动广告营销平台</title>
     <meta name="keywords" content="有盟,有盟移动,手机广告,手机应用推广,手机广告平台,APP推广,移动广告平台,移动营销平台,移动互联网广告,移动广告联盟">
     <meta name="description" content="有盟移动是智能化的移动广告交易平台，通过与手机应用APP、DSP平台以及广告交易平台合作，能使广告主的投放效果得到显著提升、开发者降低广告管理成本并大幅提升广告收入。">
     <meta http-equiv="Cache-Control" content="no-transform" />
@@ -43,7 +43,7 @@
         <li ><a href="/about.html">关于我们</a></li>
     </ul>
     <ul class="login-area">
-        <li>400-700-2276</li>
+        <li>{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}}</li>
         <li><a href="/login.html" class="login">登录</a></li>
         <li><a href="/register.html" class="register">注册</a></li>
     </ul>
@@ -52,7 +52,7 @@
         <div class="section page-1">
             <div class="swiper-container" id="index-banner">
                 <div class="swiper-wrapper" style="transition-duration: 0ms;"><div class="swiper-slide img-fluid slide-4 swiper-slide-duplicate swiper-no-swiping swiper-slide-prev" style="background-image: url('{{url('/resources/views/frontend/pc/images/index-banner-4.jpg')}}'); background-position: 50% 100%; width: 1920px; transition-duration: 0ms; opacity: 1; transform: translate3d(0px, 0px, 0px);" data-swiper-slide-index="3">
-                        <h5>有盟<span>广告主、媒介主</span>管理后台小程序正式上线</h5>
+                        <h5>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}<span>广告主、媒介主</span>管理后台小程序正式上线</h5>
                         <h6>无需下载APP打开微信即可操作</h6>
                         <figure class="img-1">
                             <img src="{{url('/resources/views/frontend/pc/images/index-banner-4-1.png')}}" alt="">
@@ -210,7 +210,7 @@
             <div class="en-font">NEWS</div>
             <figure><img src="{{url('/resources/views/frontend/pc/images/news-cf.jpg')}}" alt=""></figure>
             <div class="left-con">
-                <h6 class="page-head">有盟 <br>
+                <h6 class="page-head">{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} <br>
                     <span>最新动态</span></h6>
                 <div class="border"></div>
                 <p>关注最新的动态，了解最新的公告，对有盟消息一网打尽。</p>
@@ -418,10 +418,10 @@
                 <div class="line"></div>
             </div>
             <div class="detail">
-                <p>免费热线：400-700-2276 <br>
-                    投诉建议：feedback@17un.com</p>
+                <p>免费热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} <br>
+                    投诉建议：{{isset($commonSetting['contact_email'])?$commonSetting['contact_email']:''}}</p>
             </div>
-            <p class="copy">&copy;2018 17un.com  有盟网络 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">粤ICP备11080449号-17</a> 服务热线：400-700-2276 </p>
+            <p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} </p>
             <span class="f-page">07</span> </div>
     </div>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/jquery-1.12.4.min.js") ?>"></script>

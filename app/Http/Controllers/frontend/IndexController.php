@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Model\Member;
+use App\Model\MemberBalance;
+use App\Model\Message;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Crypt;
@@ -12,31 +14,47 @@ require_once 'resources/org/code/ValidateCode.php';
 class IndexController extends FrontendController
 {
     public function index(){
-        return view('frontend.pc.index');
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.index',compact('commonSetting'));
     }
 
     public function advance(){
-        return view('frontend.pc.advance');
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.advance',compact('commonSetting'));
     }
 
     public function listsnotice(Request $request){
-        return view('frontend.pc.lists_notice');
+        $commonSetting = $this->commonSetting;
+        $messageArray = Message::where('status',1)->orderBy('created_at','desc')->paginate($this->pageNum);
+        return view('frontend.pc.lists_notice',compact('commonSetting','messageArray'));
     }
 
     public function notice(Request $request,$notice_id){
-        return view('frontend.pc.notice');
+        $commonSetting = $this->commonSetting;
+        $message = Message::where('msg_id',$notice_id)->where('status',1)->get()->toArray();
+        $messagePrv = Message::where('msg_id','<',$notice_id)->where('status',1)->orderBy('msg_id','desc')->get()->take(1)->toArray();
+        $messageNext = Message::where('msg_id','>',$notice_id)->where('status',1)->orderBy('msg_id','asc')->get()->take(1)->toArray();
+        if(!empty($message))
+        {
+            return view('frontend.pc.notice',compact('commonSetting','message','messagePrv','messageNext'));
+        }else{
+            return redirect('/index.html');
+        }
     }
 
     public function help(){
-        return view('frontend.pc.help');
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.help',compact('commonSetting'));
     }
 
     public function about(){
-        return view('frontend.pc.about');
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.about',compact('commonSetting'));
     }
 
     public function protocol(){
-        return view('frontend.pc.protocol');
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.protocol',compact('commonSetting'));
     }
 
     public function login(Request $request){
@@ -88,7 +106,8 @@ class IndexController extends FrontendController
             }
             echo json_encode($data);
         }else{
-            return view('frontend.pc.login');
+            $commonSetting = $this->commonSetting;
+            return view('frontend.pc.login',compact('commonSetting'));
         }
 
     }
@@ -101,14 +120,33 @@ class IndexController extends FrontendController
             $qq = request()->input('qq');
             $phone = request()->input('phone');
             $user_type = request()->input('user_type');
+            $parent_webmaster_id = request()->input('parent_webmaster_id');
+            if($user_type==1){
+                $parent_webmaster_id = 0;
+            }
 
             if($pwd == $pwd_confirm){
+                //先搜索同类型会员是否有相同名字的
+                $memberInfo = Member::where('type',$user_type)->where('name',$email)->get()->count();
+                if($memberInfo != 0)
+                {
+                    $data['status'] = 0;
+                    $data['msg'] = '该邮箱已被注册';
+                    return json_encode($data);
+                }
                 $input['pwd'] = Crypt::encrypt($pwd);
                 $input['type'] = $user_type;
                 $input['name'] = $email;
                 $input['qq'] = $qq;
+                $input['mobile'] = $phone;
+                $input['parent_daili_id'] = $parent_webmaster_id;
                 $result = Member::create($input);
                 if($result->member_id){
+                    //注册成功后，member_balance要插入一条数据
+                    $newInput['id'] = $result->member_id;
+                    $newInput['balance'] = 0;
+                    MemberBalance::create($newInput);
+
                     $data['status'] = 1;
                     $data['msg'] = '注册成功';
                 }else{
@@ -120,16 +158,23 @@ class IndexController extends FrontendController
                 $data['status'] = 0;
                 $data['msg'] = '两次密码不相同';
             }
-
+            return json_encode($data);
 
         }else{
-            return view('frontend.pc.register');
+            $commonSetting = $this->commonSetting;
+            $webdaili_id = session('webdaili_id');
+            return view('frontend.pc.register',compact('commonSetting','webdaili_id'));
         }
     }
 
     public function logout(Request $request){
         $this->deleteAllSession($request);
         return redirect('login.html');
+    }
+
+    public function dailientrance(Request $request,$webdaili_id){
+        session(['webdaili_id'=>$webdaili_id]);
+        return redirect('/index.html');
     }
 
     //验证码缩略图

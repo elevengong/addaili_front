@@ -15,6 +15,7 @@ use Crypt;
 class SettingController extends CommonController
 {
     public function index(){
+        $commonSetting = $this->commonSetting;
         $allBank = Bank::where('status',1)->orderBy('bank_id','asc')->get()->toArray();
         $memberInfo = Member::find(session('webmaster_id'))->toArray();
         $allProvince = SettingGroup::where('pid',13)->orderBy('id','asc')->get()->toArray();
@@ -26,7 +27,7 @@ class SettingController extends CommonController
                 $join->on('setting_group.id','=','withdraw_info.province_id');
             })
             ->where('withdraw_info.webmember_id',session('webmaster_id'))->where('withdraw_info.status',1)->orderBy('withdraw_info.withdraw_info_id','desc')->get()->toArray();
-        return view('backend.webmember.setting',compact('memberInfo','allBank','allProvince','withdrawInfo'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        return view('backend.webmember.setting',compact('memberInfo','allBank','allProvince','withdrawInfo','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
     public function updatepwd(Request $request){

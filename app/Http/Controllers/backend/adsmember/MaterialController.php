@@ -13,18 +13,20 @@ use App\Http\Controllers\backend\CommonController;
 class MaterialController extends CommonController
 {
     public function materiallist(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
 
         }else{
             $materialArray  = Material::where('ads_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            return view('backend.adsmember.list_material',compact('materialArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            return view('backend.adsmember.list_material',compact('materialArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
     }
 
     public function upload(){
+        $commonSetting = $this->commonSetting;
         $imageTypeArray = SettingGroup::where('pid','52')->get()->toArray();
-        return view('backend.adsmember.upload_material',compact('imageTypeArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        return view('backend.adsmember.upload_material',compact('imageTypeArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
     public function uploadprocess(Request $request){

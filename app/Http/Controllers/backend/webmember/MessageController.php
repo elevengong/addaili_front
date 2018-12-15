@@ -10,7 +10,8 @@ use App\Model\Message;
 class MessageController extends CommonController
 {
     public function lists(){
+        $commonSetting = $this->commonSetting;
         $allMessageArray = Message::where('member_type',2)->where('status',1)->orderBy('created_at','desc')->paginate(1);
-        return view('backend.webmember.list_message',compact('allMessageArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        return view('backend.webmember.list_message',compact('allMessageArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 }
