@@ -12,8 +12,8 @@ $(function() {
             navigationPosition: 'right',//导航小圆点的位置
 
             normalScrollElements: '.NSE',//避免自动滚动，
-            anchors: ['page1', 'page2', 'page3', 'page4','page5','page6','page7'],//anchors定义锚链接，
-            navigationTooltips: ['page1', 'page2', 'page3', 'page4','page5','page6','page7'],//导航小圆点的提示
+            anchors: ['page1', 'page2', 'page3', 'page4','page5','page6'],//anchors定义锚链接，
+            navigationTooltips: ['page1', 'page2', 'page3', 'page4','page5','page6'],//导航小圆点的提示
             afterLoad: function(anchorLink, index){
                 if(index == 1){
                     $('.info1').delay(800).fadeIn(100).addClass("fadeInUp animated");
@@ -45,15 +45,15 @@ $(function() {
                     $('.page-5 .more').css({top:'0',opacity:'1'});
                 }
 
-                if(index == 6){
-                    $('.page-6').css({margin:'0',opacity:'1'});
-                    $('.page-6 .con').css({margin:'0',opacity:'1'});
-                }
+                // if(index == 6){
+                //     $('.page-6').css({margin:'0',opacity:'1'});
+                //     $('.page-6 .con').css({margin:'0',opacity:'1'});
+                // }
 
-                if(index == 7){
-                    $('.page-7').css({opacity: '1'});
-                    $('.page-7 .con').css({opacity:'1'});
-                    $('.page-7 .detail').css({opacity:'1'});
+                if(index == 6){
+                    $('.page-6').css({opacity: '1'});
+                    $('.page-6 .con').css({opacity:'1'});
+                    $('.page-6 .detail').css({opacity:'1'});
                 }
 
             },
