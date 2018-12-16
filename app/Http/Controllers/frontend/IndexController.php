@@ -15,7 +15,8 @@ class IndexController extends FrontendController
 {
     public function index(){
         $commonSetting = $this->commonSetting;
-        return view('frontend.pc.index',compact('commonSetting'));
+        $lastThreeMessageArray = Message::where('status',1)->orderBy('created_at','desc')->take(3)->get()->toArray();
+        return view('frontend.pc.index',compact('commonSetting','lastThreeMessageArray'));
     }
 
     public function advance(){

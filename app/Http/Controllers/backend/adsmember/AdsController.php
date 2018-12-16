@@ -84,16 +84,16 @@ class AdsController extends CommonController
             if($set['settinggroup'] == 'dayset'){
                 $daysetArray[] = $set;
             }
-            if($set['settinggroup'] == 'Android' and $set['skey'] == 'mobile'){
+            if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
                 $AndroidMobileArray[] = $set;
             }
-            if($set['settinggroup'] == 'IOS' and $set['skey'] == 'mobile'){
+            if($set['settinggroup'] == 'OS' and $set['skey'] == 'mobile'){
                 $IOSMobileArray[] = $set;
             }
-            if($set['settinggroup'] == 'Android' and $set['skey'] == 'Browser'){
+            if($set['settinggroup'] == 'Browser'){
                 $AndroidBrowserArray[] = $set;
             }
-            if($set['settinggroup'] == 'IOS' and $set['skey'] == 'Browser'){
+            if($set['settinggroup'] == 'Browser'){
                 $IOSBrowserArray[] = $set;
             }
             if($set['settinggroup'] == 'NetworkType'){
@@ -111,6 +111,7 @@ class AdsController extends CommonController
             }
         }
         $commonSetting = $this->commonSetting;
+        //print_r($AndroidMobileArray);
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
             'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }

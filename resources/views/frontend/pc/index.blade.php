@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}-移动广告营销平台</title>
-    <meta name="keywords" content="有盟,有盟移动,手机广告,手机应用推广,手机广告平台,APP推广,移动广告平台,移动营销平台,移动互联网广告,移动广告联盟">
-    <meta name="description" content="有盟移动是智能化的移动广告交易平台，通过与手机应用APP、DSP平台以及广告交易平台合作，能使广告主的投放效果得到显著提升、开发者降低广告管理成本并大幅提升广告收入。">
+    <meta name="keywords" content="{{isset($commonSetting['keywords'])?$commonSetting['keywords']:''}}">
+    <meta name="description" content="{{isset($commonSetting['description'])?$commonSetting['description']:''}}">
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
@@ -43,7 +43,7 @@
         <li ><a href="/about.html">关于我们</a></li>
     </ul>
     <ul class="login-area">
-        <li>{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}}</li>
+        <li>&nbsp;</li>
         <li><a href="/login.html" class="login">登录</a></li>
         <li><a href="/register.html" class="register">注册</a></li>
     </ul>
@@ -62,7 +62,7 @@
                         </figure>
                     </div>
                     <div class="swiper-slide img-fluid slide-1 swiper-no-swiping swiper-slide-active" style="background-image: url('{{url('/resources/views/frontend/pc/images/index-banner-1.jpg')}}'); background-position: 50% 100%; width: 1920px; transition-duration: 0ms; opacity: 1; transform: translate3d(-1920px, 0px, 0px);" data-swiper-slide-index="0">
-                        <h5>有盟网络汇聚移动广告创新力量</h5>
+                        <h5>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}网络汇聚移动广告创新力量</h5>
                         <h6>提供专业优质的无线营销整合服务</h6>
                         <figure> <img src="{{url('/resources/views/frontend/pc/images/index-banner-1-img.png')}}" alt=""> </figure>
                     </div>
@@ -73,24 +73,14 @@
                         <figure> <img src="{{url('/resources/views/frontend/pc/images/index-banner-2-img.png')}}" alt=""> </figure>
                     </div>
                     <div class="swiper-slide img-fluid slide-3 swiper-no-swiping" style="background-image: url('{{url('/resources/views/frontend/pc/images/index-banner-3.jpg')}}'); background-position: 50% 100%; width: 1920px; transition-duration: 0ms; opacity: 0; transform: translate3d(-5760px, 0px, 0px);" data-swiper-slide-index="2">
-                        <h5>有盟数据</h5>
+                        <h5>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}数据</h5>
                         <h6>拥有<span>3万多个</span>广告主及媒介主</h6>
                         <h6>日曝光PV量<span>10亿+</span>次</h6>
                         <h6>覆盖多至<span>3.6亿</span>智能手机用户</h6>
                         <figure> <img src="{{url('/resources/views/frontend/pc/images/index-banner-3-img.png')}}" alt=""> </figure>
                     </div>
-                    <div class="swiper-slide img-fluid slide-4 swiper-no-swiping swiper-slide-duplicate-prev" style="background-image: url('{{url('/resources/views/frontend/pc/images/index-banner-4.jpg')}}'); background-position: 50% 100%; width: 1920px; transition-duration: 0ms; opacity: 0; transform: translate3d(-7680px, 0px, 0px);" data-swiper-slide-index="3">
-                        <h5>有盟<span>广告主、媒介主</span>管理后台小程序正式上线</h5>
-                        <h6>无需下载APP打开微信即可操作</h6>
-                        <figure class="img-1">
-                            <img src="{{url('/resources/views/frontend/pc/images/index-banner-4-1.png')}}" alt="">
-                        </figure>
-                        <figure class="img-2">
-                            <img src="{{url('/resources/views/frontend/pc/images/index-banner-4-2.png')}}" alt="">
-                        </figure>
-                    </div>
                     <div class="swiper-slide img-fluid slide-1 swiper-slide-duplicate swiper-no-swiping swiper-slide-duplicate-active" style="background-image: url('{{url('/resources/views/frontend/pc/images/index-banner-1.jpg')}}'); background-position: 50% 100%; width: 1920px; transition-duration: 0ms; opacity: 0; transform: translate3d(-9600px, 0px, 0px);" data-swiper-slide-index="0">
-                        <h5>有盟网络汇聚移动广告创新力量</h5>
+                        <h5>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}网络汇聚移动广告创新力量</h5>
                         <h6>提供专业优质的无线营销整合服务</h6>
                         <figure> <img src="{{url('/resources/views/frontend/pc/images/index-banner-1-img.png')}}" alt=""> </figure>
                     </div></div>
@@ -213,39 +203,28 @@
                 <h6 class="page-head">{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} <br>
                     <span>最新动态</span></h6>
                 <div class="border"></div>
-                <p>关注最新的动态，了解最新的公告，对有盟消息一网打尽。</p>
+                <p>关注最新的动态，了解最新的公告，对{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}消息一网打尽。</p>
                 <div class="line"></div>
             </div>
             <ul class="news-list">
+                @foreach($lastThreeMessageArray as $message)
                 <li>
-                    <a href="http://www.17un.com/notice/2003.html">
-                        <h6>有盟18年11月19日-18年11月25日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实</h6>
-                        <h5>有盟18年11月19日-18年11月25日的媒体佣金已支付，预计到账时间为1-2个工作日，请...</h5>
-                        <span>2018-11-29</span>
+                    <a href="/notice/{{$message['msg_id']}}.html">
+                        <h6>{{$message['message_title']}}</h6>
+                        <h5>{{mb_substr($message['message_content'] , 0 , 40)}}...</h5>
+                        <span>{{$message['created_at']}}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="http://www.17un.com/notice/1997.html">
-                        <h6>有盟18年11月12日-18年11月18日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实</h6>
-                        <h5>有盟18年11月12日-18年11月18日的媒体佣金已支付，预计到账时间为1-2个工作日，请...</h5>
-                        <span>2018-11-22</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.17un.com/notice/1993.html">
-                        <h6>有盟18年11月5日-18年11月11日的媒体佣金已支付，预计到账时间为1-2个工作日，请各网站主查收核实</h6>
-                        <h5>有盟18年11月5日-18年11月11日的媒体佣金已支付，预计到账时间为1-2个工作日，请各...</h5>
-                        <span>2018-11-15</span>
-                    </a>
-                </li>
+                @endforeach
+
             </ul>
             <a href="/lists_notice" class="more">了解更多</a> <span class="f-page">04</span> </div>
         <div class="section page-5" style="background: url('{{url('/resources/views/frontend/pc/images/page-5.jpg')}}');">
-            <h5 class="sj-head">关于<span>有盟</span></h5>
+            <h5 class="sj-head">关于<span>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}</span></h5>
             <h6 class="sm-head">About</h6>
             <div class="container">
-                <p class="jj">有盟，整合了智能手机领域大量优质媒体及广告资源，构建起一个公平、诚信、高效的广告营销服务平台，为广告主提供精准，高效的产品、品牌推广服务，同时为媒介主创造丰厚的广告收益。</p>
-                <h6 class="title">有盟合作伙伴</h6>
+                <p class="jj">{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}，整合了智能手机领域大量优质媒体及广告资源，构建起一个公平、诚信、高效的广告营销服务平台，为广告主提供精准，高效的产品、品牌推广服务，同时为媒介主创造丰厚的广告收益。</p>
+                <h6 class="title">{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}合作伙伴</h6>
                 <ul class="co-list">
                     <li>
                         <figure><img src="{{url('/resources/views/frontend/pc/images/client-01.jpg')}}" alt=""></figure>

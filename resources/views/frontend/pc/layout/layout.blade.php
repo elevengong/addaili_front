@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}-移动广告营销平台</title>
-    <meta name="keywords" content="有盟,有盟移动,手机广告,手机应用推广,手机广告平台,APP推广,移动广告平台,移动营销平台,移动互联网广告,移动广告联盟">
-    <meta name="description" content="有盟移动是智能化的移动广告交易平台，通过与手机应用APP、DSP平台以及广告交易平台合作，能使广告主的投放效果得到显著提升、开发者降低广告管理成本并大幅提升广告收入。">
+    <meta name="keywords" content="{{isset($commonSetting['keywords'])?$commonSetting['keywords']:''}}">
+    <meta name="description" content="{{isset($commonSetting['description'])?$commonSetting['description']:''}}">
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes" />
@@ -44,7 +44,7 @@
         <li ><a href="/about.html">关于我们</a></li>
     </ul>
     <ul class="login-area">
-        <li>{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}}</li>
+        <li>&nbsp;</li>
         <li><a href="/login.html" class="login">登录</a></li>
         <li><a href="/register.html" class="register">注册</a></li>
     </ul>
