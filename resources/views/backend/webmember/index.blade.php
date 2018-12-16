@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <span id="url">http://www.17un.com/vip/667?token=WGNTYVI4UjQBb1IwXWQEZQ==</span>
+                                <span id="url">{{isset($commonSetting['website_domain'])?$commonSetting['website_domain'].'webdaili/'.$webmaster['member_id']:''}}</span>
                             </div>
 
                             <div class="modal-footer">
