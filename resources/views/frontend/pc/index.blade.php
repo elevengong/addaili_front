@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="<?php echo asset( "/resources/views/frontend/pc/images/bitbug_favicon.ico") ?>" />
     <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/mobliemenu.css") ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo asset( "/resources/views/frontend/pc/css/jquery.fullpage.min.css") ?>" />
-    <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/all.css?ver=1.3") ?>">
+    <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/all.css?ver=1.6") ?>">
 </head>
 <body>
 <div class="header">
@@ -30,6 +30,7 @@
         <li ><a href="/lists_notice.html">公告中心</a></li>
         <li ><a href="/help.html">帮助中心</a></li>
         <li ><a href="/about.html">关于我们</a></li>
+        <li ><a href="/contact.html">联系我们</a></li>
     </ul>
 </div>
 <div class="mb-bg"></div>
@@ -41,6 +42,7 @@
         <li ><a href="/lists_notice.html">公告中心</a></li>
         <li ><a href="/help.html">帮助中心</a></li>
         <li ><a href="/about.html">关于我们</a></li>
+        <li ><a href="/contact.html">联系我们</a></li>
     </ul>
     <ul class="login-area">
         <li>&nbsp;</li>
@@ -112,7 +114,7 @@
                         <p>精准定位到用户行为投放</p>
                     </div>
                 </div>
-                <a href="http://www.17un.com/advert.html" class="more">了解更多</a> </div>
+                <a href="/advance.html" class="more">了解更多</a> </div>
             <span class="f-page">02</span> </div>
         <div class="section page-3" style="background: url('{{url('/resources/views/frontend/pc/images/page-3.jpg')}}');">
             <h5 class="sj-head">广告<span>形式</span></h5>
@@ -302,31 +304,19 @@
                 </div>
                 <!--index-partner-->
 
-                <a href="" class="more">了解更多</a> </div>
+                <a href="/about.html" class="more">了解更多</a> </div>
+            <p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} </p>
             <span class="f-page">05</span> </div>
 
-        <div class="section page-6" style="background: url('{{url('/resources/views/frontend/pc/images/page-7.jpg')}}');">
-            <h5 class="sj-head">联系<span>我们</span></h5>
-            <h6 class="sm-head">Customer Service</h6>
-            <div class="con">
-                <figure class="map"><img src="{{url('/resources/views/frontend/pc/images/about-img.jpg')}}" alt=""></figure>
-                <div class="line"></div>
-            </div>
-            <div class="detail">
-                <p>免费热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} <br>
-                    投诉建议：{{isset($commonSetting['contact_email'])?$commonSetting['contact_email']:''}}</p>
-            </div>
-            <p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}} </p>
-            <span class="f-page">06</span> </div>
     </div>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/jquery-1.12.4.min.js") ?>"></script>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/tether.min.js") ?>"></script>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/bootstrap.min.js") ?>"></script>
-        <script src="<?php echo asset( "/resources/views/frontend/pc/js/qthumb.min.js") ?>"></script>
+        <script src="<?php echo asset( "/resources/views/frontend/pc/js/jqthumb.min.js") ?>"></script>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/swiper.jquery.min.js") ?>"></script>
         <script type="text/javascript" src="<?php echo asset( "/resources/views/frontend/pc/js/scrolloverflow.min.js") ?>"></script>
         <script type="text/javascript" src="<?php echo asset( "/resources/views/frontend/pc/js/jquery.fullpage.min.js") ?>"></script>
         <script src="<?php echo asset( "/resources/views/frontend/pc/js/mobliemenu.js") ?>"></script>
-        <script src="<?php echo asset( "/resources/views/frontend/pc/js/all.js?ver=1.1") ?>"></script>
+        <script src="<?php echo asset( "/resources/views/frontend/pc/js/all.js?ver=1.2") ?>"></script>
 </body>
 </html>

@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="<?php echo asset( "/resources/views/frontend/pc/images/bitbug_favicon.ico") ?>" />
     <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/mobliemenu.css") ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo asset( "/resources/views/frontend/pc/css/jquery.fullpage.min.css") ?>" />
-    <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/all.css") ?>">
+    <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/all.css?ver=1.0") ?>">
     <script src="<?php echo asset( "/resources/views/frontend/pc/js/jquery-1.12.4.min.js") ?>"></script>
 </head>
 <body>
@@ -31,6 +31,7 @@
         <li ><a href="/lists_notice.html">公告中心</a></li>
         <li ><a href="/help.html">帮助中心</a></li>
         <li ><a href="/about.html">关于我们</a></li>
+        <li ><a href="/contact.html">联系我们</a></li>
     </ul>
 </div>
 <div class="mb-bg"></div>
@@ -42,6 +43,7 @@
         <li ><a href="/lists_notice.html">公告中心</a></li>
         <li ><a href="/help.html">帮助中心</a></li>
         <li ><a href="/about.html">关于我们</a></li>
+        <li ><a href="/contact.html">联系我们</a></li>
     </ul>
     <ul class="login-area">
         <li>&nbsp;</li>
@@ -55,7 +57,7 @@
 
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/tether.min.js") ?>"></script>
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/bootstrap.min.js") ?>"></script>
-<script src="<?php echo asset( "/resources/views/frontend/pc/js/qthumb.min.js") ?>"></script>
+<script src="<?php echo asset( "/resources/views/frontend/pc/js/jqthumb.min.js") ?>"></script>
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/swiper.jquery.min.js") ?>"></script>
 <script type="text/javascript" src="<?php echo asset( "/resources/views/frontend/pc/js/scrolloverflow.min.js") ?>"></script>
 <script type="text/javascript" src="<?php echo asset( "/resources/views/frontend/pc/js/jquery.fullpage.min.js") ?>"></script>

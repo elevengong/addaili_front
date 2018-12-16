@@ -86,7 +86,7 @@ Route::get('/notice/{notice_id}.html','frontend\IndexController@notice')->where(
 Route::get('/help.html','frontend\IndexController@help');
 Route::get('/about.html','frontend\IndexController@about');
 Route::get('/protocol.html','frontend\IndexController@protocol');
-
+Route::get('/contact.html','frontend\IndexController@contact');
 
 
 Route::group(['middleware' => ['web']],function () {

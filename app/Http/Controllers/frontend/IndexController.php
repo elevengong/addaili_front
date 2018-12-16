@@ -58,6 +58,11 @@ class IndexController extends FrontendController
         return view('frontend.pc.protocol',compact('commonSetting'));
     }
 
+    public function contact(){
+        $commonSetting = $this->commonSetting;
+        return view('frontend.pc.contact',compact('commonSetting'));
+    }
+
     public function login(Request $request){
         if($request->isMethod('post'))
         {
