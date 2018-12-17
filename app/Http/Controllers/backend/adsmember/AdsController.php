@@ -259,6 +259,89 @@ class AdsController extends CommonController
         $ads = Ads::where('ads_id',$ads_id)->where('member_id',session('ads_id'))->get()->toArray();
         if(!empty($ads))
         {
+            $moreSetting = json_decode($ads[0]['more_setting'],true);
+            //print_r($moreSetting);exit;
+            $newMoreSetting = array();
+
+            $newMoreSetting['time'] = $moreSetting['time'];
+            foreach ($moreSetting['os_array'] as $data)
+            {
+                $newMoreSetting['os_array'][$data] = 1;
+            }
+            if(!empty($moreSetting['time_array']))
+            {
+                foreach ($moreSetting['time_array'] as $data)
+                {
+                    $newMoreSetting['time_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['time_array'] = '';
+            }
+
+            if(!empty($moreSetting['area_array']))
+            {
+                foreach ($moreSetting['area_array'] as $data)
+                {
+                    $newMoreSetting['area_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['area_array'] = '';
+            }
+
+            if(!empty($moreSetting['terminal_array']))
+            {
+                foreach ($moreSetting['terminal_array'] as $data)
+                {
+                    $newMoreSetting['terminal_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['terminal_array'] = '';
+            }
+
+            if(!empty($moreSetting['switch_browser_array']))
+            {
+                foreach ($moreSetting['switch_browser_array'] as $data)
+                {
+                    $newMoreSetting['switch_browser_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['switch_browser_array'] = '';
+            }
+
+            if(!empty($moreSetting['switch_domain_category_array']))
+            {
+                foreach ($moreSetting['switch_domain_category_array'] as $data)
+                {
+                    $newMoreSetting['switch_domain_category_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['switch_domain_category_array'] = '';
+            }
+
+            if(!empty($moreSetting['switch_nettype_array']))
+            {
+                foreach ($moreSetting['switch_nettype_array'] as $data)
+                {
+                    $newMoreSetting['switch_nettype_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['switch_nettype_array'] = '';
+            }
+
+            if(!empty($moreSetting['switch_nettype_array']))
+            {
+                foreach ($moreSetting['switch_network_array'] as $data)
+                {
+                    $newMoreSetting['switch_network_array'][$data] = 1;
+                }
+            }else{
+                $newMoreSetting['switch_network_array'] = '';
+            }
+
+
+            //print_r($newMoreSetting);exit;
+
+
 
             $allSettingGroup = SettingGroup::get()->toArray();
             $allSetting = Setting::where('status',1)->get()->toArray();
@@ -288,10 +371,6 @@ class AdsController extends CommonController
             $adsTypeArray = array();
             $WebTypeArray = array();
             $daysetArray = array();
-            $AndroidMobileArray = array();
-            $IOSMobileArray = array();
-            $AndroidBrowserArray = array();
-            $IOSBrowserArray = array();
             $NetworkTypeArray = array();
             $OperatorArray = array();
 
@@ -312,16 +391,10 @@ class AdsController extends CommonController
                     $daysetArray[] = $set;
                 }
                 if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
-                    $AndroidMobileArray[] = $set;
-                }
-                if($set['settinggroup'] == 'OS' and $set['skey'] == 'mobile'){
-                    $IOSMobileArray[] = $set;
+                    $MobileBrandArray[] = $set;
                 }
                 if($set['settinggroup'] == 'Browser'){
-                    $AndroidBrowserArray[] = $set;
-                }
-                if($set['settinggroup'] == 'Browser'){
-                    $IOSBrowserArray[] = $set;
+                    $BrowserArray[] = $set;
                 }
                 if($set['settinggroup'] == 'NetworkType'){
                     $NetworkTypeArray[] = $set;
@@ -338,10 +411,9 @@ class AdsController extends CommonController
                 }
             }
             $commonSetting = $this->commonSetting;
-            print_r($ads);
-            return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
-                'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
-
+            //print_r($AndroidMobileArray);
+            return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
+                'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads','moreSetting','newMoreSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
 
         }else{
             return 'Error';

@@ -2,12 +2,12 @@
 @section("content")
 
     <div class="right-area">
-        <p class="position">当前位置：管理后台 &gt; 发布广告</p>
+        <p class="position">当前位置：管理后台 &gt; 修改广告</p>
         <!--position-->
         <form id="form_insert" method="post">
             {{csrf_field()}}
             <div class="insert-app ads-advert-update">
-                <h5 class="head-title">新建广告</h5>
+                <h5 class="head-title">修改广告</h5>
                 <div class="con">
                     <div class="form_row">
                         <span class="form-ti">广告名称：</span>
@@ -21,7 +21,7 @@
                         <span class="form-ti">计费类型：</span>
                         <div class="form_cont">
                             @foreach($countTypeArray as $countType)
-                                <span class="form_group w150"> <label> <input type="radio" name="count_type" value="{{$countType['set_id']}}" id="cti_{{$countType['set_id']}}">{{$countType['value']}}</label> </span>
+                                <span class="form_group w150"> <label> <input type="radio" name="count_type" value="{{$countType['set_id']}}" id="cti_{{$countType['set_id']}}" @if($ads[0]['ads_count_type'] == $countType['set_id'])checked="checked"@endif >{{$countType['value']}}</label> </span>
                             @endforeach
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <span class="form-ti">广告类型：</span>
                         <div class="form_cont">
                             @foreach($adsTypeArray as $adsType)
-                                <span class="form_group w150" style=""> <label> <input type="radio" name="adstype" value="{{$adsType['set_id']}}" id="ati_{{$adsType['set_id']}}"> {{$adsType['remark']}}</label></span>
+                                <span class="form_group w150" style=""> <label> <input type="radio" name="adstype" value="{{$adsType['set_id']}}" id="ati_{{$adsType['set_id']}}" @if($ads[0]['ads_type'] == $adsType['set_id'])checked="checked"@endif> {{$adsType['remark']}}</label></span>
                             @endforeach
                         </div>
                     </div>
@@ -38,16 +38,16 @@
                         <div class="form-ti">投放设备系统：</div>
 
                         <div class="form_cont">
-                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="android"> Android</label></span>
-                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="ios"> IOS</label></span>
-                            <p class="tips mb-hide"><i>*</i>全不选，默认两种都投放。横幅CPM只能选择一种投放系统</p>
+                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="android" @if(isset($newMoreSetting['os_array']['android']))checked="checked"@endif> Android</label></span>
+                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="ios" @if(isset($newMoreSetting['os_array']['ios']))checked="checked"@endif> IOS</label></span>
+                            <p class="tips mb-hide"><i>*</i>全不选，默认两种都投放。</p>
                         </div>
                     </div>
 
                     <div class="form_row">
                         <span class="form-ti">推广链接：</span>
 
-                        <input type="text" class="search-input" name="site_url" id="site_url">
+                        <input type="text" class="search-input" name="site_url" id="site_url" value="{{$ads[0]['ads_link']}}">
                     </div>
 
                     <div class="form_row" id="material_bag">
@@ -100,9 +100,9 @@
 
                         <div class="form_cont">
                             <ul class="date">
-                                <li><input type="text" id="stime" name="stime" value=""><i class="iconfont icon-gongdantubiao-"></i></li>
+                                <li><input type="text" id="stime" name="stime" value="{{$newMoreSetting['time']['starttime']}}"><i class="iconfont icon-gongdantubiao-"></i></li>
                                 <li>至</li>
-                                <li><input type="text" id="etime" name="etime" value=""><i class="iconfont icon-gongdantubiao-"></i></li>
+                                <li><input type="text" id="etime" name="etime" value="{{$newMoreSetting['time']['endtime']}}"><i class="iconfont icon-gongdantubiao-"></i></li>
                             </ul>
 
                             <p class="tips"><i>*</i>投放结束时间不填则为不限制投放</p>
@@ -112,7 +112,7 @@
                     <div class="form_row fff">
                         <span class="form-ti">单价：</span>
                         <div class="form_cont">
-                            <input type="text" class="search-input" id="price" name="price" value="" >
+                            <input type="text" class="search-input" id="price" name="price" value="{{$ads[0]['per_cost']*1000}}" >
 
                             <p class="tips">元</p>
 
@@ -124,7 +124,7 @@
                         <span class="form-ti">总预算：</span>
 
                         <div class="form_cont">
-                            <input type="text" class="search-input" id="budget" name="budget" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                            <input type="text" class="search-input" id="budget" name="budget" value="{{$ads[0]['total_budget']}}" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 
                             <p class="tips"><i>*</i>广告的总消费, 0表示不限总预算</p>
                         </div>
@@ -133,7 +133,7 @@
                     <div class="form_row">
                         <span class="form-ti">每日预算：</span>
                         <div class="form_cont">
-                            <input type="text" class="search-input" name="budget_daily" id="budget_daily" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                            <input type="text" class="search-input" name="budget_daily" id="budget_daily"  value="{{$ads[0]['daily_budget']}}" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
 
                             <p class="tips"><i>*</i>推广期间的每日广告预算，0表示不限每日预算</p>
                         </div>
@@ -298,7 +298,7 @@
                                             <td>
                                                 @foreach($ProvinceArray as $province)
                                                     <span class="c_province">
-                                                     <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}">{{$province['remark']}}</label>
+                                                     <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}" @if(isset($newMoreSetting['area_array'][$province['id']]))checked="checked"@endif>{{$province['remark']}}</label>
 					                          	</span>
                                                 @endforeach
                                             </td>
@@ -320,22 +320,12 @@
                                 <div class="tableBox directSelect zdSelect" id="a_terminal" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
-                                            <th class="nor" style="text-align:left"><span><label>Android</label></span></th>
+                                            <th class="nor" style="text-align:left"><span><label>手机品牌</label></span></th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                @foreach($AndroidMobileArray as $AndroidMobile)
-                                                    <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$AndroidMobile['set_id']}}" class="c_terminal" tm_pid="47">{{$AndroidMobile['remark']}}</label></span>
-                                                @endforeach
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="nor" style="text-align:left"><span><label>IOS</label></span></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @foreach($IOSMobileArray as $IOSMobile)
-                                                    <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$IOSMobile['set_id']}}" class="c_terminal" tm_pid="48">{{$IOSMobile['remark']}}</label></span>
+                                                @foreach($MobileBrandArray as $Mobile)
+                                                    <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$Mobile['set_id']}}" class="c_terminal" tm_pid="{{$Mobile['set_id']}}" @if(isset($newMoreSetting['terminal_array'][$Mobile['set_id']]))checked="checked"@endif>{{$Mobile['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -352,22 +342,12 @@
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody>
                                         <tr>
-                                            <th class="nor" style="text-align:left"><span>android</span></th>
+                                            <th class="nor" style="text-align:left"><span>浏览器</span></th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                @foreach($AndroidBrowserArray as $AndroidBrowser)
-                                                    <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$AndroidBrowser['set_id']}}">{{$AndroidBrowser['remark']}}</label></span>
-                                                @endforeach
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="nor" style="text-align:left"><span>ios</span></th>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                @foreach($IOSBrowserArray as $IOSBrowser)
-                                                    <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$IOSBrowser['set_id']}}">{{$IOSBrowser['remark']}}</label></span>
+                                                @foreach($BrowserArray as $browser)
+                                                    <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$browser['set_id']}}" @if(isset($newMoreSetting['switch_browser_array'][$browser['set_id']]))checked="checked"@endif>{{$browser['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -392,7 +372,7 @@
                                         <tr>
                                             <td>
                                                 @foreach($WebTypeArray as $WebType)
-                                                    <span style="width:150px"><label><input type="checkbox" name="domain_category_array[]" value="{{$WebType['set_id']}}">{{$WebType['remark']}}</label></span>
+                                                    <span style="width:150px"><label><input type="checkbox" name="domain_category_array[]" value="{{$WebType['set_id']}}" @if(isset($newMoreSetting['switch_domain_category_array'][$WebType['set_id']]))checked="checked"@endif>{{$WebType['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -414,7 +394,7 @@
                                         <tbody><tr>
                                             <td>
                                                 @foreach($NetworkTypeArray as $NetworkType)
-                                                    <span><label><input type="checkbox" name="nettype_id_array[]" value="{{$NetworkType['set_id']}}">{{$NetworkType['remark']}}</label></span>
+                                                    <span><label><input type="checkbox" name="nettype_id_array[]" value="{{$NetworkType['set_id']}}" @if(isset($newMoreSetting['switch_nettype_array'][$NetworkType['set_id']]))checked="checked"@endif>{{$NetworkType['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -426,17 +406,17 @@
                         <div class="form_row">
                             <div class="form-ti">定向运营商：</div>
                             <div class="form_cont">
-								<span class="form_group w100"> <label> <input type="radio" name="switch_network" value="0" class="switch_network" checked="checked"> 不限
+								<span class="form_group w100"> <label> <input type="radio" name="switch_network" value="0" class="switch_network" @if(empty($newMoreSetting['switch_network_array']))checked="checked"@endif> 不限
 								</label>
-								</span> <span class="form_group w100"> <label> <input type="radio" name="switch_network" value="1" class="switch_network"> 选择运营商
+								</span> <span class="form_group w100"> <label> <input type="radio" name="switch_network" value="1" class="switch_network" @if(!empty($newMoreSetting['switch_network_array']))checked="checked"@endif> 选择运营商
 								</label>
 								</span>
-                                <div class="tableBox directSelect zdSelect" id="id_network" style="display:none;">
+                                <div class="tableBox directSelect zdSelect" id="id_network" @if(empty($newMoreSetting['switch_network_array']))style="display:none;"@endif>
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                             <td>
                                                 @foreach($OperatorArray as $Operator)
-                                                    <span><label><input type="checkbox" name="network_id_array[]" value="{{$Operator['set_id']}}">{{$Operator['remark']}}</label></span>
+                                                    <span><label><input type="checkbox" name="network_id_array[]" value="{{$Operator['set_id']}}" @if(isset($newMoreSetting['switch_network_array'][$Operator['set_id']]))checked="checked"@endif>{{$Operator['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -450,7 +430,7 @@
                     </div>
 
                     <div class="button">
-                        <input type="button" value="提交" class="button-1 jbtn_save_insert">
+                        <input type="button" value="修改" class="button-1 jbtn_save_insert">
                         <input type="button" value="取消" class="button-2 jbtn_cancel">
                     </div>
                 </div>

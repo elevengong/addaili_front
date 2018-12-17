@@ -40,7 +40,7 @@
                         <div class="form_cont">
                             <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="android"> Android</label></span>
                             <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="ios"> IOS</label></span>
-                            <p class="tips mb-hide"><i>*</i>全不选，默认两种都投放。横幅CPM只能选择一种投放系统</p>
+                            <p class="tips mb-hide"><i>*</i>全不选，默认两种都投放。</p>
                         </div>
                     </div>
 
