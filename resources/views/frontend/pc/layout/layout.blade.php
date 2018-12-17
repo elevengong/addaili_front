@@ -52,7 +52,7 @@
     </ul>
 </div>
 @yield('content')
-<p class="alone-copy">©2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> 服务热线：{{isset($commonSetting['contact_number'])?$commonSetting['contact_number']:''}}</p>
+<p class="alone-copy">©2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> &nbsp;&nbsp;&nbsp;&nbsp;联系QQ:<a href="http://wpa.qq.com/msgrd?v=1&amp;uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&amp;site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&amp;menu=yes" target="_blank">{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a></p>
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/tether.min.js") ?>"></script>

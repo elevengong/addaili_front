@@ -19,7 +19,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">媒介主问题</a>
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">网站主问题</a>
                     </li>
                 </ul>
             </div>
@@ -32,15 +32,15 @@
                         <div class="help-list">
                             <li class="list">
                                 <a href="javascript:void(0)" class="ti">
-                                    <h6>- 如何注册有盟账户？</h6>
+                                    <h6>- 如何注册{{isset($commonSetting['website_simple_name'])?$commonSetting['website_simple_name']:''}}账户？</h6>
                                 </a>
 
                                 <div class="con">
-                                    <p>(1)点击 http://www.17un.com 【首页】右上角【注册】按钮，即可进入注册页面</p>
+                                    <p>(1)点击 {{isset($commonSetting['website_domain'])?$commonSetting['website_domain']:''}} 【首页】右上角【注册】按钮，即可进入注册页面</p>
 
                                     <p>(2) 在注册页面中填写相关信息，点击”接受协议并提交”。</p>
 
-                                    <p>(3) 登录填写的邮箱，打开邮件中的验证链接来完成邮箱的验证。邮箱验证后，您就可以使用有盟网络提供的各种服务了。如果您在数分钟之内没有收到我们的邮件，请及时联系我们。</p>
+                                    <p>(3) 登录填写的邮箱，打开邮件中的验证链接来完成邮箱的验证。邮箱验证后，您就可以使用{{isset($commonSetting['website_simple_name'])?$commonSetting['website_simple_name']:''}}网络提供的各种服务了。如果您在数分钟之内没有收到我们的邮件，请及时联系我们。</p>
                                 </div>
                             </li>
 
@@ -50,7 +50,7 @@
                                 </a>
 
                                 <div class="con">
-                                    <p>(1) 点击 http://www.17un.com 页面右上角的"登录"，在登录页面中点击"找回密码"。</p>
+                                    <p>(1) 点击 {{isset($commonSetting['website_domain'])?$commonSetting['website_domain']:''}} 页面右上角的"登录"，在登录页面中点击"找回密码"。</p>
 
                                     <p>(2) 输入您注册时填写的邮箱地址，点击"提交"按钮。</p>
 
@@ -64,7 +64,7 @@
                                 </a>
 
                                 <div class="con">
-                                    <p>(1) 登录有盟网络用户后台，然后点击导航栏中的"个人设置"。</p>
+                                    <p>(1) 登录{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}用户后台，然后点击导航栏中的"个人设置"。</p>
 
                                     <p>(2) 点击"修改密码"选项卡，输入新密码及确认密码。</p>
 
@@ -78,7 +78,7 @@
                                 </a>
 
                                 <div class="con">
-                                    <p>(1) 登录有盟网络用户后台，然后点击导航栏中的"个人设置"。</p>
+                                    <p>(1) 登录{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}用户后台，然后点击导航栏中的"个人设置"。</p>
 
                                     <p>(2) 点击"更新资料"选项卡，然后在选项卡中点击"编辑我的信息"按钮。</p>
 
@@ -112,7 +112,7 @@
                                 </a>
 
                                 <div class="con">
-                                    <p>目前被冻结的账户无法再登录有盟网络广告平台，您如果对此有什么异议可向客服人员询问。</p>
+                                    <p>目前被冻结的账户无法再登录{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}广告平台，您如果对此有什么异议可向客服人员询问。</p>
                                 </div>
                             </li>
                         </div>
@@ -123,17 +123,17 @@
 
                         <li class="list">
                             <a href="javascript:void(0)" class="ti">
-                                <h6>- 有盟网络的广告投放到哪些媒体上？</h6>
+                                <h6>- {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}的广告投放到哪些媒体上？</h6>
                             </a>
 
                             <div class="con">
-                                <p>广告主的广告将直接投放到有盟网络所有的合作媒体上，这些媒体包括全国性、行业性、地方性的各媒体网站，有盟网络的合作媒体一直在不断增加，覆盖各个地区与行业，超大的访问量，注定超大的浏览点击率，宣传效果可见一斑。</p>
+                                <p>广告主的广告将直接投放到{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}所有的合作媒体上，这些媒体包括全国性、行业性、地方性的各媒体网站，{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}的合作媒体一直在不断增加，覆盖各个地区与行业，超大的访问量，注定超大的浏览点击率，宣传效果可见一斑。</p>
                             </div>
                         </li>
 
                         <li class="list">
                             <a href="javascript:void(0)" class="ti">
-                                <h6>- 有盟的广告样式有哪些？</h6>
+                                <h6>- {{isset($commonSetting['website_simple_name'])?$commonSetting['website_simple_name']:''}}的广告样式有哪些？</h6>
                             </a>
 
                             <div class="con">
@@ -244,7 +244,7 @@
                             </a>
 
                             <div class="con">
-                                <p>有盟网络支持主流的计费方式，包括 CPC、CPA、CPM。</p>
+                                <p>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}支持主流的计费方式，包括 CPC、CPM。</p>
                             </div>
                         </li>
 

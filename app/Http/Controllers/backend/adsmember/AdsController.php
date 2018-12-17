@@ -85,16 +85,10 @@ class AdsController extends CommonController
                 $daysetArray[] = $set;
             }
             if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
-                $AndroidMobileArray[] = $set;
-            }
-            if($set['settinggroup'] == 'OS' and $set['skey'] == 'mobile'){
-                $IOSMobileArray[] = $set;
+                $MobileBrandArray[] = $set;
             }
             if($set['settinggroup'] == 'Browser'){
-                $AndroidBrowserArray[] = $set;
-            }
-            if($set['settinggroup'] == 'Browser'){
-                $IOSBrowserArray[] = $set;
+                $BrowserArray[] = $set;
             }
             if($set['settinggroup'] == 'NetworkType'){
                 $NetworkTypeArray[] = $set;
@@ -112,14 +106,14 @@ class AdsController extends CommonController
         }
         $commonSetting = $this->commonSetting;
         //print_r($AndroidMobileArray);
-        return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
-            'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
+            'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
     public function getallmaterial(Request $request){
         if($request->isMethod('post')){
             $ads_id = session('ads_id');
-            $allMaterial = Material::where('ads_id',$ads_id)->where('status',1)->orderBy('created_at','desc')->paginate(1);
+            $allMaterial = Material::where('ads_id',$ads_id)->where('status',1)->orderBy('created_at','desc')->paginate(5);
             $html = '';
             $paginate = '';
             if(!empty($allMaterial)){
@@ -257,6 +251,101 @@ class AdsController extends CommonController
 
         }
 
+    }
+
+    public function edit(Request $request, $ads_id){
+        //判断该广告是否是当用广告主
+        //echo session('ads_id');
+        $ads = Ads::where('ads_id',$ads_id)->where('member_id',session('ads_id'))->get()->toArray();
+        if(!empty($ads))
+        {
+
+            $allSettingGroup = SettingGroup::get()->toArray();
+            $allSetting = Setting::where('status',1)->get()->toArray();
+            $settingGroupData = array();
+
+            $parentSettingGroupData = array();
+            foreach ($allSettingGroup as $v => $parentData)
+            {
+                $parentSettingGroupData[$parentData['id']] = $parentData;
+            }
+
+            foreach ($allSettingGroup as $v => $settingGroup)
+            {
+                if($settingGroup['pid'] != 0)
+                {
+                    //echo $parentSettingGroupData[$settingGroup['pid']]['name'];exit;
+                    $settingGroupData[$parentSettingGroupData[$settingGroup['pid']]['name']][$settingGroup['name']] = $settingGroup;
+                }else{
+                    $settingGroupData[$settingGroup['name']] = $settingGroup;
+                }
+
+            }
+
+            //print_r($settingGroupData['china']);exit;
+
+            $countTypeArray = array();
+            $adsTypeArray = array();
+            $WebTypeArray = array();
+            $daysetArray = array();
+            $AndroidMobileArray = array();
+            $IOSMobileArray = array();
+            $AndroidBrowserArray = array();
+            $IOSBrowserArray = array();
+            $NetworkTypeArray = array();
+            $OperatorArray = array();
+
+            $ProvinceArray = array();
+
+            foreach ($allSetting as $set)
+            {
+                if($set['settinggroup'] == 'countType'){
+                    $countTypeArray[] = $set;
+                }
+                if($set['settinggroup'] == 'adsType'){
+                    $adsTypeArray[] = $set;
+                }
+                if($set['settinggroup'] == 'WebType'){
+                    $WebTypeArray[] = $set;
+                }
+                if($set['settinggroup'] == 'dayset'){
+                    $daysetArray[] = $set;
+                }
+                if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
+                    $AndroidMobileArray[] = $set;
+                }
+                if($set['settinggroup'] == 'OS' and $set['skey'] == 'mobile'){
+                    $IOSMobileArray[] = $set;
+                }
+                if($set['settinggroup'] == 'Browser'){
+                    $AndroidBrowserArray[] = $set;
+                }
+                if($set['settinggroup'] == 'Browser'){
+                    $IOSBrowserArray[] = $set;
+                }
+                if($set['settinggroup'] == 'NetworkType'){
+                    $NetworkTypeArray[] = $set;
+                }
+                if($set['settinggroup'] == 'Operator'){
+                    $OperatorArray[] = $set;
+                }
+
+            }
+
+            foreach ($allSettingGroup as $group){
+                if($group['pid'] == $settingGroupData['china']['id']){
+                    $ProvinceArray[] = $group;
+                }
+            }
+            $commonSetting = $this->commonSetting;
+            print_r($ads);
+            return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','AndroidMobileArray','IOSMobileArray','AndroidBrowserArray',
+                'IOSBrowserArray','NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+
+
+        }else{
+            return 'Error';
+        }
     }
 
 }

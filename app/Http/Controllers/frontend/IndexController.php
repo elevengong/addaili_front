@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Model\CommonSetting;
 use App\Model\Member;
 use App\Model\MemberBalance;
 use App\Model\Message;
@@ -60,7 +61,8 @@ class IndexController extends FrontendController
 
     public function contact(){
         $commonSetting = $this->commonSetting;
-        return view('frontend.pc.contact',compact('commonSetting'));
+        $qqGroup = CommonSetting::where('status',1)->where('name','qq_group')->orderBy('common_set_id','asc')->get()->toArray();
+        return view('frontend.pc.contact',compact('commonSetting','qqGroup'));
     }
 
     public function login(Request $request){

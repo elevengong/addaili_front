@@ -12,7 +12,7 @@
                     <div class="form_row">
                         <span class="form-ti">广告名称：</span>
 
-                        <input type="text" class="search-input" value="" name="name" id="name">
+                        <input type="text" class="search-input" value="{{$ads[0]['ads_name']}}" name="name" id="name">
 
                         <p class="tips mb-hide"><i>*</i>该名称方便您在我们的系统识别该广告，手机用户是看不到这个名称。</p>
                     </div>
@@ -21,7 +21,7 @@
                         <span class="form-ti">计费类型：</span>
                         <div class="form_cont">
                             @foreach($countTypeArray as $countType)
-                            <span class="form_group w150"> <label> <input type="radio" name="count_type" value="{{$countType['set_id']}}" id="cti_{{$countType['set_id']}}">{{$countType['value']}}</label> </span>
+                                <span class="form_group w150"> <label> <input type="radio" name="count_type" value="{{$countType['set_id']}}" id="cti_{{$countType['set_id']}}">{{$countType['value']}}</label> </span>
                             @endforeach
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                         <span class="form-ti">广告类型：</span>
                         <div class="form_cont">
                             @foreach($adsTypeArray as $adsType)
-                            <span class="form_group w150" style=""> <label> <input type="radio" name="adstype" value="{{$adsType['set_id']}}" id="ati_{{$adsType['set_id']}}"> {{$adsType['remark']}}</label></span>
+                                <span class="form_group w150" style=""> <label> <input type="radio" name="adstype" value="{{$adsType['set_id']}}" id="ati_{{$adsType['set_id']}}"> {{$adsType['remark']}}</label></span>
                             @endforeach
                         </div>
                     </div>
@@ -297,10 +297,10 @@
                                         <tr>
                                             <td>
                                                 @foreach($ProvinceArray as $province)
-					                             <span class="c_province">
+                                                    <span class="c_province">
                                                      <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}">{{$province['remark']}}</label>
 					                          	</span>
-                                                 @endforeach
+                                                @endforeach
                                             </td>
                                         </tr>
                                         </tbody>
@@ -320,12 +320,22 @@
                                 <div class="tableBox directSelect zdSelect" id="a_terminal" style="display:none;">
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
-                                            <th class="nor" style="text-align:left"><span><label>手机品牌</label></span></th>
+                                            <th class="nor" style="text-align:left"><span><label>Android</label></span></th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                @foreach($MobileBrandArray as $Mobile)
-                                                <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$Mobile['set_id']}}" class="c_terminal" tm_pid="{{$Mobile['set_id']}}">{{$Mobile['remark']}}</label></span>
+                                                @foreach($AndroidMobileArray as $AndroidMobile)
+                                                    <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$AndroidMobile['set_id']}}" class="c_terminal" tm_pid="47">{{$AndroidMobile['remark']}}</label></span>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="nor" style="text-align:left"><span><label>IOS</label></span></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @foreach($IOSMobileArray as $IOSMobile)
+                                                    <span style="width:120px;"><label><input type="checkbox" name="terminal_id_array[]" value="{{$IOSMobile['set_id']}}" class="c_terminal" tm_pid="48">{{$IOSMobile['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -342,12 +352,22 @@
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tbody>
                                         <tr>
-                                            <th class="nor" style="text-align:left"><span>浏览器</span></th>
+                                            <th class="nor" style="text-align:left"><span>android</span></th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                @foreach($BrowserArray as $browser)
-                                                <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$browser['set_id']}}">{{$browser['remark']}}</label></span>
+                                                @foreach($AndroidBrowserArray as $AndroidBrowser)
+                                                    <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$AndroidBrowser['set_id']}}">{{$AndroidBrowser['remark']}}</label></span>
+                                                @endforeach
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="nor" style="text-align:left"><span>ios</span></th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @foreach($IOSBrowserArray as $IOSBrowser)
+                                                    <span style="width:150px"><label><input type="checkbox" name="browser_id_array[]" value="{{$IOSBrowser['set_id']}}">{{$IOSBrowser['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -372,7 +392,7 @@
                                         <tr>
                                             <td>
                                                 @foreach($WebTypeArray as $WebType)
-                                                <span style="width:150px"><label><input type="checkbox" name="domain_category_array[]" value="{{$WebType['set_id']}}">{{$WebType['remark']}}</label></span>
+                                                    <span style="width:150px"><label><input type="checkbox" name="domain_category_array[]" value="{{$WebType['set_id']}}">{{$WebType['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -394,7 +414,7 @@
                                         <tbody><tr>
                                             <td>
                                                 @foreach($NetworkTypeArray as $NetworkType)
-                                                <span><label><input type="checkbox" name="nettype_id_array[]" value="{{$NetworkType['set_id']}}">{{$NetworkType['remark']}}</label></span>
+                                                    <span><label><input type="checkbox" name="nettype_id_array[]" value="{{$NetworkType['set_id']}}">{{$NetworkType['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
@@ -416,7 +436,7 @@
                                         <tbody><tr>
                                             <td>
                                                 @foreach($OperatorArray as $Operator)
-                                                <span><label><input type="checkbox" name="network_id_array[]" value="{{$Operator['set_id']}}">{{$Operator['remark']}}</label></span>
+                                                    <span><label><input type="checkbox" name="network_id_array[]" value="{{$Operator['set_id']}}">{{$Operator['remark']}}</label></span>
                                                 @endforeach
                                             </td>
                                         </tr>
