@@ -6,6 +6,7 @@
         <!--position-->
         <form id="form_insert" method="post">
             {{csrf_field()}}
+            <input type="hidden" value="{{$commonSetting['min_ads_per_price']}}" name="min_ads_per_price" id="min_ads_per_price">
             <div class="insert-app ads-advert-update">
                 <h5 class="head-title">新建广告</h5>
                 <div class="con">
@@ -472,6 +473,8 @@
 
             $('.jbtn_save_insert').click(function () {
                 var name = $.trim( $('#name').val() );
+                var min_ads_per_price = $.trim( $('#min_ads_per_price').val() );
+
                 if(name === undefined || name == '')
                 {
                     alert('广告名称不能为空!');
@@ -532,6 +535,11 @@
                 if(price === undefined || price == '' || price == 0)
                 {
                     alert('单价不能为空或者为0!');
+                    return false;
+                }
+                if(price < min_ads_per_price)
+                {
+                    alert('每1000次的单价不能为空或者为'+min_ads_per_price+'元!');
                     return false;
                 }
                 if(!valimoney(price))

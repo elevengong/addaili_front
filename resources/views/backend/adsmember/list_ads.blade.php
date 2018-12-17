@@ -85,7 +85,7 @@
                         </td>
                         {{--<td></td>--}}
                         <td>
-                            <a href="/adsmember/ads/edit/{{$ads['ads_id']}}" target="_blank" title="编辑" class="icoOpr icoEdit">编辑</a>&nbsp;&nbsp;
+                            <a href="/adsmember/ads/edit/{{$ads['ads_id']}}" title="编辑" class="icoOpr icoEdit">编辑</a>&nbsp;&nbsp;
                             <a href="#" target="_blank" title="暂停" class="icoOpr icoEdit">暂停</a>
                         </td>
                     </tr>

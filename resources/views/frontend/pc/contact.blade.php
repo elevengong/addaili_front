@@ -17,7 +17,7 @@
         <div class="container">
             <div class="con">
                 <div class="top">
-                    <h6>媒体合作</h6>
+                    <h6>客服QQ</h6>
 
                     <div class="row">
 

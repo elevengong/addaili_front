@@ -105,7 +105,7 @@ class AdsController extends CommonController
             }
         }
         $commonSetting = $this->commonSetting;
-        //print_r($AndroidMobileArray);
+        //print_r($commonSetting);exit;
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
             'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
@@ -212,6 +212,14 @@ class AdsController extends CommonController
             $switch_nettype_array = request()->input('switch_nettype_array');
             $switch_network_array = request()->input('switch_network_array');
 
+            $commonSetting = $this->commonSetting;
+            if($price < $commonSetting['min_ads_per_price'])
+            {
+                $reData['status'] = 0;
+                $reData['msg'] = '每1000次的单价不能为空或者为'.$commonSetting['min_ads_per_price'].'元!';
+                return json_encode($reData);
+            }
+
             $insertData['member_id'] = session('ads_id');
             $insertData['ads_name'] = $name;
             $insertData['ads_count_type'] = $count_type;
@@ -259,6 +267,18 @@ class AdsController extends CommonController
         $ads = Ads::where('ads_id',$ads_id)->where('member_id',session('ads_id'))->get()->toArray();
         if(!empty($ads))
         {
+
+            $photoArray = json_decode($ads[0]['ads_photo'],true);
+            $photoInfoArray = Material::where('ads_id',session('ads_id'))->whereIn('id',$photoArray)->orderBy('created_at','desc')->get()->toArray();
+            $photoString = '';
+            foreach ($photoInfoArray as $img)
+            {
+                $photoString .= '<div class="material_item" id="material_item_'.$img['id'].'"><a href="javascript:void(0)" onclick="removeimage('.$img['id'].')" class="del">';
+                $photoString .= '<i class="iconfont icon-shanchu1"></i></a>';
+                $photoString .= '<img onmouseover="" src="'.$img['image'].'" class="imgs">';
+                $photoString .= '<input type="hidden" value="'.$img['id'].'" name="creative_image_id_array[]" jid="'.$img['id'].'" id="material_'.$img['id'].'" class="material_checked"></div>';
+            }
+
             $moreSetting = json_decode($ads[0]['more_setting'],true);
             //print_r($moreSetting);exit;
             $newMoreSetting = array();
@@ -413,10 +433,82 @@ class AdsController extends CommonController
             $commonSetting = $this->commonSetting;
             //print_r($AndroidMobileArray);
             return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
-                'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads','moreSetting','newMoreSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+                'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads','moreSetting','newMoreSetting','photoString'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
 
         }else{
             return 'Error';
+        }
+    }
+
+    public function editprocess(Request $request){
+        if($request->isMethod('post')){
+            $ads_id = request()->input('ads_id');
+            $name = request()->input('name');
+            $count_type = request()->input('count_type');
+            $adstype = request()->input('adstype');
+            $site_url = request()->input('site_url');
+            $creative_image_id_array = request()->input('creative_image_id_array');
+            $stime = request()->input('stime');
+            $etime = request()->input('etime');
+            $price = request()->input('price');
+            $budget = request()->input('budget');
+            $budget_daily = request()->input('budget_daily');
+            $os_array = request()->input('os_array');
+            $time_array = request()->input('time_array');
+            $area_array = request()->input('area_array');
+            $terminal_array = request()->input('terminal_array');
+            $switch_browser_array = request()->input('switch_browser_array');
+            $switch_domain_category_array = request()->input('switch_domain_category_array');
+            $switch_nettype_array = request()->input('switch_nettype_array');
+            $switch_network_array = request()->input('switch_network_array');
+
+            $commonSetting = $this->commonSetting;
+            if($price < $commonSetting['min_ads_per_price'])
+            {
+                $reData['status'] = 0;
+                $reData['msg'] = '每1000次的单价不能为空或者为'.$commonSetting['min_ads_per_price'].'元!';
+                return json_encode($reData);
+            }
+
+            $updateData['ads_name'] = $name;
+            $updateData['ads_count_type'] = $count_type;
+            $updateData['ads_type'] = $adstype;
+            $updateData['ads_link'] = $site_url;
+            $updateData['per_cost'] = $price/1000;
+            $updateData['total_budget'] = $budget;
+            $updateData['daily_budget'] = $budget_daily;
+            $updateData['ads_photo'] = json_encode($creative_image_id_array);
+            $updateData['ismobile'] = 1;
+            $updateData['status'] = 0;
+
+            $more_setting = array();
+            $more_setting['time']['starttime'] = $stime;
+            $more_setting['time']['endtime'] = $etime;
+            $more_setting['os_array'] = $os_array;
+            $more_setting['time_array'] = $time_array;
+            $more_setting['area_array'] = $area_array;
+            $more_setting['terminal_array'] = $terminal_array;
+            $more_setting['switch_browser_array'] = $switch_browser_array;
+            $more_setting['switch_domain_category_array'] = $switch_domain_category_array;
+            $more_setting['switch_nettype_array'] = $switch_nettype_array;
+            $more_setting['switch_network_array'] = $switch_network_array;
+
+            $updateData['more_setting'] = json_encode($more_setting);
+
+//            echo $ads_id."---";
+//            echo session('ads_id');
+//            print_r($updateData);exit;
+            $res = Ads::where('ads_id',$ads_id)->where('member_id',session('ads_id'))->update($updateData);
+            //$result = CommonSetting::where('common_set_id',$set_id)->update($input);
+            if($res){
+                $reData['status'] = 1;
+                $reData['msg'] = '广告修改成功!';
+            }else{
+                $reData['status'] = 0;
+                $reData['msg'] = '广告修改失败!';
+            }
+            return json_encode($reData);
+
         }
     }
 

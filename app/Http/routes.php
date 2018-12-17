@@ -20,6 +20,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::get('/adsmember/ads/add','backend\adsmember\AdsController@add');
     Route::post('/adsmember/ads/addprocess','backend\adsmember\AdsController@addprocess');
     Route::get('/adsmember/ads/edit/{ads_id}','backend\adsmember\AdsController@edit');
+    Route::post('/adsmember/ads/editprocess/','backend\adsmember\AdsController@editprocess');
     Route::post('/adsmember/ads/getallmaterial','backend\adsmember\AdsController@getallmaterial');
     Route::post('/adsmember/ads/choosematerial/{id}','backend\adsmember\AdsController@choosematerial')->where(['id' => '[0-9]+']);
     Route::post('/adsmember/ads/getmaterialbyid/{id}','backend\adsmember\AdsController@getmaterialbyid')->where(['id' => '[0-9]+']);
