@@ -15,12 +15,12 @@ class MaterialController extends CommonController
     public function materiallist(Request $request){
         $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
-
-
+            $keyword = request()->input('keyword');
+            $materialArray  = Material::where('id',$keyword)->where('ads_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
         }else{
             $materialArray  = Material::where('ads_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            return view('backend.adsmember.list_material',compact('materialArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
+        return view('backend.adsmember.list_material',compact('materialArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
     public function upload(){

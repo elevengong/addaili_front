@@ -11,32 +11,31 @@
             </div>
 
             <div class="top search-area">
-                <form action="#" method="get">
+                <form action="/adsmember/ads/lists" method="post">
                     <div class="input">
-                        <input class="ipt" type="text" name="keyword" value="" placeholder="广告ID | 名称">
-                        <span><select id="mobile_advert_type_id" name="mobile_advert_type_id">
-                                <option value="" selected="selected">选择广告类型</option>
-                                <option value="1">横幅</option>
-                                <option value="11">网摘</option>
-                                <option value="13">横幅（微信）</option>
-                                <option value="15">网摘（微信）</option>
-                                <option value="21">小图标（微信）</option>
-                                <option value="19">小图标</option>
-                                <option value="27">互动广告</option>
-                                <option value="31">视频广告</option>
-                                <option value="33">网摘双图</option>
+                        {{csrf_field()}}
+                        <input class="ipt" type="text" name="ads_id" value="" placeholder="广告ID">
+                        <input class="ipt" type="text" name="ads_name" value="" placeholder="名称">
+                        <span><select id="adstype" name="adstype">
+                                <option value="0" selected="selected">选择广告类型</option>
+                                @foreach($adstypeArray as $adsType)
+                                <option value="{{$adsType['set_id']}}">{{$adsType['remark']}}</option>
+                                @endforeach
                                 </select></span>
-                        <span><select id="mobile_charge_type_id" name="mobile_charge_type_id">
-                                <option value="" selected="selected">选择计费类型</option>
-                                <option value="1">CPM</option>
-                                <option value="3">CPC</option>
+                        <span><select id="count_type" name="count_type">
+                                <option value="0" selected="selected">选择计费类型</option>
+                                @foreach($countTypeArray as $countType)
+                                    <option value="{{$countType['set_id']}}">{{$countType['remark']}}</option>
+                                @endforeach
                                 </select></span>
-                        <span><select id="state" name="state">
+                        <span><select id="status" name="status">
                                 <option value="" selected="selected">选择状态</option>
-                                <option value="ready">待审</option>
-                                <option value="open">正常</option>
-                                <option value="pause">暂停</option>
-                                <option value="stop">系统暂停</option>
+                                <option value="0">待审</option>
+                                <option value="1">正常</option>
+                                <option value="2">暂停</option>
+                                <option value="3">账户余额不足</option>
+                                <option value="4">当天预算用完</option>
+                                <option value="5">系统暂停</option>
                                 </select></span>
                         <input type="submit" value="查询" class="check check-h">
                         <div class="bottom">

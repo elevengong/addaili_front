@@ -7,7 +7,7 @@
             <div class="button"><a href="/adsmember/material/upload" target="_blank" class="button-1">+ 上传创意</a></div>
             <div class="top search-area">
                 <div class="input">
-                    <form action="/adsmember/material/lists" method="get" name="form_search" id="form_list">
+                    <form action="/adsmember/material/lists" method="post" name="form_search" id="form_list">
                         {{csrf_field()}}
                         <input type="text" name="keyword" value="" class="search-input" placeholder="创意ID">
                         <input type="submit" value="查询" class="check check-h">

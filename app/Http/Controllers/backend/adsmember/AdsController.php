@@ -15,20 +15,56 @@ class AdsController extends CommonController
 {
     public function lists(Request $request){
         $commonSetting = $this->commonSetting;
+        $adstypeArray = Setting::where('settinggroup','adsType')->where('status',1)->orderBy('set_id')->get()->toArray();
+        $countTypeArray = Setting::where('settinggroup','countType')->where('status',1)->orderBy('set_id')->get()->toArray();
+
+        $settingArray = Setting::orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->get()->toArray();
+        $setting = array();
+        foreach($settingArray as $set)
+        {
+            $setting[$set['set_id']] = $set['remark'];
+        }
+
         if($request->isMethod('post')){
+            $adsArray = Ads::orderBy('created_at','desc')
+                ->where(function($query) use($request){
+
+                    $query->where('member_id',session('ads_id'));
+                    $ads_id = $request->input('ads_id');
+                    if(!empty($ads_id))
+                    {
+                        $query->where('ads_id',$ads_id);
+                    }
+                    $ads_name = $request->input('ads_name');
+                    if(!empty($ads_name))
+                    {
+                        $query->where('ads_name',$ads_name);
+                    }
+                    $adstype = $request->input('adstype');
+                    if($adstype!=0)
+                    {
+                        $query->where('ads_type',$adstype);
+                    }
+                    $count_type = $request->input('count_type');
+                    if($count_type!=0)
+                    {
+                        $query->where('ads_count_type',$count_type);
+                    }
+                    $status = $request->input('status');
+                    if(!empty($status))
+                    {
+                        $query->where('status',$status);
+                    }
+
+                })
+                ->paginate($this->backendPageNum);
+
 
         }else{
-            $settingArray = Setting::orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->get()->toArray();
-            $setting = array();
-            foreach($settingArray as $set)
-            {
-                $setting[$set['set_id']] = $set['remark'];
-            }
-            //print_r($settingArray);exit;
-            $adsmember_id = session('ads_id');
-            $adsArray = Ads::where('member_id',$adsmember_id)->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            return view('backend.adsmember.list_ads',compact('adsArray','setting','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            $adsArray = Ads::where('member_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
         }
+        return view('backend.adsmember.list_ads',compact('adsArray','setting','commonSetting','adstypeArray','countTypeArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+
 
     }
 
