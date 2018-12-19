@@ -156,7 +156,7 @@
     <div class="ddd ddd-dd"></div>
     @yield('content')
     <div class="copy">
-        <p>©2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}版权所有 {{isset($commonSetting['icp'])?$commonSetting['icp']:''}} <br>  我的客服：<a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&menu=yes">QQ:{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a></p>
+        <p>©2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}版权所有&nbsp;&nbsp;&nbsp; 我的客服：<a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&menu=yes">QQ:{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a></p>
     </div>
 </div>
     <!--right-area-->

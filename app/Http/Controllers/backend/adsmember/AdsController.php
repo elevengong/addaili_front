@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\backend\adsmember;
 
 use App\Model\Ads;
+use App\Model\CommonSetting;
 use App\Model\Material;
+use App\Model\Member;
 use App\Model\Setting;
 use App\Model\SettingGroup;
 use Illuminate\Http\Request;
@@ -303,7 +305,6 @@ class AdsController extends CommonController
         $ads = Ads::where('ads_id',$ads_id)->where('member_id',session('ads_id'))->get()->toArray();
         if(!empty($ads))
         {
-
             $photoArray = json_decode($ads[0]['ads_photo'],true);
             $photoInfoArray = Material::where('ads_id',session('ads_id'))->whereIn('id',$photoArray)->orderBy('created_at','desc')->get()->toArray();
             $photoString = '';
@@ -478,6 +479,43 @@ class AdsController extends CommonController
 
     public function editprocess(Request $request){
         if($request->isMethod('post')){
+            //判断当天修改次数是否超过总限制
+            $limitTimeArray = CommonSetting::select('value')->where('name','per_adsmember_change_perday')->get()->toArray();
+            if(empty($limitTimeArray))
+            {
+                $limit = 50;
+            }else{
+                $limit = $limitTimeArray[0]['value'];
+            }
+            $member = Member::select('change_times','changed_at')->find(session('ads_id'))->toArray();
+            $change_times = $member['change_times'];
+            $changed_at = $member['changed_at'];
+            if($changed_at == '')
+            {
+                $change_times = 1;
+                $changed_at = date('Y-m-d H:i:s',time());
+            }else{
+                $nowDay = date('Ymd',time());
+                $recordDay = date('Ymd',strtotime($changed_at));
+                if($nowDay != $recordDay)
+                {
+                    $change_times = 1;
+                    $changed_at = date('Y-m-d H:i:s',time());
+                }else{
+                    $change_times = $change_times + 1;
+                    $changed_at = date('Y-m-d H:i:s',time());
+                }
+            }
+            if($change_times > $limit)
+            {
+                $reData['status'] = 0;
+                $reData['msg'] = '当天修改次数已到上限，请明天再修改!';
+                return json_encode($reData);
+            }
+            Member::where('member_id',session('ads_id'))->update(['change_times'=>$change_times, 'changed_at'=>$changed_at]);
+
+
+
             $ads_id = request()->input('ads_id');
             $name = request()->input('name');
             $count_type = request()->input('count_type');

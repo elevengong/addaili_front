@@ -305,7 +305,7 @@
                 <!--index-partner-->
 
                 <a href="/about.html" class="more">了解更多</a> </div>
-            <p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有    <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:white">{{isset($commonSetting['icp'])?$commonSetting['icp']:''}}</a> &nbsp;&nbsp;&nbsp;&nbsp;联系QQ:<a href="http://wpa.qq.com/msgrd?v=1&amp;uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&amp;site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&amp;menu=yes" target="_blank">{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a> </p>
+            <p class="copy">&copy;2018 {{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}} 版权所有 &nbsp;&nbsp;联系QQ:<a href="http://wpa.qq.com/msgrd?v=1&amp;uin={{isset($commonSetting['qq'])?$commonSetting['qq']:''}}&amp;site={{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}客服专员&amp;menu=yes" target="_blank">{{isset($commonSetting['qq'])?$commonSetting['qq']:''}}</a> </p>
             <span class="f-page">05</span> </div>
 
     </div>
