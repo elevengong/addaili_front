@@ -586,4 +586,19 @@ class AdsController extends CommonController
         }
     }
 
+    public function changestatus(Request $request,$ads_id){
+        if($request->isMethod('post')){
+            $status = request()->input('status');
+            $res = Ads::where('member_id',session('ads_id'))->where('ads_id',$ads_id)->update(['status'=>$status]);
+            if($res){
+                $reData['status'] = 1;
+                $reData['msg'] = '广告状态修改成功!';
+            }else{
+                $reData['status'] = 0;
+                $reData['msg'] = '广告状态修改失败!';
+            }
+            return json_encode($reData);
+        }
+    }
+
 }

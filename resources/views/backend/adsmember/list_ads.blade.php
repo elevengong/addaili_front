@@ -84,8 +84,13 @@
                         </td>
                         {{--<td></td>--}}
                         <td>
-                            <a href="/adsmember/ads/edit/{{$ads['ads_id']}}" title="编辑" class="icoOpr icoEdit">编辑</a>&nbsp;&nbsp;
-                            <a href="#" target="_blank" title="暂停" class="icoOpr icoEdit">暂停</a>
+                            <a href="/adsmember/ads/edit/{{$ads['ads_id']}}" title="编辑" class="icoOpr icoEdit">编辑</a>
+                            @if($ads['status'] == 1)
+                            <a href="javascript:" target="_blank" title="暂停" onclick="adschange('{{$ads['ads_id']}}',2)" class="icoOpr icoEdit">暂停</a>
+                                @endif
+                            @if($ads['status'] == 2)
+                                <a href="javascript:" target="_blank" title="开始" onclick="adschange('{{$ads['ads_id']}}',1)" class="icoOpr icoEdit">开始</a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -105,5 +110,35 @@
         $('.mb-menu li').removeClass('active');
         $('.menu li').eq(3).addClass('active');
         $('.mb-menu li').eq(3).addClass('active');
+
+        function adschange(ads_id,status) {
+            var msg = "您真的确定要暂停吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                $.ajax({
+                    type:"post",
+                    url:"/adsmember/ads/changestatus/"+ads_id,
+                    dataType:'json',
+                    headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
+                    data:{status:status},
+                    // data:$("#form_insert").serialize(),
+                    success:function(data){
+                        if(data.status == 0)
+                        {
+                            alert(data.msg);
+                        }else{
+                            alert(data.msg);
+                            window.location.reload();
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg(data.msg);
+                    }
+                });
+
+            }else{
+                return false;
+            }
+        }
+
     </script>
 @endsection

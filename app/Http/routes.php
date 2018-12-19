@@ -24,6 +24,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::post('/adsmember/ads/getallmaterial','backend\adsmember\AdsController@getallmaterial');
     Route::post('/adsmember/ads/choosematerial/{id}','backend\adsmember\AdsController@choosematerial')->where(['id' => '[0-9]+']);
     Route::post('/adsmember/ads/getmaterialbyid/{id}','backend\adsmember\AdsController@getmaterialbyid')->where(['id' => '[0-9]+']);
+    Route::post('/adsmember/ads/changestatus/{ads_id}','backend\adsmember\AdsController@changestatus')->where(['ads_id' => '[0-9]+']);
 
     Route::any('/adsmember/service/report','backend\adsmember\ReportController@report');
 
