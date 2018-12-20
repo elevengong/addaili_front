@@ -12,8 +12,11 @@
 
                 <div class="top search-area">
                     <div class="input">
-                        <form method="get" action="/webmember/website/index" name="form_search" id="form_list">
-                            <input class="search-input" type="text" name="keyword" value="" placeholder="ID|网站名称|域名">
+                        <form method="post" action="/webmember/website/index" name="form_search" id="form_list">
+                            {{csrf_field()}}
+                            <input class="search-input" type="text" name="keywordId" value="" placeholder="ID">
+                            <input class="search-input" type="text" name="keywordName" value="" placeholder="网站名称">
+                            <input class="search-input" type="text" name="keywordDomain" value="" placeholder="域名">
                             <input type="submit" value="查询" class="check check-h">
                             <div class="bottom">
                                 <input class="sm_btn check" type="submit" value="查 询">
@@ -65,12 +68,12 @@
             $('.menu li').eq(2).addClass('active');
             $('.mb-menu li').eq(2).addClass('active');
 
-            function del(id) {
+            function del(web_id) {
                 var msg = "您真的确定要删除吗？\n\n请确认！";
                 if (confirm(msg)==true){
                     $.ajax({
                         type:"delete",
-                        url:"/webmember/website/delete/"+id,
+                        url:"/webmember/website/delete/"+web_id,
                         dataType:'json',
                         headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
                         data:{},

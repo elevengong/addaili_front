@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo asset( "/resources/views/frontend/pc/css/jquery.fullpage.min.css") ?>" />
     <link rel="stylesheet" href="<?php echo asset( "/resources/views/frontend/pc/css/all.css?ver=1.0") ?>">
     <script src="<?php echo asset( "/resources/views/frontend/pc/js/jquery-1.12.4.min.js") ?>"></script>
+
 </head>
 <body>
 
@@ -64,18 +65,8 @@
 <script type="text/javascript" src="<?php echo asset( "/resources/views/frontend/pc/js/jquery.fullpage.min.js") ?>"></script>
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/mobliemenu.js") ?>"></script>
 <script src="<?php echo asset( "/resources/views/frontend/pc/js/all.js") ?>"></script>
-<style type="text/css">
-    body{
-        /*padding-bottom: 6rem;*/
-        padding-bottom: 100px;
-    }
-    #bom {
-        width:100%;
-        position:fixed;
-        left:0px;
-        bottom:0;
-        z-index:1000;
-    }</style>
-<div id="bom" style="margin-top: 100px;"><a href="#"><img src="http://daili.com/public/uploads/20181208/1544281819lxJHy.gif" style="width:100%;"></a></div>
+<script>
+
+</script>
 </body>
 </html>

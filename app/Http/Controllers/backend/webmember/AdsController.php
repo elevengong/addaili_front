@@ -16,20 +16,56 @@ class AdsController extends CommonController
 {
     public function managementadslist(Request $request){
         $commonSetting = $this->commonSetting;
+        $allSettingArray = Setting::select('set_id','settinggroup','remark')->orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->orderBy('set_id','asc')->get()->toArray();
+        $settingArray = array();
+        $adsTypeArray = array();
+        $countTypeArray = array();
+        foreach($allSettingArray as $setting)
+        {
+            $settingArray[$setting['set_id']] = $setting['remark'];
+            if($setting['settinggroup'] == 'adsType')
+            {
+                $adsTypeArray[] = $setting;
+            }elseif($setting['settinggroup'] == 'countType')
+            {
+                $countTypeArray[] = $setting;
+            }
+        }
         if($request->isMethod('post')){
+            $allAdsArray = WebmasterApplyAds::where('webmaster_id',session('webmaster_id'))->orderBy('created_at','desc')
+                ->where(function($query) use($request){
+
+                    $query->where('webmaster_id',session('webmaster_id'));
+
+                    $keywordId = request()->input('keywordId');
+                    if(!empty($keywordId))
+                    {
+                        $query->where('webmater_ads_id',$keywordId);
+                    }
+                    $keywordName = request()->input('keywordName');
+                    if(!empty($keywordName))
+                    {
+                        $query->where('name','like','%'.$keywordName.'%');
+                    }
+                    $adstype = request()->input('adstype');
+                    if($adstype!=0)
+                    {
+                        $query->where('ads_type',$adstype);
+                    }
+                    $counttype = request()->input('counttype');
+                    if($counttype!=0)
+                    {
+                        $query->where('ads_count_type',$counttype);
+                    }
+                })
+                ->paginate($this->backendPageNum);
+
+
 
         }else{
             $allAdsArray = WebmasterApplyAds::where('webmaster_id',session('webmaster_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            $allSettingArray = Setting::select('set_id','remark')->orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->orderBy('set_id','asc')->get()->toArray();
-            $settingArray = array();
-            foreach($allSettingArray as $setting)
-            {
-                $settingArray[$setting['set_id']] = $setting['remark'];
-            }
-
-            return view('backend.webmember.list_managementads',compact('allAdsArray','settingArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
-
+        return view('backend.webmember.list_managementads',compact('allAdsArray','settingArray','commonSetting','adsTypeArray','countTypeArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
     public function add(Request $request){
@@ -56,9 +92,24 @@ class AdsController extends CommonController
         }
     }
 
-    public function getadscode(){
+    public function getadscode(Request $request,$webmaster_ads_id){
         $commonSetting = $this->commonSetting;
-        return view('backend.webmember.getadscode',compact('commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        $allSettingArray = Setting::select('set_id','settinggroup','remark')->orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->orderBy('set_id','asc')->get()->toArray();
+        $adsTypeArray = array();
+        $countTypeArray = array();
+        foreach($allSettingArray as $setting)
+        {
+            if($setting['settinggroup'] == 'adsType')
+            {
+                $adsTypeArray[$setting['set_id']] = $setting['remark'];
+            }elseif($setting['settinggroup'] == 'countType')
+            {
+                $countTypeArray[$setting['set_id']] = $setting['remark'];
+            }
+        }
+
+        $adsInfo = WebmasterApplyAds::where('webmaster_id',session('webmaster_id'))->where('webmaster_ads_id',$webmaster_ads_id)->get()->toArray();
+        return view('backend.webmember.getadscode',compact('commonSetting','adsInfo','adsTypeArray','countTypeArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 }

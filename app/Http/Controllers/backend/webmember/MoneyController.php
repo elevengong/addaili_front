@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\backend\webmember;
 
+use App\Model\Setting;
+use App\Model\Websites;
 use App\Model\WithdrawInfo;
 use App\Model\WithdrawOrder;
 use Illuminate\Http\Request;
@@ -15,10 +17,27 @@ class MoneyController extends CommonController
 {
     public function commissionlist(Request $request){
         $commonSetting = $this->commonSetting;
+        $allSettingArray = Setting::select('set_id','settinggroup','remark')->orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->orderBy('set_id','asc')->get()->toArray();
+        $settingArray = array();
+        $adsTypeArray = array();
+        $countTypeArray = array();
+        foreach($allSettingArray as $setting)
+        {
+            $settingArray[$setting['set_id']] = $setting['remark'];
+            if($setting['settinggroup'] == 'adsType')
+            {
+                $adsTypeArray[] = $setting;
+            }elseif($setting['settinggroup'] == 'countType')
+            {
+                $countTypeArray[] = $setting;
+            }
+        }
+        $domainArray = Websites::where('member_id',session('webmaster_id'))->where('status',1)->get()->toArray();
+
         if($request->isMethod('post')){
 
         }else{
-            return view('backend.webmember.list_commission_report',compact('commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+            return view('backend.webmember.list_commission_report',compact('commonSetting','settingArray','adsTypeArray','countTypeArray','domainArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
         }
     }
 

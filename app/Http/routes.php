@@ -65,7 +65,7 @@ Route::group(['middleware' => ['web','webmember.login']],function () {
 
     Route::any('/webmember/website/index','backend\webmember\WebsiteController@websitelist');
     Route::any('/webmember/website/add','backend\webmember\WebsiteController@add');
-    Route::delete('/webmember/website/delete','backend\webmember\WebsiteController@delete');
+    Route::delete('/webmember/website/delete/{web_id}','backend\webmember\WebsiteController@delete')->where(['web_id' => '[0-9]+']);
 
     Route::any('/webmember/ads/management','backend\webmember\AdsController@managementadslist');
     Route::any('/webmember/ads/add','backend\webmember\AdsController@add');

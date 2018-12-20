@@ -15,15 +15,44 @@ class WebsiteController extends CommonController
     public function websitelist(Request $request){
         $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
+            $keywordId = request()->input('keywordId');
+            $keywordName = request()->input('keywordName');
+            $keywordDomain = request()->input('keywordDomain');
+
+            $allWebsiteArray = Websites::select('websites.*','setting.remark')
+                ->leftJoin('setting',function ($join){
+                    $join->on('setting.set_id','=','websites.webtype');
+                })
+                ->where(function($query) use($request){
+
+                    $query->where('websites.member_id',session('webmaster_id'));
+
+                    $keywordId = request()->input('keywordId');
+                    if(!empty($keywordId))
+                    {
+                        $query->where('websites.web_id',$keywordId);
+                    }
+                    $keywordName = request()->input('keywordName');
+                    if(!empty($keywordName))
+                    {
+                        $query->where('websites.web_name',$keywordName);
+                    }
+                    $keywordDomain = request()->input('keywordDomain');
+                    if(!empty($keywordDomain))
+                    {
+                        $query->where('websites.domain','like','%'.$keywordDomain.'%');
+                    }
+                })
+                ->orderBy('websites.created_at','asc')->get()->toArray();
 
         }else{
             $allWebsiteArray = Websites::select('websites.*','setting.remark')
                 ->leftJoin('setting',function ($join){
                     $join->on('setting.set_id','=','websites.webtype');
                 })
-                ->where('websites.member_id',session('webmaster_id'))->orderBy('websites.created_at','asc')->get()->toArray();
-            return view('backend.webmember.list_website',compact('allWebsiteArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+                ->where('websites.member_id',session('webmaster_id'))->where('websites.status','!=',3)->orderBy('websites.created_at','asc')->get()->toArray();
         }
+        return view('backend.webmember.list_website',compact('allWebsiteArray','commonSetting'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
 
     }
 
@@ -53,9 +82,9 @@ class WebsiteController extends CommonController
 
     }
 
-    public function delete(Request $request,$id){
+    public function delete(Request $request,$web_id){
         if($request->isMethod('delete')){
-            $result = Websites::destroy($id);
+            $result = Websites::where('member_id',session('webmaster_id'))->where('web_id',$web_id)->update(['status'=>3]);
             if ($result) {
                 $reData['status'] = 1;
                 $reData['msg'] = "删除成功";

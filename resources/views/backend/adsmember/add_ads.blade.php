@@ -539,7 +539,7 @@
                 }
                 if(price < min_ads_per_price)
                 {
-                    alert('每1000次的单价不能为空或者为'+min_ads_per_price+'元!');
+                    alert('每1000次的单价不能为空或者不少于'+min_ads_per_price+'元!');
                     return false;
                 }
                 if(!valimoney(price))

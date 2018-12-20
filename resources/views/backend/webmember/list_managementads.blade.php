@@ -11,17 +11,23 @@
                 </div>
                 <div class="top search-area">
                     <div class="input">
-                        <form method="get" action="http://www.17un.com/service/customer/mobile/space/action/lists.html" name="form_search" id="form_list">
-                            <input class="ipt" type="text" placeholder="广告位名称|广告位ID" name="keyword" value="" id="keyword">
-                            <select id="mobile_advert_type_id" name="mobile_advert_type_id">
-                                <option value="" selected="selected">选择广告类型</option>
-                                <option value="1">横幅</option>
-                                <option value="11">网摘</option>
-                            </select>							<select id="mobile_charge_type_id" name="mobile_charge_type_id">
-                                <option value="" selected="selected">选择计费模式</option>
-                                <option value="1">CPM</option>
-                                <option value="3">CPC</option>
-                            </select>				            	<input type="submit" value="查询" class="check check-h">
+                        <form method="post" action="/webmember/ads/management" name="form_search" id="form_list">
+                            {{csrf_field()}}
+                            <input class="ipt" type="text" placeholder="广告位ID" name="keywordId" value="">
+                            <input class="ipt" type="text" placeholder="广告位名称" name="keywordName" value="">
+                            <select id="mobile_advert_type_id" name="adstype">
+                                <option value="0" selected="selected">选择广告类型</option>
+                                @foreach($adsTypeArray as $adsType)
+                                <option value="{{$adsType['set_id']}}">{{$adsType['remark']}}</option>
+                                @endforeach
+                            </select>
+                            <select id="mobile_charge_type_id" name="counttype">
+                                <option value="0" selected="selected">选择计费模式</option>
+                                @foreach($countTypeArray as $countType)
+                                    <option value="{{$countType['set_id']}}">{{$countType['remark']}}</option>
+                                @endforeach
+                            </select>
+                            <input type="submit" value="查询" class="check check-h">
                             <div class="bottom">
                                 <input class="sm_btn check" type="submit" value="查 询">
                                 <input type="button" value="关闭" class="check close-bt">
