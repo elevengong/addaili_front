@@ -55,8 +55,8 @@
                     <tr>
                         <th scope="row">{{$allAds['webmaster_ads_id']}}</th>
                         <td class="long-table">{{$allAds['name']}}</td>
-                        <td>{{$settingArray[$allAds['ads_type']]}}</td>
-                        <td>{{$settingArray[$allAds['ads_count_type']]}}</td>
+                        <td>{{isset($settingArray[$allAds['ads_type']])?$settingArray[$allAds['ads_type']]:$allAds['ads_type']}}</td>
+                        <td>{{isset($settingArray[$allAds['ads_count_type']])?$settingArray[$allAds['ads_count_type']]:$allAds['ads_count_type']}}</td>
                         <td class="mb-hide">{{$allAds['created_at']}}</td>
                         <td class="long-table"><a href="/webmember/ads/getadscode/{{$allAds['webmaster_ads_id']}}" title="获取代码">获取代码</a></td>
                     </tr>

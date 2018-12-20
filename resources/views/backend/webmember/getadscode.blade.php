@@ -18,10 +18,10 @@
             <span class="left-text">广告位名称：</span>{{$adsInfo[0]['name']}}</p>
 
         <p class="text-tip">
-            <span class="left-text">广告位类型：</span>{{$adsTypeArray[$adsInfo[0]['ads_type']]}}
+            <span class="left-text">广告位类型：</span>{{isset($adsTypeArray[$adsInfo[0]['ads_type']])?$adsTypeArray[$adsInfo[0]['ads_type']]:$adsInfo[0]['ads_type']}}
         </p>
         <p class="text-tip">
-            <span class="left-text">广告计费类型：</span>{{$countTypeArray[$adsInfo[0]['ads_count_type']]}}
+            <span class="left-text">广告计费类型：</span>{{isset($adsTypeArray[$adsInfo[0]['ads_count_type']])?$adsTypeArray[$adsInfo[0]['ads_count_type']]:$adsInfo[0]['ads_count_type']}}
         </p>
 
         <div class="form-row">

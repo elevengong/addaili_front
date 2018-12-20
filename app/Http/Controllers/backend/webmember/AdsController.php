@@ -31,6 +31,7 @@ class AdsController extends CommonController
                 $countTypeArray[] = $setting;
             }
         }
+        //print_r($settingArray);exit;
         if($request->isMethod('post')){
             $allAdsArray = WebmasterApplyAds::where('webmaster_id',session('webmaster_id'))->orderBy('created_at','desc')
                 ->where(function($query) use($request){

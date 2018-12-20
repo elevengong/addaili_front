@@ -72,8 +72,8 @@
                     <tr>
                         <th scope="row">{{$ads['ads_id']}}</th>
                         <td class="br-table">{{$ads['ads_name']}}</td>
-                        <td>{{$setting[$ads['ads_type']]}}</td>
-                        <td>{{$setting[$ads['ads_count_type']]}}</td>
+                        <td>{{isset($setting[$ads['ads_type']])?$setting[$ads['ads_type']]:$ads['ads_type']}}</td>
+                        <td>{{isset($setting[$ads['ads_count_type']])?$setting[$ads['ads_count_type']]:$ads['ads_count_type']}}</td>
                         <td>{{$ads['per_cost']*1000}}</td>
                         <td>{{$ads['total_budget']}}</td>
                         <td>{{$ads['daily_budget']}}</td>
