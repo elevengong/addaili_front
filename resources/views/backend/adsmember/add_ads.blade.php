@@ -405,7 +405,7 @@
                             </div>
                         </div>
                         <!--form_row end-->
-                        <div class="form_row">
+                        <div class="form_row" style="display: none;">
                             <div class="form-ti">定向运营商：</div>
                             <div class="form_cont">
 								<span class="form_group w100"> <label> <input type="radio" name="switch_network" value="0" class="switch_network" checked="checked"> 不限

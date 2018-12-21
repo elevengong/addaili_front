@@ -246,6 +246,11 @@ class AdsController extends CommonController
             $budget = request()->input('budget');
             $budget_daily = request()->input('budget_daily');
             $os_array = request()->input('os_array');
+            if(in_array('any',$os_array))
+            {
+                $os_array = array('any');
+            }
+
             $time_array = request()->input('time_array');
             $area_array = request()->input('area_array');
             $terminal_array = request()->input('terminal_array');
@@ -277,14 +282,14 @@ class AdsController extends CommonController
             $more_setting = array();
             $more_setting['time']['starttime'] = $stime;
             $more_setting['time']['endtime'] = $etime;
-            $more_setting['os_array'] = $os_array;
-            $more_setting['time_array'] = $time_array;
-            $more_setting['area_array'] = $area_array;
-            $more_setting['terminal_array'] = $terminal_array;
-            $more_setting['switch_browser_array'] = $switch_browser_array;
-            $more_setting['switch_domain_category_array'] = $switch_domain_category_array;
-            $more_setting['switch_nettype_array'] = $switch_nettype_array;
-            $more_setting['switch_network_array'] = $switch_network_array;
+            $more_setting['os_array'] = !empty($os_array)?$os_array:array('any');
+            $more_setting['time_array'] = !empty($time_array)?$time_array:array('any');
+            $more_setting['area_array'] = !empty($area_array)?$area_array:array('any');
+            $more_setting['terminal_array'] = !empty($terminal_array)?$terminal_array:array('any');
+            $more_setting['switch_browser_array'] = !empty($switch_browser_array)?$switch_browser_array:array('any');
+            $more_setting['switch_domain_category_array'] = !empty($switch_domain_category_array)?$switch_domain_category_array:array('any');
+            $more_setting['switch_nettype_array'] = !empty($switch_nettype_array)?$switch_nettype_array:array('any');
+            $more_setting['switch_network_array'] = !empty($switch_network_array)?$switch_network_array:array('any');
 
             $insertData['more_setting'] = json_encode($more_setting);
 
@@ -321,7 +326,7 @@ class AdsController extends CommonController
             }
 
             $moreSetting = json_decode($ads[0]['more_setting'],true);
-            //print_r($moreSetting);exit;
+//            print_r($moreSetting);exit;
             $newMoreSetting = array();
 
             $newMoreSetting['time'] = $moreSetting['time'];
@@ -329,7 +334,7 @@ class AdsController extends CommonController
             {
                 $newMoreSetting['os_array'][$data] = 1;
             }
-            if(!empty($moreSetting['time_array']))
+            if($moreSetting['time_array'][0] != 'any')
             {
                 foreach ($moreSetting['time_array'] as $data)
                 {
@@ -339,7 +344,7 @@ class AdsController extends CommonController
                 $newMoreSetting['time_array'] = '';
             }
 
-            if(!empty($moreSetting['area_array']))
+            if($moreSetting['area_array'][0] != 'any')
             {
                 foreach ($moreSetting['area_array'] as $data)
                 {
@@ -349,7 +354,7 @@ class AdsController extends CommonController
                 $newMoreSetting['area_array'] = '';
             }
 
-            if(!empty($moreSetting['terminal_array']))
+            if($moreSetting['terminal_array'][0] != 'any')
             {
                 foreach ($moreSetting['terminal_array'] as $data)
                 {
@@ -359,7 +364,7 @@ class AdsController extends CommonController
                 $newMoreSetting['terminal_array'] = '';
             }
 
-            if(!empty($moreSetting['switch_browser_array']))
+            if($moreSetting['switch_browser_array'][0] != 'any')
             {
                 foreach ($moreSetting['switch_browser_array'] as $data)
                 {
@@ -369,7 +374,7 @@ class AdsController extends CommonController
                 $newMoreSetting['switch_browser_array'] = '';
             }
 
-            if(!empty($moreSetting['switch_domain_category_array']))
+            if($moreSetting['switch_domain_category_array'][0] != 'any')
             {
                 foreach ($moreSetting['switch_domain_category_array'] as $data)
                 {
@@ -379,7 +384,7 @@ class AdsController extends CommonController
                 $newMoreSetting['switch_domain_category_array'] = '';
             }
 
-            if(!empty($moreSetting['switch_nettype_array']))
+            if($moreSetting['switch_nettype_array'][0] != 'any')
             {
                 foreach ($moreSetting['switch_nettype_array'] as $data)
                 {
@@ -389,7 +394,7 @@ class AdsController extends CommonController
                 $newMoreSetting['switch_nettype_array'] = '';
             }
 
-            if(!empty($moreSetting['switch_nettype_array']))
+            if($moreSetting['switch_nettype_array'][0] != 'any')
             {
                 foreach ($moreSetting['switch_network_array'] as $data)
                 {
@@ -536,6 +541,10 @@ class AdsController extends CommonController
             $budget = request()->input('budget');
             $budget_daily = request()->input('budget_daily');
             $os_array = request()->input('os_array');
+            if(in_array('any',$os_array))
+            {
+                $os_array = array('any');
+            }
             $time_array = request()->input('time_array');
             $area_array = request()->input('area_array');
             $terminal_array = request()->input('terminal_array');
@@ -566,14 +575,14 @@ class AdsController extends CommonController
             $more_setting = array();
             $more_setting['time']['starttime'] = $stime;
             $more_setting['time']['endtime'] = $etime;
-            $more_setting['os_array'] = $os_array;
-            $more_setting['time_array'] = $time_array;
-            $more_setting['area_array'] = $area_array;
-            $more_setting['terminal_array'] = $terminal_array;
-            $more_setting['switch_browser_array'] = $switch_browser_array;
-            $more_setting['switch_domain_category_array'] = $switch_domain_category_array;
-            $more_setting['switch_nettype_array'] = $switch_nettype_array;
-            $more_setting['switch_network_array'] = $switch_network_array;
+            $more_setting['os_array'] = !empty($os_array)?$os_array:array('any');
+            $more_setting['time_array'] = !empty($time_array)?$time_array:array('any');
+            $more_setting['area_array'] = !empty($area_array)?$area_array:array('any');
+            $more_setting['terminal_array'] = !empty($terminal_array)?$terminal_array:array('any');
+            $more_setting['switch_browser_array'] = !empty($switch_browser_array)?$switch_browser_array:array('any');
+            $more_setting['switch_domain_category_array'] = !empty($switch_domain_category_array)?$switch_domain_category_array:array('any');
+            $more_setting['switch_nettype_array'] = !empty($switch_nettype_array)?$switch_nettype_array:array('any');
+            $more_setting['switch_network_array'] = !empty($switch_network_array)?$switch_network_array:array('any');
 
             $updateData['more_setting'] = json_encode($more_setting);
 
