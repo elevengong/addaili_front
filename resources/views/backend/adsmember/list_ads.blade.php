@@ -102,8 +102,7 @@
 
             {{$adsArray->links()}}
         </div>
-        <!--list-ad-->
-    </div>
+
 
     <script>
         $('.menu li').removeClass('active');
