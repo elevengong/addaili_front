@@ -99,6 +99,7 @@ class AdsController extends CommonController
         $adsTypeArray = array();
         $WebTypeArray = array();
         $daysetArray = array();
+        $osSystemArray = array();
         $AndroidMobileArray = array();
         $IOSMobileArray = array();
         $AndroidBrowserArray = array();
@@ -121,6 +122,9 @@ class AdsController extends CommonController
             }
             if($set['settinggroup'] == 'dayset'){
                 $daysetArray[] = $set;
+            }
+            if($set['settinggroup'] == 'OS'){
+                $osSystemArray[] = $set;
             }
             if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
                 $MobileBrandArray[] = $set;
@@ -145,7 +149,7 @@ class AdsController extends CommonController
         $commonSetting = $this->commonSetting;
         //print_r($commonSetting);exit;
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
-            'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','osSystemArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
     public function getallmaterial(Request $request){
@@ -428,6 +432,7 @@ class AdsController extends CommonController
             $adsTypeArray = array();
             $WebTypeArray = array();
             $daysetArray = array();
+            $osSystemArray = array();
             $NetworkTypeArray = array();
             $OperatorArray = array();
 
@@ -446,6 +451,9 @@ class AdsController extends CommonController
                 }
                 if($set['settinggroup'] == 'dayset'){
                     $daysetArray[] = $set;
+                }
+                if($set['settinggroup'] == 'OS'){
+                    $osSystemArray[] = $set;
                 }
                 if($set['settinggroup'] == 'brand' and $set['skey'] == 'mobile'){
                     $MobileBrandArray[] = $set;
@@ -470,7 +478,7 @@ class AdsController extends CommonController
             $commonSetting = $this->commonSetting;
             //print_r($AndroidMobileArray);
             return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
-                'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads','moreSetting','newMoreSetting','photoString'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+                'NetworkTypeArray','OperatorArray','ProvinceArray','commonSetting','ads','moreSetting','newMoreSetting','photoString','osSystemArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
 
         }else{
             return 'Error';

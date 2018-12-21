@@ -40,8 +40,9 @@
                         <div class="form-ti">投放设备系统：</div>
 
                         <div class="form_cont">
-                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="android" @if(isset($newMoreSetting['os_array']['android']))checked="checked"@endif> Android</label></span>
-                            <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="ios" @if(isset($newMoreSetting['os_array']['ios']))checked="checked"@endif> IOS</label></span>
+                            @foreach($osSystemArray as $system)
+                                <span class="form_group w100"> <label> <input type="checkbox" name="os[]" value="{{$system['value']}}" @if(isset($newMoreSetting['os_array'][$system['value']]))checked="checked"@endif> {{$system['remark']}}</label></span>
+                            @endforeach
                             <p class="tips mb-hide"><i>*</i>全不选，默认两种都投放。</p>
                         </div>
                     </div>
@@ -580,7 +581,8 @@
                     os_array.push($(this).val());
                 });
                 if(os_array === undefined || os_array.length == 0){
-                    os_array =['android','ios']
+                    alert('请选择投放设备!');
+                    return false;
                 }
 
                 //--------------------日程设置

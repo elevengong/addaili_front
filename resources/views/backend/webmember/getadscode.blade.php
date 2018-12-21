@@ -40,8 +40,12 @@
                     <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_http" style="display: none;"><script>;(function(){var m = document.createElement("script");var url = "http://test2.com/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();</script>
 </textarea>
 
+                    加密代码:
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_iframe_https" style="display: block;"></textarea>
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_iframe_http" style="display: none;"></textarea>
                     <div class="button">
                         <input type="button" value="获取代码" class="bt-1 jbtn_html" id="jbtn_html_http" data-clipboard-target="#jcontent_html_http">
+                        <input type="button" value="获取加密代码" class="bt-1 jbtn_html_iframe" id="jbtn_html_iframe_http" data-clipboard-target="#jcontent_html_iframe_https">
                     </div>
                 </div>
 
@@ -73,9 +77,13 @@
 </textarea>
                     <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_http" style="display: none;">;(function(){var m = document.createElement("script");var url = "http://test2.com/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();
 </textarea>
+                    加密代码:
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_iframe_https">a</textarea>
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_iframe_http" style="display: none;">b</textarea>
 
                     <div class="button">
                         <input type="button" value="获取代码" class="bt-1 jbtn_js" id="jbtn_js_http" data-clipboard-target="#jcontent_js_http">
+                        <input type="button" value="获取加密代码" class="bt-1 jbtn_js_iframe" id="jbtn_js_iframe_http" data-clipboard-target="#jcontent_js_iframe_http">
                     </div>
                 </div>
 
@@ -96,6 +104,47 @@
         $('.mb-menu li').removeClass('active');
         $('.menu li').eq(4).addClass('active');
         $('.mb-menu li').eq(4).addClass('active');
+
+        $(document).ready(function() {
+            var code = document.getElementById('jcontent_js_https').value;
+            encode(code);
+        });
+
+        a=62;
+        function encode(code) {
+            code = code.replace(/[\r\n]+/g, '');
+            code = code.replace(/'/g, "\\'");
+            var tmp = code.match(/\b(\w+)\b/g);
+            tmp.sort();
+            var dict = [];
+            var i, t = '';
+            for(var i=0; i<tmp.length; i++) {
+                if(tmp[i] != t) dict.push(t = tmp[i]);
+            }
+            var len = dict.length;
+            var ch;
+            for(i=0; i<len; i++) {
+                ch = num(i);
+                code = code.replace(new RegExp('\\b'+dict[i]+'\\b','g'), ch);
+                if(ch == dict[i]) dict[i] = '';
+            }
+            document.getElementById('jcontent_html_iframe_https').value = "<script>"+"eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\\\b'+e(c)+'\\\\b','g'),k[c]);return p}("
+                + "'"+code+"',"+a+","+len+",'"+ dict.join('|')+"'.split('|'),0,{}))"+"<\/script>";
+            document.getElementById('jcontent_html_iframe_http').value = "<script>"+"eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\\\b'+e(c)+'\\\\b','g'),k[c]);return p}("
+                + "'"+code+"',"+a+","+len+",'"+ dict.join('|')+"'.split('|'),0,{}))"+"<\/script>";
+
+            document.getElementById('jcontent_js_iframe_https').value = "eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\\\b'+e(c)+'\\\\b','g'),k[c]);return p}("
+                + "'"+code+"',"+a+","+len+",'"+ dict.join('|')+"'.split('|'),0,{}))";
+            document.getElementById('jcontent_js_iframe_http').value = "eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\\\b'+e(c)+'\\\\b','g'),k[c]);return p}("
+                + "'"+code+"',"+a+","+len+",'"+ dict.join('|')+"'.split('|'),0,{}))";
+
+        }
+        function num(c) {
+            return(c<a?'':num(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36));
+        }
+
+
+
         $("#jbtn_html_http").attr('data-clipboard-target', '#jcontent_html_http');
         var clipboard1 = new ClipboardJS('#jbtn_html_http');
         clipboard1.on('success', function(e) {
