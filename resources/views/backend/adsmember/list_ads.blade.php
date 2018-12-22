@@ -62,7 +62,6 @@
                         <th scope="col">总剩余预算</th>
                         <th scope="col">每日剩余预算</th>
                         <th scope="col" class="br-table">状态</th>
-                        {{--<th scope="col">备注</th>--}}
                         <th scope="col" class="long-table">操作</th>
                     </tr>
                     </thead>
