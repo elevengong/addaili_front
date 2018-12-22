@@ -300,7 +300,7 @@
                                             <td>
                                                 @foreach($ProvinceArray as $province)
 					                             <span class="c_province">
-                                                     <label class="c_province_b" pid="{{$province['id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['id']}}" value="{{$province['id']}}">{{$province['remark']}}</label>
+                                                     <label class="c_province_b" pid="{{$province['set_id']}}"><input type="checkbox" name="province_id_array[]" class="province" id="p_{{$province['set_id']}}" value="{{$province['set_id']}}">{{$province['remark']}}</label>
 					                          	</span>
                                                  @endforeach
                                             </td>

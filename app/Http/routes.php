@@ -11,7 +11,7 @@
 |
 */
 //---------------------广告商后台------------------------
-
+Route::any('/test','backend\adsmember\AdsController@test');
 
 Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::any('/adsmember/service/index','backend\adsmember\IndexController@index');
@@ -44,6 +44,7 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
 
     //图片上传
     Route::any('/backend/uploadphoto/{id}','backend\CommonController@uploadphoto');
+
 });
 
 

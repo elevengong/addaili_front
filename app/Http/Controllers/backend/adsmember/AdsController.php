@@ -138,14 +138,17 @@ class AdsController extends CommonController
             if($set['settinggroup'] == 'Operator'){
                 $OperatorArray[] = $set;
             }
-
-        }
-
-        foreach ($allSettingGroup as $group){
-            if($group['pid'] == $settingGroupData['china']['id']){
-                $ProvinceArray[] = $group;
+            if($set['settinggroup'] == 'china'){
+                $ProvinceArray[] = $set;
             }
+
         }
+        //print_r($ProvinceArray);exit;
+//        foreach ($allSettingGroup as $group){
+//            if($group['pid'] == $settingGroupData['china']['id']){
+//                $ProvinceArray[] = $group;
+//            }
+//        }
         $commonSetting = $this->commonSetting;
         //print_r($commonSetting);exit;
         return view('backend.adsmember.add_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
@@ -472,14 +475,17 @@ class AdsController extends CommonController
                 if($set['settinggroup'] == 'Operator'){
                     $OperatorArray[] = $set;
                 }
-
-            }
-
-            foreach ($allSettingGroup as $group){
-                if($group['pid'] == $settingGroupData['china']['id']){
-                    $ProvinceArray[] = $group;
+                if($set['settinggroup'] == 'china'){
+                    $ProvinceArray[] = $set;
                 }
+
             }
+
+//            foreach ($allSettingGroup as $group){
+//                if($group['pid'] == $settingGroupData['china']['id']){
+//                    $ProvinceArray[] = $group;
+//                }
+//            }
             $commonSetting = $this->commonSetting;
             //print_r($AndroidMobileArray);
             return view('backend.adsmember.edit_ads',compact('countTypeArray','adsTypeArray','WebTypeArray','daysetArray','MobileBrandArray','BrowserArray',
@@ -616,6 +622,17 @@ class AdsController extends CommonController
             }
             return json_encode($reData);
         }
+    }
+
+    public function test(){
+        $post_data = array(
+            "username" => "coder",
+            "password" => "12345"
+        );
+        $post_data['field'] = ['a','b'];
+        print_r($post_data);exit;
+        $res = $this->curl($post_data);
+        print_r($res);
     }
 
 }

@@ -13,17 +13,34 @@ class CommonController extends Controller
     private $domain;
     protected $backendPageNum;
     protected $commonSetting;
+    private $apiUrl;
+    protected $pwd;
 
     public function __construct()
     {
         date_default_timezone_set('Asia/Shanghai');
         $this->domain = 'http://daili.com';
+        $this->apiUrl = 'http://www.ck.com/getcurl.php';
+        $this->pwd = 'abc';
         $this->backendPageNum = '10';
         $commonSetting = CommonSetting::where('status',1)->orderBy('common_set_id','asc')->get()->toArray();
         foreach($commonSetting as $set)
         {
             $this->commonSetting[$set['name']] = $set['value'];
         }
+    }
+
+    public function curl($dataArray){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $this->apiUrl);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POST, 1);
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $dataArray);
+        $data = curl_exec($curl);
+        curl_close($curl);
+        return $data;
     }
 
     //删除指定session数据
