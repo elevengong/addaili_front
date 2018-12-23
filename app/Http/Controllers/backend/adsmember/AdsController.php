@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\adsmember;
 
 use App\Model\Ads;
+use App\Model\AdsRun;
 use App\Model\CommonSetting;
 use App\Model\Material;
 use App\Model\Member;
@@ -299,6 +300,7 @@ class AdsController extends CommonController
             //print_r($insertData);exit;
             $res = Ads::create($insertData);
             if($res->ads_id){
+                AdsRun::create(['id'=>$res->ads_id]);
                 $reData['status'] = 1;
                 $reData['msg'] = '广告添加成功!';
             }else{
