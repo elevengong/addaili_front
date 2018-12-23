@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\webmember;
 
 use App\Model\Ads;
+use App\Model\CommonSetting;
 use App\Model\Material;
 use App\Model\Setting;
 use App\Model\SettingGroup;
@@ -109,8 +110,20 @@ class AdsController extends CommonController
             }
         }
 
+        //获取随机域名
+        $domainArray = CommonSetting::where('name','ads_domain_url')->where('status',1)->get()->toArray();
+        $domain = '';
+        $countDomain = count($domainArray);
+        if($countDomain == 1)
+        {
+            $domain = $domainArray[0]['value'];
+        }else{
+            $rand = rand(0,$countDomain-1);
+            $domain = $domainArray[$rand]['value'];
+        }
+//        echo $domain;exit;
         $adsInfo = WebmasterApplyAds::where('webmaster_id',session('webmaster_id'))->where('webmaster_ads_id',$webmaster_ads_id)->get()->toArray();
-        return view('backend.webmember.getadscode',compact('commonSetting','adsInfo','adsTypeArray','countTypeArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        return view('backend.webmember.getadscode',compact('commonSetting','adsInfo','adsTypeArray','countTypeArray','domain'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 }
