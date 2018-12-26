@@ -76,7 +76,6 @@ class AdsController extends CommonController
             $input['name'] = request()->input('name');
             $input['ads_type'] = request()->input('ads_type');
             $input['ads_count_type'] = request()->input('ads_count_type');
-            $input['status'] = 1;
             $res = WebmasterApplyAds::create($input);
             if ($res->webmaster_ads_id) {
                 $data['status'] = 1;
