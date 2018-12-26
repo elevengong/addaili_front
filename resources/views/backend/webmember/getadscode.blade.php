@@ -35,9 +35,9 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="pills-home-1" role="tabpanel" aria-labelledby="pills-home-tab">
 
-                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_https"><script>;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();</script>
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_https"><script>;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}/?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();</script>
 </textarea>
-                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_http" style="display: none;"><script>;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();</script>
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_html_http" style="display: none;"><script>;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}/?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();</script>
 </textarea>
 
                     加密代码:
@@ -73,9 +73,9 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
-                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_https">;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_https">;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}/?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();
 </textarea>
-                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_http" style="display: none;">;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();
+                    <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_http" style="display: none;">;(function(){var m = document.createElement("script");var url = "{{$domain}}/fei";m.src = url + "/{{$adsInfo[0]['webmaster_ads_id']}}/?" + Math.round(Math.random() * 10000);var ss = document.getElementsByTagName("script")[0];ss.parentNode.insertBefore(m, ss);})();
 </textarea>
                     加密代码:
                     <textarea rows="7" cols="120" class="txtarea" id="jcontent_js_iframe_https">a</textarea>
