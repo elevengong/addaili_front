@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend\webmember;
 
+use App\Model\AccountChange;
 use App\Model\Setting;
 use App\Model\Websites;
 use App\Model\WithdrawInfo;
@@ -81,7 +82,20 @@ class MoneyController extends CommonController
                     $res2 = Member::where('member_id', session('webmaster_id'))->increment('frozen',$amount);
                     $res3 = MemberBalance::where('id', session('webmaster_id'))->decrement('balance',$amount);
 
-                    if($res1->withdraw_id and $res2 and $res3)
+                    //帐变
+                    $accountChange = array();
+                    $accountChange['memberId'] = session('webmaster_id');
+                    $accountChange['acType'] ='161';
+                    $accountChange['moreorless'] = 0;
+                    $accountChange['balanceBeforeChange'] = $webmasterBalance[0]['balance'];
+                    $accountChange['balance'] = $webmasterBalance[0]['balance']-$amount;
+                    $accountChange['remark'] = '站长提款';
+                    $accountChange['details'] = '';
+                    $accountChange['time'] = date('Y-m-d H:i:s',time());
+                    $accountChange['relateId'] = $res1->withdraw_id;
+                    $result = AccountChange::create($accountChange);
+
+                    if($res1->withdraw_id and $res2 and $res3 and !empty($result->id))
                     {
                         DB::commit();
                         $data['status'] = 1;

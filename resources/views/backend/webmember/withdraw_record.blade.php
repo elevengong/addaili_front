@@ -35,8 +35,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            @foreach($orderArray as $order)
+                        @foreach($orderArray as $order)
+                         <tr>
                             <td scope="row">{{$order['created_at']}}</td>
                             <td scope="row">{{$order['bank_number']}}</td>
                             <td scope="row">{{$order['account_name']}}</td>
@@ -44,9 +44,8 @@
                             <td scope="row">{{$order['updated_at']}}</td>
                             <td scope="row">{{$order['remark']}}</td>
                             <td scope="row">@if($order['status']==0)审核中@elseif($order['status']==1)已审核@elseif($order['status']==2)审核不通过@endif</td>
-                            @endforeach
-
-                        </tr>
+                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <div class="loading" style="display: none;"><i class="iconfont icon-loading"></i><span>加载数据...</span></div></div>

@@ -117,11 +117,26 @@ class AccountController extends CommonController
     public function depositlist(Request $request){
         $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
+            $depositArray = Deposit::orderBy('created_at','desc')
+                ->where(function($query) use($request){
+                    $query->where('member_id',session('ads_id'));
 
+                    $stime = $request->input('stime');
+                    if(!empty($stime))
+                    {
+                        $query->where('created_at','>',$stime);
+                    }
+                    $etime = $request->input('etime');
+                    if(!empty($etime))
+                    {
+                        $query->where('created_at','<',$etime);
+                    }
+                })
+                ->paginate($this->backendPageNum);
         }else{
             $depositArray = Deposit::where('member_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
-            return view('backend.adsmember.list_deposit',compact('commonSetting','depositArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
+        return view('backend.adsmember.list_deposit',compact('commonSetting','depositArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
 
