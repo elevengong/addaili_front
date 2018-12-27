@@ -30,6 +30,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th scope="col">订单编号</th>
                         <th scope="col">记账日期</th>
                         <th scope="col">帐务类型</th>
                         <th scope="col">财务金额</th>
@@ -40,12 +41,18 @@
                     </thead>
 
                     <tbody>
+                    @foreach($depositArray as $deposit)
                     <tr>
-                        <td colspan="6">没有数据信息</td>
+                        <td>{{$deposit['order_no']}}</td>
+                        <td>{{date('Y-m-d',strtotime($deposit['deposit_time']))}}</td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
+
+                {{$depositArray->links()}}
             </div>
+
 
             <p class="slide-tip">可左右滑动浏览</p>
         </div>

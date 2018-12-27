@@ -19,7 +19,7 @@ class CommonController extends Controller
     public function __construct()
     {
         date_default_timezone_set('Asia/Shanghai');
-        $this->domain = 'http://feiyueun.com';
+        $this->domain = 'http://www.feiyueun.com';
         $this->apiUrl = 'http://www.ck.com/getcurl.php';
         $this->pwd = 'abc';
         $this->backendPageNum = '10';

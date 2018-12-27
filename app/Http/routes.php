@@ -32,7 +32,8 @@ Route::group(['middleware' => ['web','adsmember.login']],function () {
     Route::post('/adsmember/account/updateqq','backend\adsmember\AccountController@updateqq');
     Route::post('/adsmember/account/updatepwd','backend\adsmember\AccountController@updatepwd');
 
-    Route::any('/adsmember/account/deposit','backend\adsmember\AccountController@deposit');
+    Route::get('/adsmember/account/deposit','backend\adsmember\AccountController@deposit');
+    Route::post('/adsmember/account/depositprocess','backend\adsmember\AccountController@depositprocess');
     Route::any('/adsmember/account/deposit/lists','backend\adsmember\AccountController@depositlist');
 
     Route::any('/adsmember/message/lists','backend\adsmember\MessageController@messagelist');

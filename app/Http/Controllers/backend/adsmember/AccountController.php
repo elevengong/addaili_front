@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\backend\adsmember;
 
+use App\Model\Deposit;
+use App\Model\DepositInfo;
 use App\Model\Member;
 use Illuminate\Http\Request;
 use Crypt;
@@ -65,19 +67,60 @@ class AccountController extends CommonController
         }
     }
 
-    public function deposit(Request $request){
-        if($request->isMethod('post')){
+    public function deposit(){
+        $commonSetting = $this->commonSetting;
+        $depositInfo = DepositInfo::where('status',1)->orderBy('created_at','desc')->get()->toArray();
+        return view('backend.adsmember.deposit',compact('commonSetting','depositInfo'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+    }
 
-        }else{
-            return view('backend.adsmember.deposit')->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+    public function depositprocess(Request $request){
+        if($request->isMethod('post')){
+            $deposit_info_id = request()->input('deposit_info_id');
+            $money = request()->input('money');
+            $member_deposit_time = request()->input('rtime');
+            $payer_account_name = request()->input('remit_user');
+
+            $deposit_info = DepositInfo::find($deposit_info_id)->toArray();
+            if(empty($deposit_info))
+            {
+                $data['status'] = 0;
+                $data['msg'] = "Error!";
+                echo json_encode($data);
+            }
+
+            $input = array();
+            $input['member_id'] = session('ads_id');
+            $input['order_no'] = time().rand(10,99);
+            $input['money'] = $money;
+            $input['type'] = $deposit_info['type'];
+            $input['bank'] = $deposit_info['bank_name'];
+            $input['account_number'] = $deposit_info['account_number'];
+            $input['account_name'] = $deposit_info['username'];
+            $input['payer_account_name'] = $payer_account_name;
+            $input['deposit_time'] = $member_deposit_time;
+            $input['pay_ip'] = $request->getClientIp();
+            $input['status'] = 0;
+
+            $res = Deposit::create($input);
+            if ($res->deposit_id) {
+                $data['status'] = 1;
+                $data['msg'] = "存款订单生成成功";
+            } else {
+                $data['status'] = 0;
+                $data['msg'] = "存款订单生成失败";
+            }
+            echo json_encode($data);
+
         }
     }
 
     public function depositlist(Request $request){
+        $commonSetting = $this->commonSetting;
         if($request->isMethod('post')){
 
         }else{
-            return view('backend.adsmember.list_deposit')->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+            $depositArray = Deposit::where('member_id',session('ads_id'))->orderBy('created_at','desc')->paginate($this->backendPageNum);
+            return view('backend.adsmember.list_deposit',compact('commonSetting','depositArray'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
         }
     }
 
