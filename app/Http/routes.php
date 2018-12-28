@@ -93,6 +93,8 @@ Route::get('/about.html','frontend\IndexController@about');
 Route::get('/protocol.html','frontend\IndexController@protocol');
 Route::get('/contact.html','frontend\IndexController@contact');
 
+Route::get('/fei/2','frontend\TestController@test');
+
 
 Route::group(['middleware' => ['web']],function () {
     Route::any('/login.html','frontend\IndexController@login');
