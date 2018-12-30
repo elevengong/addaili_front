@@ -47,7 +47,7 @@
             <li class="li">
                 <a href="/webmember/member/setting"><i class="iconfont icon-shezhi"></i>基本设置</a>
             </li>
-            <li class="li">
+            <li class="li" style="display: none;">
                 <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
             </li>
             <li class="li" style="display: none;">
@@ -118,7 +118,7 @@
                 <a href="/webmember/member/setting"><i class="iconfont icon-shezhi"></i>基本设置</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
             </li>
-            <li>
+            <li style="display: none;">
                 <a href="/webmember/website/index"><i class="iconfont icon-diannaodianqi"></i>网站管理</a>
                 <span class="iconfont icon-sanjiaoxing"></span>
             </li>
