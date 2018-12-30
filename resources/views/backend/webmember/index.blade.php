@@ -82,11 +82,11 @@
                     <li>
                         <h5>0.00<span>元</span></h5>
 
-                        <p>今日收入</p>
+                        <p>今天目前预估收入<br>（当天收入以晚上12点结算为确）</p>
                     </li>
 
                     <li>
-                        <h5>0.00<span>元</span></h5>
+                        <h5>{{$thisMonthSumEarn}}<span>元</span></h5>
 
                         <p>本月收入</p>
                     </li>
@@ -94,7 +94,7 @@
                     <li>
                         <h5>0<span>元</span></h5>
 
-                        <p>上月奖励金额</p>
+                        <p>昨天推广提成</p>
                     </li>
                 </ul>
             </div>
