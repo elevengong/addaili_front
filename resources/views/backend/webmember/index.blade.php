@@ -82,7 +82,7 @@
                     <li>
                         <h5>0.00<span>元</span></h5>
 
-                        <p>今天目前预估收入<br>（当天收入以晚上12点结算为确）</p>
+                        <p>今天目前收入</p>
                     </li>
 
                     <li>
@@ -104,24 +104,24 @@
         <div class="curve">
             <div class="top">
                 <h5 class="head-title">收入曲线</h5>
-                <form id="form_index">
+                <form method="post" action="/webmember/service/index" name="form_search" id="form_index">
+                    {{csrf_field()}}
                     <div class="input">
-                        <input class="search-input mobile_space_id" type="text" name="mobile_space_id" placeholder="广告位ID">
+                        <input class="search-input mobile_space_id" type="text" name="ads_space_id" placeholder="广告位ID" value="{{$ads_space_id}}">
 
-                        <select class="select mobile_advert_type_id" name="mobile_advert_type_id">
-                            <option value="">选择广告类型</option>
-                            <option value="1">横幅</option>
-                            <option value="11">网摘</option>
-                            <option value="19">小图标</option>
+                        <select class="select mobile_advert_type_id" name="ads_type">
+                            <option value="0">选择广告类型</option>
+                            @foreach($adsTypeArray as $type)
+                            <option value="{{$type['set_id']}}" @if($ads_type == $type['set_id'])selected="selected"@endif>{{$type['remark']}}</option>
+                            @endforeach
                         </select>
-                        <input type="hidden" value="2018-12-04" name="stime" id="stime">
-                        <input type="hidden" value="2018-12-10" name="etime" id="etime">
-                        <select class="select" id="cycle_time">
-                            <option value="2018-12-10 - 2018-12-10">今天</option>
-                            <option value="2018-12-09 - 2018-12-09">昨天</option>
-                            <option value="2018-12-04 - 2018-12-10" selected="selected">最近7天</option>
-                            <option value="2018-11-26 - 2018-12-10">最近15天</option>
+                        <select class="select" id="cycle_time" name="cycle_time">
+                            {{--<option value="2018-12-10 - 2018-12-10">今天</option>--}}
+                            {{--<option value="2018-12-09 - 2018-12-09">昨天</option>--}}
+                            <option value="7" @if($cycle_time==7)selected="selected"@endif>最近7天</option>
+                            <option value="15" @if($cycle_time==15)selected="selected"@endif>最近15天</option>
                         </select>
+                        <input type="submit" value="查询" class="check check-h">
                     </div>
                 </form></div>
 
@@ -130,7 +130,9 @@
                 <script type="text/javascript">
                     //基于准备好的dom，初始化echarts实例
                     var myChart = echarts.init(document.getElementById('div_render'));
-                    var chart_data = [{"date":"12-04","value":0},{"date":"12-05","value":0},{"date":"12-06","value":0},{"date":"12-07","value":0},{"date":"12-08","value":0},{"date":"12-09","value":0},{"date":"12-10","value":0}];
+                    //var chart_data = [{"date":"12-04","value":0},{"date":"12-05","value":0},{"date":"12-06","value":0},{"date":"12-07","value":0},{"date":"12-08","value":0},{"date":"12-09","value":0},{"date":"12-10","value":0}];
+                    //alert(json_data);
+                    var chart_data = {!! $recentDateJson !!};
                     var xAxis_data = [];
                     var series_data = [];
                     $.each(chart_data,function(index,row){
