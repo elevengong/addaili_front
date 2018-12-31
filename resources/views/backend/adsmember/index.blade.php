@@ -31,12 +31,12 @@
                     <p>今日消耗</p>
                 </li>
                 <li>
-                    <h5>0.00<span>元</span></h5>
+                    <h5>{{$yesterdaySpent}}<span>元</span></h5>
                     <p>昨日消耗</p>
 
                 </li>
                 <li>
-                    <h5>0.00<span>元</span></h5>
+                    <h5>{{$thisMonthTotalSpent}}<span>元</span></h5>
                     <p>本月消耗</p>
                 </li>
                 <li>
@@ -48,35 +48,99 @@
         <!--income-->
     </div>
     <!--row-con-->
-    <form id="form_index">
+    <form method="post" action="/adsmember/service/index" name="form_search" id="form_index">
+        {{csrf_field()}}
         <div class="curve">
             <div class="top">
                 <h5 class="head-title">消耗曲线</h5>
 
                 <div class="input">
-                    <input type="hidden" value="2018-11-26" name="stime" id="stime" />
-                    <input type="hidden" value="2018-12-02" name="etime" id="etime" />
-                    <input type="hidden" name="response" value=""  />
-                    <select name="mobile_advert_type_id" class="select" id="mobile_advert_type_id">
-                        <option value="">广告类型</option>
-                        <option value="1">横幅</option>
-                        <option value="11">网摘</option>
-                        <option value="13">横幅（微信）</option>
-                        <option value="15">网摘（微信）</option>
+                    <select class="select" id="ads_count_type" name="ads_count_type">
+                        <option value="0">广告计费类型</option>
+                        @foreach($adsCountTypeArray as $type)
+                        <option value="{{$type['set_id']}}" @if($ads_count_type == $type['set_id'])selected="selected"@endif>{{$type['remark']}}</option>
+                        @endforeach
                     </select>
 
-                    <select class="select" id="cycle_time">
-                        <option value="2018-12-02 - 2018-12-02"  >今天</option>
-                        <option value="2018-12-01 - 2018-12-01"  >昨天</option>
-                        <option value="2018-11-26 - 2018-12-02"  selected="selected">最近7天</option>
-                        <option value="2018-11-18 - 2018-12-02"  >最近15天</option>
+                    <select class="select" id="cycle_time" name="cycle_time">
+                        <option value="7" @if($cycle_time==7)selected="selected"@endif>最近7天</option>
+                        <option value="15" @if($cycle_time==15)selected="selected"@endif>最近15天</option>
                     </select>
+                    <input type="submit" value="查询" class="check check-h">
                 </div>
             </div>
 
             {{--<div class="curve-area" id="container">--}}
             {{--</div>--}}
-            <div class="curve-area" id="jlist_amount" style="height:350px;"></div>
+            <div class="curve-area" id="jlist_amount" style="height:350px;">
+                <script src="<?php echo asset( "/resources/views/backend/js/echarts.min.js") ?>" type="text/javascript"></script>
+                <script type="text/javascript">
+                    //基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('jlist_amount'));
+                    //var chart_data = [{"date":"12-04","value":0},{"date":"12-05","value":0},{"date":"12-06","value":0},{"date":"12-07","value":0},{"date":"12-08","value":0},{"date":"12-09","value":0},{"date":"12-10","value":0}];
+                    //alert(json_data);
+                    var chart_data = {!! $recentDateJson !!};
+                    var xAxis_data = [];
+                    var series_data = [];
+                    $.each(chart_data,function(index,row){
+                        xAxis_data.push(row.date);
+                        series_data.push(row.value);
+                    });
+                    // 指定图表的配置项和数据
+                    var option = {
+                        title: {
+                            text: ''
+                        },
+                        tooltip: {
+                            show : true,
+                            trigger: 'axis'
+                        },
+                        xAxis: {
+                            type : 'category',
+                            boundaryGap : false,
+                            data: xAxis_data
+                        },
+                        yAxis: {},
+                        series: [{
+                            name: '广告收入',
+                            type: 'line',
+                            smooth:true,
+                            sampling: 'average',
+                            itemStyle: {
+                                normal: {
+                                    color: '#43939F'
+                                }
+                            },
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'right',
+                                    offset : [0,-20]
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#D9EEF0'
+                                    }, {
+                                        offset: 1,
+                                        color: '#43939F'
+                                    }])
+                                }
+                            },
+                            data: series_data
+                        }]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+
+                    window.onresize = function(){
+                        myChart.resize();
+                    };
+                </script>
+
+            </div>
 
             <p class="slide-tip">可左右滑动浏览</p>
         </div>
@@ -116,59 +180,5 @@
         </ul>
     </div>
 
-    <script src="<?php echo asset( "/resources/views/backend/js/echarts.min.js") ?>" type="text/javascript"></script>
-    <script>
-        var dom = document.getElementById("jlist_amount");
-        var myChart = echarts.init(dom);
-        var app = {};
-        option = null;
-        option = {
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['广告消耗']
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            toolbox: {
-                feature: {
-                    saveAsImage: {}
-                }
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: ['12-03','12-04','12-05','12-06','12-07','12-08','12-09']
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [
-                {
-                    name:'广告消耗',
-                    type:'line',
-                    stack: '总量',
-                    itemStyle : {
-                        normal : {
-                            color:'#92b8ff',
-                            lineStyle:{
-                                color:'#92b8ff'
-                            }
-                        }
-                    },
-                    data:[0, 0, 0, 0, 0, 0, 0]
-                }
-            ]
-        };
-        ;
-        if (option && typeof option === "object") {
-            myChart.setOption(option, true);
-        }
 
-    </script>
     @endsection

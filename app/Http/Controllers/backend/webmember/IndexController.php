@@ -36,6 +36,21 @@ class IndexController extends CommonController
         $ads_space_id = request()->input('ads_space_id');
         $ads_space_id = isset($ads_space_id)?$ads_space_id:'';
 
+        $adsSpaceArray = WebmasterApplyAds::select('webmaster_ads_id')->where('webmaster_id',session('webmaster_id'))->get()->toArray();
+
+        $adsSpaceIdArray = array();
+        foreach ($adsSpaceArray as $ads)
+        {
+            $adsSpaceIdArray[] = $ads['webmaster_ads_id'];
+        }
+        $sumSpaceArray = SumSpace::where('date','>=',$thisMonthFirstDay)->whereIn('space_id',$adsSpaceIdArray)->orderBy('date','desc')->get()->toArray();
+        $thisMonthSumEarn = 0;
+        foreach($sumSpaceArray as $sum)
+        {
+            $thisMonthSumEarn = $thisMonthSumEarn + $sum['earn'];
+        }
+        //echo $thisMonthSumEarn;exit;
+        //最近7天收入 strtotime('-7 days')  获得的是时间戳
         $adsSpaceArray = WebmasterApplyAds::select('webmaster_ads_id')
             ->where(function($query) use($request){
                 $query->where('webmaster_id',session('webmaster_id'));
@@ -54,23 +69,14 @@ class IndexController extends CommonController
                 }
             })
             ->get()->toArray();
-
         $adsSpaceIdArray = array();
         foreach ($adsSpaceArray as $ads)
         {
             $adsSpaceIdArray[] = $ads['webmaster_ads_id'];
         }
-        $sumSpaceArray = SumSpace::where('date','>=',$thisMonthFirstDay)->whereIn('space_id',$adsSpaceIdArray)->orderBy('date','desc')->get()->toArray();
-        $thisMonthSumEarn = 0;
-        foreach($sumSpaceArray as $sum)
-        {
-            $thisMonthSumEarn = $thisMonthSumEarn + $sum['earn'];
-        }
-        //echo $thisMonthSumEarn;exit;
-        //最近7天收入 strtotime('-7 days')  获得的是时间戳
         $startDate =  date('Y-m-d',strtotime('-'.$cycle_time.' days'));
         $endDate = date('Y-m-d',strtotime('-1 days'));
-        $recentSumSpaceArray = SumSpace::where('date','>=',$thisMonthFirstDay)->where('date','>=',$startDate)->where('date','<=',$endDate)->whereIn('space_id',$adsSpaceIdArray)->orderBy('date','desc')->get()->toArray();
+        $recentSumSpaceArray = SumSpace::where('date','>=',$startDate)->where('date','<=',$endDate)->whereIn('space_id',$adsSpaceIdArray)->orderBy('date','desc')->get()->toArray();
         //print_r($recentSumSpaceArray);exit;
         $recentDate = array();
         for($i=$cycle_time;$i>=1;$i--)
