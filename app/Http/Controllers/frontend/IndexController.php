@@ -142,6 +142,9 @@ class IndexController extends FrontendController
                     $data['msg'] = '该邮箱已被注册';
                     return json_encode($data);
                 }
+                if($user_type==2){
+                    $input['vip'] = '173';
+                }
                 $input['pwd'] = Crypt::encrypt($pwd);
                 $input['type'] = $user_type;
                 $input['name'] = $email;
