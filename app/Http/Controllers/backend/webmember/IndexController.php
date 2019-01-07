@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend\webmember;
 
 use App\Http\Controllers\backend\CommonController;
+use Illuminate\Support\Facades\Redis;
+
 use App\Model\Ads;
 use App\Model\Member;
 use App\Model\MemberBalance;
