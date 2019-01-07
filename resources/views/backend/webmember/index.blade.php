@@ -80,7 +80,7 @@
                     </li>
 
                     <li>
-                        <h5>0.00<span>元</span></h5>
+                        <h5>{{isset($webmasterTodayEarn)?$webmasterTodayEarn:0}}<span>元</span></h5>
 
                         <p>今天目前收入</p>
                     </li>

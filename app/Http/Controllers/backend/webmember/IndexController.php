@@ -19,6 +19,9 @@ class IndexController extends CommonController
         $commonSetting = $this->commonSetting;
         $adsTypeArray = Setting::where('settinggroup','adsType')->where('status',1)->get()->toArray();
 
+        $webmasterTodayEarn = Redis::get('field-webmaster_adspace_earn-total_earn-8');
+
+
         $cycle_time = request()->input('cycle_time');
         $cycle_time = isset($cycle_time)?$cycle_time:7;
 
@@ -98,7 +101,7 @@ class IndexController extends CommonController
         }
         $recentDateJson = json_encode($recentDateData);
 
-        return view('backend.webmember.index',compact('memberBalance','webmaster','lastestMessage','commonSetting','thisMonthSumEarn','recentDateJson','cycle_time','adsTypeArray','ads_type','ads_space_id'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+        return view('backend.webmember.index',compact('memberBalance','webmaster','lastestMessage','commonSetting','thisMonthSumEarn','recentDateJson','cycle_time','adsTypeArray','ads_type','ads_space_id','webmasterTodayEarn'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
     }
 
 
