@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\adsmember;
 
 use App\Http\Controllers\backend\CommonController;
+use Illuminate\Support\Facades\Redis;
 use App\Model\Ads;
 use App\Model\Member;
 use App\Model\MemberBalance;
@@ -23,15 +24,17 @@ class IndexController extends CommonController
 
         $yesterdayDate = date("Y-m-d",strtotime("-1 day"));
         $adsArray = Ads::select('ads_id')->where('member_id',session('ads_id'))->get()->toArray();
-
+        //print_r($adsArray);exit;
+        $adsmemberTodaySpent = 0;
         $adsIdArray = array();
         foreach ($adsArray as $ads)
         {
             $adsIdArray[] = $ads['ads_id'];
+            $adsmemberTodaySpent = $adsmemberTodaySpent + Redis::get('field-ads_run-total_spant-'.$ads['ads_id']);
         }
         //计算昨天花费
         $yesterdaySpent = SumAds::where('date',$yesterdayDate)->whereIn('ads_id',$adsIdArray)->sum('spant');
-        //print_r($yesterdaySpent);
+        //print_r($yesterdaySpent);exit;
 
         //计算本月总花费
         $thisMonthFirstDay = date('Y-m',time())."-01";
@@ -90,7 +93,7 @@ class IndexController extends CommonController
         $thisMonthFirstDay = date('Y-m',time())."-01";
         //$thisMonthSumSpent = SumAds::
 
-        return view('backend.adsmember.index',compact('memberBalance','member','countAds','commonSetting','yesterdaySpent','thisMonthTotalSpent','recentDateJson','adsCountTypeArray','ads_count_type','cycle_time'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
+        return view('backend.adsmember.index',compact('memberBalance','member','countAds','commonSetting','yesterdaySpent','thisMonthTotalSpent','recentDateJson','adsCountTypeArray','ads_count_type','cycle_time','adsmemberTodaySpent'))->with('ads_id',session('ads_id'))->with('adsmember',session('adsmember'));
     }
 
 

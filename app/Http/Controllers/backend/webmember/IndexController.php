@@ -21,8 +21,6 @@ class IndexController extends CommonController
         $commonSetting = $this->commonSetting;
         $adsTypeArray = Setting::where('settinggroup','adsType')->where('status',1)->get()->toArray();
 
-        $webmasterTodayEarn = Redis::get('field-webmaster_adspace_earn-total_earn-8');
-
         $cycle_time = request()->input('cycle_time');
         $cycle_time = isset($cycle_time)?$cycle_time:7;
 
@@ -40,7 +38,17 @@ class IndexController extends CommonController
         $ads_space_id = request()->input('ads_space_id');
         $ads_space_id = isset($ads_space_id)?$ads_space_id:'';
 
+        $webmasterTodayEarn = 0;
         $adsSpaceArray = WebmasterApplyAds::select('webmaster_ads_id')->where('webmaster_id',session('webmaster_id'))->get()->toArray();
+        if(!empty($adsSpaceArray))
+        {
+            foreach ($adsSpaceArray as $ad)
+            {
+                $webmasterTodayEarn = $webmasterTodayEarn + Redis::get('field-webmaster_adspace_earn-total_earn-'.$ad['webmaster_ads_id']);
+            }
+        }
+        //print_r($adsSpaceArray);exit;
+        //$webmasterTodayEarn = Redis::get('field-webmaster_adspace_earn-total_earn-8');
 
         $adsSpaceIdArray = array();
         foreach ($adsSpaceArray as $ads)

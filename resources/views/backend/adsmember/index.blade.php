@@ -27,7 +27,7 @@
             <h5 class="head-title">消耗状况</h5>
             <ul>
                 <li>
-                    <h5>0.00<span>元</span></h5>
+                    <h5>{{$adsmemberTodaySpent}}<span>元</span></h5>
                     <p>今日消耗</p>
                 </li>
                 <li>
