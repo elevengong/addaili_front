@@ -4,7 +4,7 @@ namespace App\Http\Controllers\backend\webmember;
 
 use App\Http\Controllers\backend\CommonController;
 //use Illuminate\Support\Facades\Redis;
-use Redis;
+use Illuminate\Support\Facades\Redis;
 use App\Model\Ads;
 use App\Model\Member;
 use App\Model\MemberBalance;
@@ -22,7 +22,6 @@ class IndexController extends CommonController
         $adsTypeArray = Setting::where('settinggroup','adsType')->where('status',1)->get()->toArray();
 
         $webmasterTodayEarn = Redis::get('field-webmaster_adspace_earn-total_earn-8');
-
 
         $cycle_time = request()->input('cycle_time');
         $cycle_time = isset($cycle_time)?$cycle_time:7;
