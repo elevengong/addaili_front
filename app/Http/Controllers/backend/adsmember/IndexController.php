@@ -34,6 +34,10 @@ class IndexController extends CommonController
         }
         //计算昨天花费
         $yesterdaySpent = SumAds::where('date',$yesterdayDate)->whereIn('ads_id',$adsIdArray)->sum('spant');
+        if(empty($yesterdaySpent))
+        {
+            $yesterdaySpent = 0;
+        }
         //print_r($yesterdaySpent);exit;
 
         //计算本月总花费
