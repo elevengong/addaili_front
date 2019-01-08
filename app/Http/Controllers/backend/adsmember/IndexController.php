@@ -30,7 +30,7 @@ class IndexController extends CommonController
         foreach ($adsArray as $ads)
         {
             $adsIdArray[] = $ads['ads_id'];
-            $adsmemberTodaySpent = $adsmemberTodaySpent + Redis::get('field-ads_run-total_spant-'.$ads['ads_id']);
+            $adsmemberTodaySpent = $adsmemberTodaySpent + Redis::get('real-ads_run-total_spant-'.$ads['ads_id']);
         }
         //计算昨天花费
         $yesterdaySpent = SumAds::where('date',$yesterdayDate)->whereIn('ads_id',$adsIdArray)->sum('spant');

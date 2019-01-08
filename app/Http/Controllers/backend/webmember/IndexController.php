@@ -44,7 +44,7 @@ class IndexController extends CommonController
         {
             foreach ($adsSpaceArray as $ad)
             {
-                $webmasterTodayEarn = $webmasterTodayEarn + Redis::get('field-webmaster_adspace_earn-total_earn-'.$ad['webmaster_ads_id']);
+                $webmasterTodayEarn = $webmasterTodayEarn + Redis::get('real-webmaster_adspace_earn-total_earn-'.$ad['webmaster_ads_id']);
             }
         }
         //print_r($adsSpaceArray);exit;
