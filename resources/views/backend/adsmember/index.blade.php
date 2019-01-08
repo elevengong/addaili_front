@@ -16,7 +16,7 @@
 
                     <p>上次登录时间：{{$member['lastlogined_at']}}</p>
 
-                    <p>账户总额：<span>{{isset($memberBalance[0]['balance'])?$memberBalance[0]['balance']:'Error!'}}</span></p>
+                    <p>账户总额：<span>{{isset($memberBalance[0]['balance'])?$memberBalance[0]['balance']-$adsmemberTodaySpent:'Error!'}}</span></p>
 
                 </div>
             </div>
