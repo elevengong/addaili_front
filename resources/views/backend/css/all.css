@@ -525,7 +525,7 @@ slide-tip
     */
 .list-amount-web{width: 100%;background: #fff;border:solid 1px #dae0e9;border-radius: 5px;padding: 25px 20px;}
 .list-amount-web select{height: 36px;margin-right: 6px;}
-.list-amount-web th{width: 50%;}
+/*.list-amount-web th{width: 50%;}*/
 .list-amount-web .date{display: inline-block;}
 .list-amount-web .date li{display: inline-block;font-size: 14px;margin-right: 5px;color: #999;position: relative;}
 .list-amount-web .date input{color: #333;}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend\webmember;
 
 use App\Model\AccountChange;
 use App\Model\Setting;
+use App\Model\SumSpace;
 use App\Model\Websites;
 use App\Model\WithdrawInfo;
 use App\Model\WithdrawOrder;
@@ -33,13 +34,59 @@ class MoneyController extends CommonController
                 $countTypeArray[] = $setting;
             }
         }
-        $domainArray = Websites::where('member_id',session('webmaster_id'))->where('status',1)->get()->toArray();
 
-        if($request->isMethod('post')){
+        $stime = !empty(request()->input('stime')) ? request()->input('stime'):date('Y-m-d',time());
+        $etime = !empty(request()->input('etime')) ? request()->input('etime'):date('Y-m-d',time());
+        $adstype = request()->input('adstype');
+        $counttype = request()->input('counttype');
+        $space_id = request()->input('space_id');
 
-        }else{
-            return view('backend.webmember.list_commission_report',compact('commonSetting','settingArray','adsTypeArray','countTypeArray','domainArray'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
-        }
+        $commissionArray = SumSpace::select('sum_space.date','sum_space.earn')->where('sum_space.webmaster_id',session('webmaster_id'))
+            ->leftJoin('webmaster_apply_ads',function ($join){
+                $join->on('webmaster_apply_ads.webmaster_ads_id','=','sum_space.space_id');
+            })
+            ->where(function($query) use($request){
+                $stime = !empty(request()->input('stime')) ? request()->input('stime'):date('Y-m-d',time());
+                $etime = !empty(request()->input('etime')) ? request()->input('etime'):date('Y-m-d',time());
+                $adstype = request()->input('adstype');
+                $counttype = request()->input('counttype');
+                $space_id = request()->input('space_id');
+                if(!empty($stime) and !empty($etime) and $stime == $etime)
+                {
+                    $query->where('sum_space.date',$stime);
+                }
+
+                if(!empty($stime) and $stime != $etime)
+                {
+                    $query->where('sum_space.date','>=',$stime);
+                }
+
+                if(!empty($etime) and $stime != $etime)
+                {
+                    $query->where('sum_space.date','<=',$etime);
+                }
+
+                if(!empty($adstype))
+                {
+                    $query->where('webmaster_apply_ads.ads_type',$adstype);
+                }
+
+                if(!empty($counttype))
+                {
+                    $query->where('webmaster_apply_ads.ads_count_type',$counttype);
+                }
+
+                if(!empty($space_id))
+                {
+                    $query->where('sum_space.space_id',$space_id);
+                }
+
+
+            })->orderBy('sum_space.date','ASC')
+            ->paginate($this->backendPageNum);
+
+            return view('backend.webmember.list_commission_report',compact('commonSetting','settingArray','adsTypeArray','countTypeArray','commissionArray','stime','etime','adstype','counttype','space_id'))->with('webmaster_id',session('webmaster_id'))->with('webmember',session('webmember'));
+
     }
 
     public function withdraw(Request $request){

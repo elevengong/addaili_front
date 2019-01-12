@@ -197,36 +197,6 @@
         </div>
         <!--curve-->
 
-        <div class="index-income-detail">
-            <h5 class="head-title">收入明细</h5>
-
-            <div class="mb-table" id="income_data"><div class="tab_box mb-table">
-                    <table class="table">
-                        <thead>
-                        <tr class="thead_bg">
-                            <th scope="col">日期</th>
-                            <!-- <th scope="col" class="pc-hide">收入小计</th> -->
-                            <th scope="col">横幅收入</th>
-                            <th scope="col">网摘收入</th>
-                            <th scope="col">小图标收入</th>
-                            <th scope="col">奖励收入</th>
-                            <th scope="col" class="mb-hide">收入小计</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td colspan="7">暂无数据</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p class="slide-tip">可左右滑动浏览</p>
-            </div>
-
-        </div>
-        <!--index-income-detail-->
-
-
         <div class="advertisers">
             <h5 class="head-title">优质广告主</h5>
 

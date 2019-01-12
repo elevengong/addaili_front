@@ -68,7 +68,6 @@ class IndexController extends CommonController
             }
         }
         //print_r($adsIdArray);
-
         $recentSumAdsArray = SumAds::where('date','>=',$startDate)->where('date','<=',$endDate)->whereIn('ads_id',$adsIdArray)->orderBy('date','desc')->get()->toArray();
 
         $recentDate = array();

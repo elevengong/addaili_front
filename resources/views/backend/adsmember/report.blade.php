@@ -7,39 +7,33 @@
 
         <div class="list-amount-web ads-stat">
             <div class="top search-area">
-                <form action="/service/business/stat/mobile/action/lists" method="get" id="form_list">
+                <form action="/adsmember/service/report" method="post" id="form_list">
+                    {{csrf_field()}}
                     <div class="input">
                         <ul class="date">
-                            <li><input name="stime" type="text" value="" placeholder="" id="stime" lay-key="1"><i class="iconfont icon-gongdantubiao-"></i></li>
+                            <li><input name="stime" type="text" value="{{$stime}}" placeholder="" id="stime" lay-key="1"><i class="iconfont icon-gongdantubiao-"></i></li>
                             <li>至</li>
-                            <li><input name="etime" type="text" value="" placeholder="" id="etime" lay-key="2"><i class="iconfont icon-gongdantubiao-"></i></li>
+                            <li><input name="etime" type="text" value="{{$etime}}" placeholder="" id="etime" lay-key="2"><i class="iconfont icon-gongdantubiao-"></i></li>
                         </ul>
 
-                        <input type="text" class="search-input" placeholder="广告位ID|名称" name="keyword" value="">
+                        <input type="text" class="search-input" placeholder="广告ID" name="keyword" value="">
 
                         <div class="date">
-                            <select id="mobile_advert_type_id" name="mobile_advert_type_id">
-                                <option value="" selected="selected">请选择广告类型</option>
-                                <option value="1">横幅</option>
-                                <option value="11">网摘</option>
-                                <option value="13">横幅（微信）</option>
-                                <option value="15">网摘（微信）</option>
+                            <select id="mobile_advert_type_id" name="adstype">
+                                <option value="0" selected="selected">请选择广告类型</option>
+                                @foreach($adsTypeArray as $adsType)
+                                    <option value="{{$adsType['set_id']}}" @if($adstype == $adsType['set_id'])selected="selected"@endif>{{$adsType['remark']}}</option>
+                                @endforeach
                             </select>
-                            <select id="mobile_charge_type_id" name="mobile_charge_type_id">
-                                <option value="" selected="selected">请选择计费类型</option>
-                                <option value="1">CPM</option>
-                                <option value="3">CPC</option>
-                            </select>																									<select id="show_type" name="show_type">
-                                <option value="">数据查看方式</option>
-                                <option value="single" selected="selected">单个广告</option>
-                                <option value="all">所有广告</option>
-                            </select>									                        </div>
-
-                        <input type="button" value="查询" class="check check-h" onclick="search_data();">
-                        <div class="bottom">
-                            <input type="button" value="查询" class="check" onclick="search_data();">
-                            <input type="button" value="关闭" class="check close-bt">
+                            <select id="mobile_charge_type_id" name="counttype">
+                                <option value="0" selected="selected">请选择计费类型</option>
+                                @foreach($countTypeArray as $countType)
+                                    <option value="{{$countType['set_id']}}" @if($counttype == $countType['set_id'])selected="selected"@endif>{{$countType['remark']}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
+                        <input type="submit" value="查询" class="check check-h">
                     </div>
                 </form>
             </div>
@@ -53,23 +47,32 @@
                         <th scope="col">广告名称</th>
                         <th scope="col">广告类型</th>
                         <th scope="col">计费类型</th>
-                        <th scope="col">单价</th>
-                        <th scope="col">交易量</th>
-                        <th scope="col">广告金额</th>
-                        <th scope="col">操作</th>
+                        <th scope="col">消耗广告金额</th>
+                        <th scope="col">日期</th>
                     </tr>
                     </thead>
 
                     <tbody>
+                    @foreach($commissionArray as $commission)
+                        <tr class="">
+                            <td>{{$commission['ads_id']}}</td>
+                            <td>{{$commission['ads_name']}}</td>
+                            <td>{{$settingArray[$commission['ads_type']]}}</td>
+                            <td>{{$settingArray[$commission['ads_count_type']]}}</td>
+                            <td>￥{{$commission['spant']}}</td>
+                            <td>{{$commission['date']}}</td>
+                        </tr>
+                    @endforeach
+
                     <tr class="">
-                        <td colspan="5" scope="row"><strong>合计：</strong></td>
-                        <td><strong>0</strong></td>
-                        <td><strong>￥0.00</strong></td>
-                        <td></td>
+                        <td colspan="4" scope="row"><strong>当前页面合计：</strong></td>
+                        <td><strong>￥{{$totalSpent}}</strong></td>
+                        <td>&nbsp;</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            {!! $commissionArray->appends(array('stime'=>$stime,'etime'=>$etime,'adstype'=>$adstype,'counttype'=>$counttype,'keyword'=>$keyword))->render() !!}
             <p class="slide-tip">可左右滑动浏览</p>
         </div>
 

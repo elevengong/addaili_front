@@ -7,37 +7,28 @@
     <div class="list-amount-web">
         <div class="top search-area">
             <div class="input">
-                <form id="ajax_search">
+                <form id="ajax_search" action="/webmember/money/report" name="form_search" id="form_list" method="post">
+                    {{csrf_field()}}
                     <ul class="date">
-                        <li><input type="text" placeholder="开始时间" id="stime" name="stime" value="" lay-key="1"><i class="iconfont icon-gongdantubiao-"></i></li>
+                        <li><input type="text" placeholder="开始时间" id="stime" name="stime" value="{{$stime}}" lay-key="1"><i class="iconfont icon-gongdantubiao-"></i></li>
                         <li>至</li>
-                        <li><input type="text" placeholder="结束时间" id="etime" name="etime" value="" lay-key="2"><i class="iconfont icon-gongdantubiao-"></i></li>
+                        <li><input type="text" placeholder="结束时间" id="etime" name="etime" value="{{$etime}}" lay-key="2"><i class="iconfont icon-gongdantubiao-"></i></li>
                     </ul>
 
                     <select id="mobile_advert_type_id" name="adstype">
-                        <option value="0" selected="selected">选择广告类型</option>
+                        <option value="0" @if($adstype == 0)selected="selected"@endif>选择广告类型</option>
                         @foreach($adsTypeArray as $adsType)
-                            <option value="{{$adsType['set_id']}}">{{$adsType['remark']}}</option>
+                            <option value="{{$adsType['set_id']}}" @if($adstype == $adsType['set_id'])selected="selected"@endif>{{$adsType['remark']}}</option>
                         @endforeach
                     </select>
                     <select id="mobile_charge_type_id" name="counttype">
-                        <option value="0" selected="selected">选择计费模式</option>
+                        <option value="0" @if($counttype == 0)selected="selected"@endif>选择计费模式</option>
                         @foreach($countTypeArray as $countType)
-                            <option value="{{$countType['set_id']}}">{{$countType['remark']}}</option>
+                            <option value="{{$countType['set_id']}}" @if($counttype == $countType['set_id'])selected="selected"@endif>{{$countType['remark']}}</option>
                         @endforeach
                     </select>
-                    <select id="mobile_domain_id" name="domain">
-                        <option value="0" selected="selected">选择域名</option>
-                        @foreach($domainArray as $domain)
-                            <option value="{{$domain['web_id']}}">{{$domain['domain']}}</option>
-                        @endforeach
-                    </select>
-                    <input type="text" class="search-input" placeholder="广告位ID" name="adsid" value="" id="mobile_space_id">
+                    <input type="text" class="search-input" placeholder="广告位ID" name="space_id" value="{{$space_id}}" id="space_id">
                     <input type="submit" value="查询" class="check check-h">
-                    <div class="bottom">
-                        <input class="sm_btn check" type="submit" value="查 询">
-                        <input type="button" value="关闭" class="check close-bt">
-                    </div>
                 </form>
             </div>
         </div>
@@ -52,12 +43,21 @@
                 </tr>
                 </thead>
                 <tbody>
+                @if(!empty($commissionArray))
+                    @foreach($commissionArray as $commission)
+                    <tr scope="row">
+                        <td colspan="1">{{$commission['date']}}</td>
+                        <td colspan="1">{{$commission['earn']}}</td>
+                    </tr>
+                    @endforeach
+                @else
                 <tr scope="row">
                     <td colspan="2">暂无数据！</td>
                 </tr>
+                 @endif
                 </tbody>
             </table>
-
+            {!! $commissionArray->appends(array('stime'=>$stime,'etime'=>$etime,'adstype'=>$adstype,'counttype'=>$counttype,'space_id'=>$space_id))->render() !!}
         <p class="slide-tip">可左右滑动浏览</p>
 
 
@@ -78,5 +78,5 @@
         $('.menu li').eq(5).addClass('active');
         $('.mb-menu li').eq(5).addClass('active');
     </script>
-
+    </div>
     @endsection
